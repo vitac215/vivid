@@ -1,45 +1,45 @@
 app.coffee
-framer/backups/backup-2017-07-18 15.01.38.coffee
-framer/backups/backup-2017-07-18 15.02.38.vekter
-framer/backups/backup-2017-07-18 15.03.38.vekter
-framer/backups/backup-2017-07-18 15.04.38.vekter
-framer/backups/backup-2017-07-18 15.05.38.coffee
-framer/backups/backup-2017-07-18 15.05.38.vekter
-framer/backups/backup-2017-07-18 15.06.38.coffee
-framer/backups/backup-2017-07-18 15.07.38.coffee
-framer/backups/backup-2017-07-18 15.08.44.coffee
-framer/backups/backup-2017-07-18 15.09.38.coffee
-framer/backups/backup-2017-07-18 15.10.38.coffee
-framer/backups/backup-2017-07-18 15.11.38.coffee
-framer/backups/backup-2017-07-18 15.11.38.vekter
-framer/backups/backup-2017-07-18 15.12.38.vekter
-framer/backups/backup-2017-07-18 15.13.38.vekter
-framer/backups/backup-2017-07-18 15.14.38.vekter
-framer/backups/backup-2017-07-18 15.15.38.vekter
-framer/backups/backup-2017-07-18 15.16.38.vekter
-framer/backups/backup-2017-07-18 15.17.38.vekter
-framer/backups/backup-2017-07-18 15.18.38.vekter
-framer/backups/backup-2017-07-18 15.19.38.coffee
-framer/backups/backup-2017-07-18 15.19.38.vekter
-framer/backups/backup-2017-07-18 15.20.38.vekter
-framer/backups/backup-2017-07-18 15.21.38.vekter
-framer/backups/backup-2017-07-18 15.22.38.vekter
-framer/backups/backup-2017-07-18 15.23.38.vekter
-framer/backups/backup-2017-07-18 15.24.38.vekter
-framer/backups/backup-2017-07-18 15.25.38.vekter
-framer/backups/backup-2017-07-18 15.26.38.vekter
-framer/backups/backup-2017-07-18 15.27.38.vekter
-framer/backups/backup-2017-07-18 15.28.38.vekter
-framer/backups/backup-2017-07-18 15.29.38.vekter
-framer/backups/backup-2017-07-18 15.30.38.vekter
-framer/backups/backup-2017-07-18 15.31.38.coffee
-framer/backups/backup-2017-07-18 15.32.38.coffee
-framer/backups/backup-2017-07-18 15.33.38.coffee
-framer/backups/backup-2017-07-18 15.33.38.vekter
-framer/backups/backup-2017-07-18 15.34.38.coffee
-framer/backups/backup-2017-07-18 15.35.38.coffee
-framer/backups/backup-2017-07-18 15.36.38.coffee
-framer/backups/backup-2017-07-18 15.36.38.vekter
+framer/backups/backup-2017-07-18 15.43.38.coffee
+framer/backups/backup-2017-07-18 15.44.38.coffee
+framer/backups/backup-2017-07-18 15.45.38.coffee
+framer/backups/backup-2017-07-18 15.47.38.coffee
+framer/backups/backup-2017-07-18 15.49.38.vekter
+framer/backups/backup-2017-07-18 15.50.38.coffee
+framer/backups/backup-2017-07-18 15.50.38.vekter
+framer/backups/backup-2017-07-18 15.51.38.coffee
+framer/backups/backup-2017-07-18 15.51.38.vekter
+framer/backups/backup-2017-07-18 15.52.38.coffee
+framer/backups/backup-2017-07-18 15.52.38.vekter
+framer/backups/backup-2017-07-18 15.53.38.coffee
+framer/backups/backup-2017-07-18 15.54.38.coffee
+framer/backups/backup-2017-07-18 15.55.38.coffee
+framer/backups/backup-2017-07-18 16.01.38.coffee
+framer/backups/backup-2017-07-18 16.01.38.vekter
+framer/backups/backup-2017-07-18 16.02.38.coffee
+framer/backups/backup-2017-07-18 16.03.38.coffee
+framer/backups/backup-2017-07-18 16.04.38.coffee
+framer/backups/backup-2017-07-18 16.04.38.vekter
+framer/backups/backup-2017-07-18 16.05.38.coffee
+framer/backups/backup-2017-07-18 16.06.38.coffee
+framer/backups/backup-2017-07-18 16.07.38.coffee
+framer/backups/backup-2017-07-18 16.08.38.coffee
+framer/backups/backup-2017-07-18 16.10.38.vekter
+framer/backups/backup-2017-07-18 16.11.38.vekter
+framer/backups/backup-2017-07-18 16.12.38.vekter
+framer/backups/backup-2017-07-18 16.15.37.coffee
+framer/backups/backup-2017-07-18 16.16.37.coffee
+framer/backups/backup-2017-07-18 16.17.37.coffee
+framer/backups/backup-2017-07-18 16.18.37.coffee
+framer/backups/backup-2017-07-18 16.19.38.coffee
+framer/backups/backup-2017-07-18 16.20.37.coffee
+framer/backups/backup-2017-07-18 16.25.37.coffee
+framer/backups/backup-2017-07-18 16.26.37.coffee
+framer/backups/backup-2017-07-18 16.27.37.coffee
+framer/backups/backup-2017-07-18 16.28.37.coffee
+framer/backups/backup-2017-07-18 16.29.37.coffee
+framer/backups/backup-2017-07-18 16.30.37.coffee
+framer/backups/backup-2017-07-18 16.31.37.coffee
+framer/backups/backup-2017-07-18 16.32.37.vekter
 framer/coffee-script.js
 framer/config.json
 framer/design.vekter
@@ -60,6 +60,10 @@ framer/images/icon-192.png
 framer/images/icon-76.png
 framer/manifest.txt
 framer/preview.png
+framer/social-1200x630.png
+framer/social-800x600.png
+framer/social-80x80.png
+framer/social-880x460.png
 framer/style.css
 framer/version
 images/design/08qHgT31dMt8aRXEoCzqkhxuq9yhnbXbmPQklizoxUuAKOfluiShMJkiKJpiQsPPdxDqQmFuAlcVyoVlg.png

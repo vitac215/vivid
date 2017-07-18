@@ -8,7 +8,7 @@ peopleTitle = navbar.childrenWithName("title")[0].childrenWithName("title_people
 mapsTitle = navbar.childrenWithName("title")[0].childrenWithName("title_maps")[0]
 
 for title in navbar.childrenWithName("title")[0].children
-	title.states.add
+	title.states =
 		active:
 			visible: true
 
@@ -21,7 +21,7 @@ peopleTab = menu_nav.childrenWithName("people")[0]
 mapsTab = menu_nav.childrenWithName("maps")[0]
 
 for tab in menu_nav.children
-	tab.states.add
+	tab.states =
 		active:
 			opacity: 1
 	tab.states.animationOptions =
@@ -45,15 +45,62 @@ summaryView = menu_nav.parent.childrenWithName("summary_view")[0]
 viewGroup = [notesView, voiceView, cameraView, peopleView, summaryView]
 
 for view in viewGroup
-	view.states.add
+	view.states =
 		active:
 			visible: true
 
 
+
+
+# Camera View
+cameraBtn = cameraView.childrenWithName("camera_btn")[0]
+cameraPreview = cameraView.childrenWithName("camera_preview")[0]
+cameraBg = cameraView.childrenWithName("camera_bg")[0]
+
+cameraBtn.states =
+	active:
+		visible: true
+	inactive:
+		visible: false
+cameraPreview.states =
+	active:
+		visible: true
+	inactive:
+		visible: false
+
+cameraBtn.html = """
+    <input type="file" id="cameraBtn" accept="image/*"/ style="display: none">
+"""
+cameraInput = document.getElementById("cameraBtn")
+cameraBtn.on Events.Click, ->
+	cameraInput.click()
+
+cameraInput.onchange = ->
+	imageReader()
+	cameraPreview.visible = true
+
+imageReader = ->
+	file = cameraInput.files[0]
+	if file != undefined
+		reader = new FileReader()
+		reader.readAsDataURL file
+		reader.onload = ->
+			cameraPreview.image = reader.result
+
+cameraPreview.on Events.Click, ->
+	if cameraPreview.image != undefined
+		cameraBg.image = cameraPreview.image
+		cameraPreview.animate("inactive")
+		cameraBtn.animate("inactive")
+
+
+
+
+
 # Defatult
-notesTab.states.switchInstant("active")
-notesTitle.states.switchInstant("active")
-notesView.states.switchInstant("active")
+notesTab.animate("active", {instant: true})
+notesTitle.animate("active", {instant: true})
+notesView.animate("active", {instant: true})
 
 
 # Tab Group
@@ -68,7 +115,7 @@ summary = [summaryView]
 # Set state for tabs
 setStateTab = (tabGroup, state) ->
 	for item in tabGroup
-		item.states.switch(state)
+		item.animate(state)
 
 
 # Tab config
