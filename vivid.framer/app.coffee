@@ -1,4 +1,27 @@
+# firebase
+{Firebase} = require 'firebase'
+firebase = new Firebase
+	projectID: "vivid-6124d"
+	secret: "gj2baisq18Z679XxNlxBosxtR4KBR5NLwwpQIVoA"
+
+# User setting
+generateUUID = ->
+	s4 = ->
+		return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+	return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+
+username = "vita"
+uuid = generateUUID()
+caseID = "case1"
+
+
+# Save session
+firebase.post(
+	"/#{caseID}/#{uuid}/meta", 
+	{username: username, location: "300 S Craig St. - Zone 1", time: new Date()})
+
 navbar = menu_nav.parent.childrenWithName("navbar")[0]
+
 
 # Titles
 notesTitle = navbar.childrenWithName("title")[0].childrenWithName("title_notes")[0]
@@ -56,6 +79,9 @@ for view in viewGroup
 cameraBtn = cameraView.childrenWithName("camera_btn")[0]
 cameraPreview = cameraView.childrenWithName("camera_preview")[0]
 cameraBg = cameraView.childrenWithName("camera_bg")[0]
+cameraShapeBtn = cameraView.childrenWithName("shape")[0]
+cameraTextBtn = cameraView.childrenWithName("text")[0]
+cameraAnnotationSaveBtn = cameraView.childrenWithName("save_btn")[0]
 
 cameraBtn.states =
 	active:
@@ -67,7 +93,22 @@ cameraPreview.states =
 		visible: true
 	inactive:
 		visible: false
-
+cameraShapeBtn.states = 
+	active:
+		visible: true
+	inactive:
+		visible: false
+cameraTextBtn.states = 
+	active:
+		visible: true
+	inactive:
+		visible: false
+cameraAnnotationSaveBtn.states = 
+	active:
+		visible: true
+	inactive:
+		visible: false
+	
 cameraBtn.html = """
     <input type="file" id="cameraBtn" accept="image/*"/ style="display: none">
 """
@@ -75,6 +116,7 @@ cameraInput = document.getElementById("cameraBtn")
 cameraBtn.on Events.Click, ->
 	cameraInput.click()
 
+# take photos
 cameraInput.onchange = ->
 	imageReader()
 	cameraPreview.visible = true
@@ -84,15 +126,36 @@ imageReader = ->
 	if file != undefined
 		reader = new FileReader()
 		reader.readAsDataURL file
+		# when image is ready
 		reader.onload = ->
-			cameraPreview.image = reader.result
+			img = reader.result
+			# transfer to firebase
+			firebase.post(
+				"/#{caseID}/#{uuid}/captured", 
+				{type: 'img', data: img, location: "300 S Craig St.", created_at: new Date()})
+			# render to preview box
+			cameraPreview.image = img
 
-cameraPreview.on Events.Click, ->
-	if cameraPreview.image != undefined
-		cameraBg.image = cameraPreview.image
-		cameraPreview.animate("inactive")
-		cameraBtn.animate("inactive")
+# # check preview
+# cameraPreview.on Events.Click, ->
+# 	if cameraPreview.image != undefined
+# 		cameraBg.image = cameraPreview.image
+# 		# hide camera preview box and camera button
+# 		cameraPreview.animate("inactive")
+# 		cameraBtn.animate("inactive")
+# 		# show annotation buttons
+# 		cameraAnnotationSaveBtn.animate("active")
+# 		cameraShapeBtn.animate("active")
+# 		cameraTextBtn.animate("active")
 
+
+
+
+# Summary view
+response = (res) ->
+	firebase.get "/#{caseID}/#{uuid}/captured", (res) ->
+		print res
+firebase.onChange("/#{caseID}/#{uuid}/captured", response)
 
 
 
@@ -118,6 +181,7 @@ setStateTab = (tabGroup, state) ->
 		item.animate(state)
 
 
+
 # Tab config
 tabConf = (notesConf, voiceConf, cameraConf, peopleConf, mapsConf, summaryConf) ->
 	setStateTab(notes, notesConf)
@@ -126,6 +190,7 @@ tabConf = (notesConf, voiceConf, cameraConf, peopleConf, mapsConf, summaryConf) 
 	setStateTab(people, peopleConf)
 	setStateTab(maps, mapsConf)
 	setStateTab(summary, summaryConf)
+
 
 
 # Tab events
