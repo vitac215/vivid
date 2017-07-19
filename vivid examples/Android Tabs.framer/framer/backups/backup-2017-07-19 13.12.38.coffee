@@ -33,6 +33,7 @@ page = new PageComponent
 mediaInfo = require "mediaInfo"
 
 for layer, title of mediaInfo
+	print title
 	moviesTitle = title.movies.name
 	moviesDescription = title.movies.description
 	showsTitle = title.shows.name

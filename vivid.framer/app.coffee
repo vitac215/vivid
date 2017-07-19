@@ -123,7 +123,7 @@ cameraInput.onchange = ->
 
 imageReader = ->
 	file = cameraInput.files[0]
-	if file != undefined
+	if file?
 		reader = new FileReader()
 		reader.readAsDataURL file
 		# when image is ready
@@ -152,18 +152,88 @@ imageReader = ->
 
 
 # Summary view
-response = (res) ->
-	firebase.get "/#{caseID}/#{uuid}/captured", (res) ->
-		print res
-firebase.onChange("/#{caseID}/#{uuid}/captured", response)
+summaryScroll = new ScrollComponent
+summaryScroll.props = 
+	parent: summaryView
+	size: Screen.size
+	scrollHorizontal: false	
+	visible: false
+summaryScroll.states = 
+	active:
+		visible: true
+
+renderRes = (dataSet) ->
+# 	print "data from firebase: ", dataSet
+	if dataSet?
+		meta = _.toArray(dataSet.meta)[0]
+		dataArray = _.toArray(dataSet.captured)
+		print "meta ", meta
+		print "dataArray ", dataArray
+		
+		# render the view
+		xPos = 17
+		yPos = navbar.height
+		loc = new TextLayer
+			parent: summaryScroll.content
+			text: "#{if meta.location then meta.location else 'Location'}"
+			fontSize: 15
+			color: '#4A4A4A'
+			x: xPos
+			y: yPos + 16
+		time = new TextLayer
+			parent: summaryScroll.content
+			text: "#{if meta.time then meta.time else 'Time'}"
+			fontSize: 10
+			color: '#4A4A4A'
+			x: xPos
+			y: loc.y + loc.height + 5
+			
+		# render box
+		if dataArray? and dataArray.length > 0
+			dataCount = dataArray.length
+			
+			row = Math.ceil(dataCount / 3)
+			boxCount = 3
+			size = 104
+			boxMargin = 15
+			xPos = 17
+			yPos = time.y + time.height + 8
+
+			for j in [0...row]
+				for i in [0...3]
+					data = dataArray[j*3 + i]
+					if data?
+						print "data ", data.data
+						xOffSet = (if i == 0 then xPos else xPos + boxMargin*i)
+						yOffSet = (if j == 0 then yPos else yPos + boxMargin*j)
+						dataBox = new Layer
+							parent: summaryScroll.content
+							image: data.data
+							width: size
+							height: size
+							x: size*i + xOffSet
+							y: size*j + yOffSet
+
+
+
+# receive captured evidence from firebase
+retrieveDB = ->
+	firebase.get "/#{caseID}/#{uuid}", (res) ->
+		renderRes(res)
+# firebase.onChange("/#{caseID}/#{uuid}/captured", response)
+
+
 
 
 
 
 # Defatult
+# notesTab.animate("active", {instant: true})
+# notesTitle.animate("active", {instant: true})
+# notesView.animate("active", {instant: true})
+
 notesTab.animate("active", {instant: true})
-notesTitle.animate("active", {instant: true})
-notesView.animate("active", {instant: true})
+summaryView.animate("active", {instant: true})
 
 
 # Tab Group
@@ -172,7 +242,7 @@ voice = [voiceTab, voiceTitle, voiceView]
 camera = [cameraTab, cameraTitle, cameraView]
 people = [peopleTab, peopleTitle, peopleView]
 maps = [mapsTab, mapsTitle]
-summary = [summaryView]
+summary = [summaryView, summaryScroll]
 
 
 # Set state for tabs
@@ -206,4 +276,5 @@ mapsTab.onTap ->
 	tabConf("default", "default", "default", "default", "active", "default")
 summaryBtn.onTap ->
 	tabConf("default", "default", "default", "default", "default", "active")
+	retrieveDB()
 	

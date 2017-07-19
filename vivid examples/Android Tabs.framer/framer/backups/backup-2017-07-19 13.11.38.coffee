@@ -42,6 +42,7 @@ for layer, title of mediaInfo
 	watchTitle = title.watch.name
 	watchDescription = title.watch.description
 
+print moviesTitle
 
 movieScroll = new ScrollComponent
 showsScroll = new ScrollComponent
