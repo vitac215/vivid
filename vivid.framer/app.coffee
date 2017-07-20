@@ -176,7 +176,6 @@ cameraAnnotationSaveBtn.onTap ->
 	tabConf("default", "default", "active", "default", "default", "default")
 	resetCamera()
 
-
 # Animation function
 shakeAnimate = (ele, duration) ->
 	animA = ele.animate
@@ -348,7 +347,7 @@ idReader = ->
 		# save fake data
 		arrayLen = inputform.label.length
 		for i in [0...arrayLen]
-			formData["#{inputform.label[i]}"] = "#{inputform.content[i]}"
+			formData["#{inputform.name[i]}"] = "#{inputform.content[i]}"
 		
 
 
@@ -368,6 +367,7 @@ clearForm = ->
 	
 # Save person info
 personSaveBtn.onTap ->
+	print formData
 	# transfer to firebase
 	if formData.name != ""
 		firebase.post(
@@ -392,7 +392,8 @@ personSaveBtn.onTap ->
 		clearForm()
 		appendForm(false)
 	else 
-		shakeAnimate(formEleArray[0], 0.5)
+		requiredInput = peopleScroll.content.childrenWithName("name")[0]
+		shakeAnimate(requiredInput, 0.5)
 		
 
 # press done
