@@ -177,12 +177,45 @@ cameraAnnotationSaveBtn.onTap ->
 	resetCamera()
 
 
+# Animation function
+shakeAnimate = (ele, duration) ->
+	animA = ele.animate
+		properties: {x: formEleArray[0].x + 4}
+		time: 0.1
+		curve: "linear"
+	animB = ele.animate
+		properties: {x: formEleArray[0].x - 4}
+		time: 0.1
+		curve: "linear"
+		
+	animA.on Events.AnimationEnd, -> animB.start()
+	animB.on Events.AnimationEnd, -> animA.start()
+	
+	Utils.delay duration, ->
+		animA.stop()
+		animB.stop()
+
+
 # People view
 scanIDbtn = peopleView.childrenWithName("scan_btn")[0]
 personImg = peopleView.childrenWithName("person_img")[0]
 personImgPlaceholder = personImg.children[0]
 personSaveBtn = peopleView.childrenWithName("save_btn")[0]
-sampleIDImg = "images/id_sample.png"
+
+personDoneBtn = peopleView.childrenWithName("done")[0]
+personDoneBtn.states =
+	done:
+		opacity: 1
+		y: 228
+	active:
+		opacity: 0
+		y: -60
+personDoneBtn.states.animationOptions =
+		curve: Spring(tension: 250, friction: 25)
+		time: 0.3
+	
+
+
 
 
 # scroll
@@ -197,6 +230,8 @@ peopleScroll.props =
 peopleScroll.states = 
 	active:
 		visible: true
+	inactive:
+		visible: false
 
 appendToScroll = (toAppendArray, scrollPage) ->
 	toAppendArray.forEach((layer) -> layer.parent = scrollPage.content)
@@ -208,10 +243,13 @@ inputform = {
 	label: ["Name", "Address", "Phone", "Race", "Mark", "Notes"], 
 	name: ["name", "address", "phone", "race", "mark", "notes"],
 	content: ["Michael M", "2345 Park Street, PA 15224", "412-000-01234", "White", "Birthmark below neck", "Check warrant"]}
+sampleIDImg = "images/id_sample.png"
+
 inputsArray = []
 formEleArray = []
 formData = {name: "", address: "", phone: "", race: "", mark: "", notes: ""}
 
+# append form to the scroll content
 appendForm = (popData) ->
 	h = 40
 	w = 335
@@ -256,22 +294,29 @@ appendForm = (popData) ->
 			x: row.width * 0.35
 			fontSize: fSize
 			placeholder: if itemName == 'name' then 'Required' else ''
+			#placeholderColor: if itemName == 'name' then '#8B8B8B' else ''
 			text: if popData then itemText else ''
 		
 		formEleArray.push(row)
 		inputsArray.push(input)
-
+	
+	# add states for the required field
+	requiredRow = formEleArray[0]
+	requiredRow.scale = 1
+	
 	# adjust y of the save button
 	notesBox = peopleScroll.content.childrenWithName("notes")[0]
 	personSaveBtn.y = notesBox.y + notesBox.height + 20
+	
+	# add input event listener
+	inputsArray.forEach((input) -> 
+		input.on "keyup", ->
+			formData["#{input.name}"] = @value)
 
 appendForm(false)
 
 
-# input event listener
-inputsArray.forEach((input) -> 
-	input.on "keyup", ->
-		formData["#{input.name}"] = @value)
+
 
 
 # ID scan
@@ -296,9 +341,8 @@ idReader = ->
 			img = reader.result
 			
 		addPersonImg()
-		# TODO populate data into the input fields
-		
-		# append fake data
+
+		# append fake data to input fields
 		clearForm()
 		appendForm(true)
 		# save fake data
@@ -323,10 +367,9 @@ clearForm = ->
 	
 	
 # Save person info
-personSaveBtn.onTap ->	
-	print formData
+personSaveBtn.onTap ->
 	# transfer to firebase
-	if formData.name?
+	if formData.name != ""
 		firebase.post(
 			"/#{caseID}/#{uuid}/captured", 
 			{type: 'people', 
@@ -340,12 +383,23 @@ personSaveBtn.onTap ->
 				notes: formData.notes,
 				}, 
 			location: "300 S Craig St.", 
-			created_at: new Date()
-			})
-	# TODO "done" animation
-	# ...
-	clearForm()
-	appendForm(false)
+			created_at: new Date()})
+		# "done" animation
+		peopleScroll.animate('inactive')
+		personDoneBtn.bringToFront()
+		personDoneBtn.animate('done')
+		# reset form
+		clearForm()
+		appendForm(false)
+	else 
+		shakeAnimate(formEleArray[0], 0.5)
+		
+
+# press done
+personDoneBtn.onTap ->
+	setStateTab(people, "active")
+
+
 
 # Summary view
 summaryBtn = navbar.childrenWithName("summary_icon")[0]
@@ -449,7 +503,7 @@ peopleScroll.animate("active", {instant: true})
 notes = [notesTab, notesTitle, notesView]
 voice = [voiceTab, voiceTitle, voiceView]
 camera = [cameraTab, cameraTitle, cameraView, cameraBtn]
-people = [peopleTab, peopleTitle, peopleView, peopleScroll]
+people = [peopleTab, peopleTitle, peopleView, personDoneBtn, peopleScroll]
 maps = [mapsTab, mapsTitle]
 summary = [summaryView, summaryScroll]
 
