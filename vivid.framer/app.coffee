@@ -17,9 +17,9 @@ uuid = generateUUID()
 caseID = "case1"
 
 # Save session
-# firebase.post(
-# 	"/#{caseID}/#{uuid}/meta", 
-# 	{username: username, location: "300 S Craig St. - Zone 1", time: new Date()})
+firebase.post(
+	"/#{caseID}/#{uuid}/meta", 
+	{username: username, location: "300 S Craig St. - Zone 1", time: new Date()})
 
 # Layers def
 navbar = menu_nav.parent.childrenWithName("navbar")[0]
@@ -185,7 +185,6 @@ personSaveBtn = peopleView.childrenWithName("save_btn")[0]
 sampleIDImg = "images/id_sample.png"
 
 
-
 # scroll
 peopleScroll = new ScrollComponent
 peopleScroll.props = 
@@ -205,25 +204,34 @@ appendToScroll([scanIDbtn, personImg, personSaveBtn], peopleScroll)
 
 
 # input
-inputform = {label: ["Name", "Address", "Phone", "Race", "Mark", "Notes"]}
+inputform = {
+	label: ["Name", "Address", "Phone", "Race", "Mark", "Notes"], 
+	name: ["name", "address", "phone", "race", "mark", "notes"],
+	content: ["Michael M", "2345 Park Street, PA 15224", "412-000-01234", "White", "Birthmark below neck", "Check warrant"]}
+inputsArray = []
+formEleArray = []
+formData = {name: "", address: "", phone: "", race: "", mark: "", notes: ""}
 
-appendForm = ->
+appendForm = (popData) ->
 	h = 40
 	w = 335
 	xPos = 20
 	yPos = scanIDbtn.y + 50
 	rowMargin = 5
+	labelWidthRatio = 0.35
 	fSize = 16
 	
 	arrayLen = inputform.label.length
 	for i in [0...arrayLen]
-		item = inputform.label[i]
+		itemLabel = inputform.label[i]
+		itemName = inputform.name[i]
+		itemText = inputform.content[i]
 		yOffSet = (if i == 0 then yPos else yPos + rowMargin*i)
 		
 		row = new Layer
 			parent: peopleScroll.content
-			name: item
-			height: if item == 'Notes' then 100 else h
+			name: itemName
+			height: if itemName == 'notes' then 80 else h
 			width: w
 			x: xPos
 			y: h*i + yOffSet
@@ -233,29 +241,37 @@ appendForm = ->
 			parent: row
 			padding: 10
 			height: row.height
-			width: row.width * 0.35
-			text: item
+			width: row.width * labelWidthRatio
+			text: itemLabel
 			fontSize: fSize
 			fontWeight: 500
 			color: "#4A4A4A"
 		
 		input = new InputModule.Input
 			parent: row
-			setup: true
-			height: 10
-			width: row.width * 0.65
+			name: itemName
+			setup: false
+			height: row.height * 0.5
+			width: row.width * (1-labelWidthRatio) * 0.9
 			x: row.width * 0.35
 			fontSize: fSize
-	
+			placeholder: if itemName == 'name' then 'Required' else ''
+			text: if popData then itemText else ''
+		
+		formEleArray.push(row)
+		inputsArray.push(input)
+
 	# adjust y of the save button
-	notesBox = peopleScroll.content.childrenWithName("Notes")[0]
+	notesBox = peopleScroll.content.childrenWithName("notes")[0]
 	personSaveBtn.y = notesBox.y + notesBox.height + 20
-			
-		
-		
 
-appendForm()
+appendForm(false)
 
+
+# input event listener
+inputsArray.forEach((input) -> 
+	input.on "keyup", ->
+		formData["#{input.name}"] = @value)
 
 
 # ID scan
@@ -278,29 +294,58 @@ idReader = ->
 		# when image is ready
 		reader.onload = ->
 			img = reader.result
+			
 		addPersonImg()
+		# TODO populate data into the input fields
+		
+		# append fake data
+		clearForm()
+		appendForm(true)
+		# save fake data
+		arrayLen = inputform.label.length
+		for i in [0...arrayLen]
+			formData["#{inputform.label[i]}"] = "#{inputform.content[i]}"
+		
+
+
 
 addPersonImg = ->
 	personImgPlaceholder.visible = false
 	personImg.image = sampleIDImg
 
-personSaveBtn.onTap ->
+# reset form
+clearForm = ->
+	# clear form data map
+	for key of formData
+		formData["#{key}"] = ""
+	# clear input fields
+	formEleArray.forEach((row) -> row.destroy())
+	
+	
+# Save person info
+personSaveBtn.onTap ->	
+	print formData
 	# transfer to firebase
-	firebase.post(
-		"/#{caseID}/#{uuid}/captured", 
-		{type: 'people', 
-		data: {
-			img: sampleIDImg,
-			name: "Michael M",
-			address: "",
-			phone: "",
-			race: "",
-			mark: "",
-			notes: "",
-			}, 
-		location: "300 S Craig St.", 
-		created_at: new Date()
-		})
+	if formData.name?
+		firebase.post(
+			"/#{caseID}/#{uuid}/captured", 
+			{type: 'people', 
+			data: {
+				img: sampleIDImg,
+				name: formData.name,
+				address: formData.address,
+				phone: formData.phone,
+				race: formData.race,
+				mark: formData.mark,
+				notes: formData.notes,
+				}, 
+			location: "300 S Craig St.", 
+			created_at: new Date()
+			})
+	# TODO "done" animation
+	# ...
+	clearForm()
+	appendForm(false)
 
 # Summary view
 summaryBtn = navbar.childrenWithName("summary_icon")[0]
@@ -362,17 +407,19 @@ renderRes = (dataSet) ->
 						xOffSet = (if i == 0 then xPos else xPos + boxMargin*i)
 						yOffSet = (if j == 0 then yPos else yPos + boxMargin*j)
 						
+						type = data.type
+						
 						dataBox = new Layer
 							parent: summaryScroll.content
 							width: size
 							height: size
-							rotation: 90
+							rotation: if type == 'img' then 90 else 0 
 							x: size*i + xOffSet
 							y: size*j + yOffSet
 						
-						type = data.type
 						switch type
 							when 'img' then dataBox.image = data.data
+							when 'people' then dataBox.image = data.data.img
 
 
 
