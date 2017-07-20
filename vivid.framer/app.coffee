@@ -1,8 +1,10 @@
-# firebase
+# Module setting (firebase, input)
 {Firebase} = require 'firebase'
 firebase = new Firebase
 	projectID: "vivid-6124d"
 	secret: "gj2baisq18Z679XxNlxBosxtR4KBR5NLwwpQIVoA"
+
+InputModule = require "input"
 
 # User setting
 generateUUID = ->
@@ -14,14 +16,13 @@ username = "vita"
 uuid = generateUUID()
 caseID = "case1"
 
-
 # Save session
-firebase.post(
-	"/#{caseID}/#{uuid}/meta", 
-	{username: username, location: "300 S Craig St. - Zone 1", time: new Date()})
+# firebase.post(
+# 	"/#{caseID}/#{uuid}/meta", 
+# 	{username: username, location: "300 S Craig St. - Zone 1", time: new Date()})
 
+# Layers def
 navbar = menu_nav.parent.childrenWithName("navbar")[0]
-
 
 # Titles
 notesTitle = navbar.childrenWithName("title")[0].childrenWithName("title_notes")[0]
@@ -51,11 +52,6 @@ for tab in menu_nav.children
 		curve: "linear"
 		time: 0.2
 
-
-# Summary
-summaryBtn = navbar.childrenWithName("summary_icon")[0]
-
-
 # Views
 notesView = menu_nav.parent.childrenWithName("notes_view")[0]
 voiceView = menu_nav.parent.childrenWithName("voice_view")[0]
@@ -72,10 +68,26 @@ for view in viewGroup
 		active:
 			visible: true
 
-
-
-
 # Camera View
+
+# # load cameralayer (only works on Android + Chrome)
+# activateCamera = ->
+# 	cameraBg.visible = false
+# 	CameraLayer = require "CameraLayer"
+# 	camera = new CameraLayer()
+# # 	camera.parent = cameraView
+# 	camera.width = Screen.width
+# 	camera.height = Screen.height
+# 	camera.facing = 'back'
+# 	# Start accessing a camera device
+# 	camera.start()
+# 
+# inactivateCamera = ->
+# 	cameraBg.visible = true
+# 	cameras = cameraView.childrenWithName("camera")
+# 	for camera in cameras
+# 		camera.destroy()
+
 cameraBtn = cameraView.childrenWithName("camera_btn")[0]
 cameraPreview = cameraView.childrenWithName("camera_preview")[0]
 cameraBg = cameraView.childrenWithName("camera_bg")[0]
@@ -135,23 +147,163 @@ imageReader = ->
 				{type: 'img', data: img, location: "300 S Craig St.", created_at: new Date()})
 			# render to preview box
 			cameraPreview.image = img
+			cameraPreview.rotation = 90
 
-# # check preview
-# cameraPreview.on Events.Click, ->
-# 	if cameraPreview.image != undefined
-# 		cameraBg.image = cameraPreview.image
-# 		# hide camera preview box and camera button
-# 		cameraPreview.animate("inactive")
-# 		cameraBtn.animate("inactive")
-# 		# show annotation buttons
-# 		cameraAnnotationSaveBtn.animate("active")
-# 		cameraShapeBtn.animate("active")
-# 		cameraTextBtn.animate("active")
+# check preview
+cameraPreview.on Events.Click, ->
+	if cameraPreview.image != undefined
+		cameraBg.image = cameraPreview.image
+		# hide camera preview box and camera button
+		cameraPreview.animate("inactive")
+		cameraBtn.animate("inactive")
+		# show annotation buttons
+		cameraAnnotationSaveBtn.animate("active")
+		cameraShapeBtn.animate("active")
+		cameraTextBtn.animate("active")
+
+resetCamera = ->
+	cameraAnnotationSaveBtn.animate("inactive")
+	cameraShapeBtn.animate("inactive")
+	cameraTextBtn.animate("inactive")
+	cameraPreview.image = null
+	cameraPreview.rotation = 0
+	cameraBg.image = null
+
+cameraAnnotationSaveBtn.onTap ->
+	# transfer the annotated image to DB
+	
+	# back to the original state
+	tabConf("default", "default", "active", "default", "default", "default")
+	resetCamera()
+
+
+# People view
+scanIDbtn = peopleView.childrenWithName("scan_btn")[0]
+personImg = peopleView.childrenWithName("person_img")[0]
+personImgPlaceholder = personImg.children[0]
+personSaveBtn = peopleView.childrenWithName("save_btn")[0]
+sampleIDImg = "images/id_sample.png"
 
 
 
+# scroll
+peopleScroll = new ScrollComponent
+peopleScroll.props = 
+	parent: peopleView
+	size: Screen.size
+	contentInset:
+		bottom: menu_nav.height
+	scrollHorizontal: false	
+	visible: false
+peopleScroll.states = 
+	active:
+		visible: true
+
+appendToScroll = (toAppendArray, scrollPage) ->
+	toAppendArray.forEach((layer) -> layer.parent = scrollPage.content)
+appendToScroll([scanIDbtn, personImg, personSaveBtn], peopleScroll)
+
+
+# input
+inputform = {label: ["Name", "Address", "Phone", "Race", "Mark", "Notes"]}
+
+appendForm = ->
+	h = 40
+	w = 335
+	xPos = 20
+	yPos = scanIDbtn.y + 50
+	rowMargin = 5
+	fSize = 16
+	
+	arrayLen = inputform.label.length
+	for i in [0...arrayLen]
+		item = inputform.label[i]
+		yOffSet = (if i == 0 then yPos else yPos + rowMargin*i)
+		
+		row = new Layer
+			parent: peopleScroll.content
+			name: item
+			height: if item == 'Notes' then 100 else h
+			width: w
+			x: xPos
+			y: h*i + yOffSet
+			backgroundColor: "#fff"
+		
+		label = new TextLayer
+			parent: row
+			padding: 10
+			height: row.height
+			width: row.width * 0.35
+			text: item
+			fontSize: fSize
+			fontWeight: 500
+			color: "#4A4A4A"
+		
+		input = new InputModule.Input
+			parent: row
+			setup: true
+			height: 10
+			width: row.width * 0.65
+			x: row.width * 0.35
+			fontSize: fSize
+	
+	# adjust y of the save button
+	notesBox = peopleScroll.content.childrenWithName("Notes")[0]
+	personSaveBtn.y = notesBox.y + notesBox.height + 20
+			
+		
+		
+
+appendForm()
+
+
+
+# ID scan
+scanIDbtn.html = """
+    <input type="file" id="scanBtn" accept="image/*"/ style="display: none">
+"""
+scanInput = document.getElementById("scanBtn")
+scanIDbtn.on Events.Click, ->
+	scanInput.click()
+
+# scan/take photo of ID
+scanInput.onchange = ->
+	idReader()
+
+idReader = ->
+	file = scanInput.files[0]
+	if file?
+		reader = new FileReader()
+		reader.readAsDataURL file
+		# when image is ready
+		reader.onload = ->
+			img = reader.result
+		addPersonImg()
+
+addPersonImg = ->
+	personImgPlaceholder.visible = false
+	personImg.image = sampleIDImg
+
+personSaveBtn.onTap ->
+	# transfer to firebase
+	firebase.post(
+		"/#{caseID}/#{uuid}/captured", 
+		{type: 'people', 
+		data: {
+			img: sampleIDImg,
+			name: "Michael M",
+			address: "",
+			phone: "",
+			race: "",
+			mark: "",
+			notes: "",
+			}, 
+		location: "300 S Craig St.", 
+		created_at: new Date()
+		})
 
 # Summary view
+summaryBtn = navbar.childrenWithName("summary_icon")[0]
 summaryScroll = new ScrollComponent
 summaryScroll.props = 
 	parent: summaryView
@@ -163,12 +315,15 @@ summaryScroll.states =
 		visible: true
 
 renderRes = (dataSet) ->
+	# clear the page
+	summaryScroll.content.children.forEach((layer) -> layer.destroy())
+	
 # 	print "data from firebase: ", dataSet
 	if dataSet?
 		meta = _.toArray(dataSet.meta)[0]
 		dataArray = _.toArray(dataSet.captured)
-		print "meta ", meta
-		print "dataArray ", dataArray
+# 		print "meta ", meta
+# 		print "dataArray ", dataArray
 		
 		# render the view
 		xPos = 17
@@ -203,16 +358,22 @@ renderRes = (dataSet) ->
 				for i in [0...3]
 					data = dataArray[j*3 + i]
 					if data?
-						print "data ", data.data
+# 						print "data ", data.data
 						xOffSet = (if i == 0 then xPos else xPos + boxMargin*i)
 						yOffSet = (if j == 0 then yPos else yPos + boxMargin*j)
+						
 						dataBox = new Layer
 							parent: summaryScroll.content
-							image: data.data
 							width: size
 							height: size
+							rotation: 90
 							x: size*i + xOffSet
 							y: size*j + yOffSet
+						
+						type = data.type
+						switch type
+							when 'img' then dataBox.image = data.data
+
 
 
 
@@ -232,18 +393,18 @@ retrieveDB = ->
 # notesTitle.animate("active", {instant: true})
 # notesView.animate("active", {instant: true})
 
-notesTab.animate("active", {instant: true})
-summaryView.animate("active", {instant: true})
-
+peopleTab.animate("active", {instant: true})
+peopleTitle.animate("active", {instant: true})
+peopleView.animate("active", {instant: true})
+peopleScroll.animate("active", {instant: true})
 
 # Tab Group
 notes = [notesTab, notesTitle, notesView]
 voice = [voiceTab, voiceTitle, voiceView]
-camera = [cameraTab, cameraTitle, cameraView]
-people = [peopleTab, peopleTitle, peopleView]
+camera = [cameraTab, cameraTitle, cameraView, cameraBtn]
+people = [peopleTab, peopleTitle, peopleView, peopleScroll]
 maps = [mapsTab, mapsTitle]
 summary = [summaryView, summaryScroll]
-
 
 # Set state for tabs
 setStateTab = (tabGroup, state) ->
@@ -254,6 +415,9 @@ setStateTab = (tabGroup, state) ->
 
 # Tab config
 tabConf = (notesConf, voiceConf, cameraConf, peopleConf, mapsConf, summaryConf) ->
+# 	# delete camera layer
+# 	if cameraConf == "default"
+# 		inactivateCamera()
 	setStateTab(notes, notesConf)
 	setStateTab(voice, voiceConf)
 	setStateTab(camera, cameraConf)
@@ -263,13 +427,15 @@ tabConf = (notesConf, voiceConf, cameraConf, peopleConf, mapsConf, summaryConf) 
 
 
 
+
 # Tab events
 notesTab.onTap ->
 	tabConf("active", "default", "default", "default", "default", "default")
 voiceTab.onTap ->
 	tabConf("default", "active", "default", "default", "default", "default")
 cameraTab.onTap ->
-	tabConf("default", "default", "active", "default", "default", "default")	
+	tabConf("default", "default", "active", "default", "default", "default")
+# 	activateCamera()	
 peopleTab.onTap ->
 	tabConf("default", "default", "default", "active", "default", "default")	
 mapsTab.onTap ->

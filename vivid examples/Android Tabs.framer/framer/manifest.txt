@@ -9,6 +9,7 @@ framer/backups/backup-2017-07-18 11.56.14.coffee
 framer/backups/backup-2017-07-18 13.40.14.coffee
 framer/backups/backup-2017-07-19 13.11.38.coffee
 framer/backups/backup-2017-07-19 13.12.38.coffee
+framer/backups/backup-2017-07-19 13.13.38.coffee
 framer/coffee-script.js
 framer/config.json
 framer/design.vekter

@@ -54,7 +54,7 @@ for scroll in [movieScroll, showsScroll, upcomingScroll, watchScroll]
 		scrollHorizontal: false	
 		opacity: 1
 		contentInset:
-			top: 220
+# 			top: 220
 			bottom: systemBarHeight + spacingUnit
 	scroll.states.add
 		hide:
