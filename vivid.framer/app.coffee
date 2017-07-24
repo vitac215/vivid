@@ -93,6 +93,8 @@ init = (device) ->
 		title.states =
 			active:
 				visible: true
+			default:
+				visible: false
 
 
 	# Tabs
@@ -561,6 +563,7 @@ init = (device) ->
 				for layer in item.children
 					layer.animate(state)
 			item.animate(state)
+
 
 
 	###

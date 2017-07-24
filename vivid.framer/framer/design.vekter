@@ -2617,155 +2617,105 @@
                 "radiusBottomRight" : 0,
                 "children" : [
                   {
-                    "__class" : "OvalNode",
-                    "fillType" : "color",
+                    "__class" : "TextNode",
                     "locked" : false,
-                    "centerAnchorX" : 0.5,
+                    "centerAnchorX" : 0.5212765957446809,
                     "parentid" : "K9(8U2=R",
                     "rotation" : 0,
-                    "fillEnabled" : false,
-                    "top" : 0,
-                    "borderWidth" : 3,
+                    "top" : null,
                     "right" : 0,
-                    "borderEnabled" : true,
-                    "children" : [
-                      {
-                        "__class" : "TextNode",
-                        "locked" : false,
-                        "centerAnchorX" : 0.5106382978723404,
-                        "parentid" : "KeM:Ic74",
-                        "rotation" : 0,
-                        "top" : null,
-                        "right" : 6,
-                        "styledText" : {
-                          "blocks" : [
+                    "styledText" : {
+                      "blocks" : [
+                        {
+                          "depth" : 0,
+                          "inlineStyleRanges" : [
                             {
-                              "depth" : 0,
-                              "inlineStyleRanges" : [
-                                {
-                                  "length" : 5,
-                                  "style" : "LETTERSPACING:0",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 5,
-                                  "style" : "LINEHEIGHT:1.2",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 5,
-                                  "style" : "FONT:Avenir-Book",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 5,
-                                  "style" : "COLOR:rgb(255, 255, 255)",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 5,
-                                  "style" : "SIZE:12",
-                                  "offset" : 0
-                                }
-                              ],
-                              "entityRanges" : [
-
-                              ],
-                              "data" : {
-                                "emptyStyle" : [
-                                  "LETTERSPACING:0",
-                                  "LINEHEIGHT:1.2",
-                                  "FONT:Avenir-Book",
-                                  "COLOR:rgb(255, 255, 255)",
-                                  "SIZE:12"
-                                ]
-                              },
-                              "text" : "Photo",
-                              "key" : "1g3gv",
-                              "type" : "unstyled"
+                              "length" : 5,
+                              "style" : "LETTERSPACING:0",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 5,
+                              "style" : "LINEHEIGHT:1.2",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 5,
+                              "style" : "FONT:Avenir-Book",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 5,
+                              "style" : "COLOR:rgb(255, 255, 255)",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 5,
+                              "style" : "SIZE:16",
+                              "offset" : 0
                             }
                           ],
-                          "__class" : "StyledTextDraft",
-                          "entityMap" : {
+                          "entityRanges" : [
 
-                          }
-                        },
-                        "name" : null,
-                        "shadows" : [
-                          {
-                            "y" : 2,
-                            "enabled" : false,
-                            "blur" : 5,
-                            "x" : 0,
-                            "__class" : "Shadow",
-                            "color" : "rgba(0,0,0,0.25)"
-                          }
-                        ],
-                        "id" : "4mKB+4c=",
-                        "x" : 163,
-                        "constraintsLocked" : false,
-                        "left" : 7,
-                        "bottom" : -17,
-                        "height" : 13,
-                        "opacity" : 1,
-                        "width" : 34,
-                        "widthFactor" : null,
-                        "targetName" : null,
-                        "heightFactor" : null,
-                        "editable" : false,
-                        "visible" : true,
-                        "centerAnchorY" : 1.223404255319149,
-                        "autoSize" : false,
-                        "y" : 508
+                          ],
+                          "data" : {
+                            "emptyStyle" : [
+                              "LETTERSPACING:0",
+                              "LINEHEIGHT:1.2",
+                              "FONT:Avenir-Book",
+                              "COLOR:rgb(255, 255, 255)",
+                              "SIZE:16"
+                            ]
+                          },
+                          "text" : "Photo",
+                          "key" : "1g3gv",
+                          "type" : "unstyled"
+                        }
+                      ],
+                      "__class" : "StyledTextDraft",
+                      "entityMap" : {
+
                       }
-                    ],
-                    "name" : "oval_outer",
-                    "aspectRatioLocked" : true,
-                    "id" : "KeM:Ic74",
-                    "boxShadows" : [
-                      {
-                        "x" : 0,
-                        "color" : "rgba(0,0,0,0.25)",
-                        "enabled" : false,
-                        "y" : 2,
-                        "__class" : "BoxShadow",
-                        "inset" : false,
-                        "blur" : 5
-                      }
-                    ],
-                    "constraintsLocked" : false,
-                    "left" : 0,
-                    "bottom" : null,
-                    "height" : 47,
-                    "fillGradient" : {
-                      "end" : "rgba(0,0,0,0)",
-                      "alpha" : 1,
-                      "angle" : 0,
-                      "__class" : "LinearGradient",
-                      "start" : "black"
                     },
-                    "width" : 47,
+                    "name" : null,
+                    "shadows" : [
+                      {
+                        "y" : 2,
+                        "enabled" : false,
+                        "blur" : 5,
+                        "x" : 0,
+                        "__class" : "Shadow",
+                        "color" : "rgba(0,0,0,0.25)"
+                      }
+                    ],
+                    "id" : "4mKB+4c=",
+                    "x" : 163,
+                    "constraintsLocked" : false,
+                    "left" : 2,
+                    "bottom" : -20,
+                    "height" : 16,
+                    "opacity" : 1,
+                    "width" : 45,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
-                    "fillColor" : "rgb(255, 255, 255)",
-                    "borderColor" : "rgb(255, 255, 255)",
-                    "centerAnchorY" : 0.5,
-                    "opacity" : 1,
-                    "visible" : true,
-                    "clip" : false
+                    "editable" : false,
+                    "visible" : false,
+                    "centerAnchorY" : 1.25531914893617,
+                    "autoSize" : false,
+                    "y" : 508
                   },
                   {
                     "__class" : "OvalNode",
                     "fillType" : "color",
                     "locked" : false,
-                    "centerAnchorX" : 0.5,
+                    "centerAnchorX" : 0.5212765957446809,
                     "parentid" : "K9(8U2=R",
                     "rotation" : 0,
                     "fillEnabled" : true,
-                    "top" : 6,
+                    "top" : null,
                     "borderWidth" : 3,
-                    "right" : 6,
+                    "right" : 5,
                     "borderEnabled" : false,
                     "children" : [
 
@@ -2785,8 +2735,8 @@
                       }
                     ],
                     "constraintsLocked" : false,
-                    "left" : 6,
-                    "bottom" : null,
+                    "left" : 7,
+                    "bottom" : -5,
                     "height" : 35,
                     "fillGradient" : {
                       "end" : "rgba(0,0,0,0)",
@@ -2801,7 +2751,58 @@
                     "heightFactor" : null,
                     "fillColor" : "rgb(255, 255, 255)",
                     "borderColor" : "rgba(0, 0, 0, 0)",
-                    "centerAnchorY" : 0.5,
+                    "centerAnchorY" : 0.7340425531914894,
+                    "opacity" : 1,
+                    "visible" : true,
+                    "clip" : false
+                  },
+                  {
+                    "__class" : "OvalNode",
+                    "fillType" : "color",
+                    "locked" : false,
+                    "centerAnchorX" : 0.5212765957446809,
+                    "parentid" : "K9(8U2=R",
+                    "rotation" : 0,
+                    "fillEnabled" : false,
+                    "top" : null,
+                    "borderWidth" : 3,
+                    "right" : -1,
+                    "borderEnabled" : true,
+                    "children" : [
+
+                    ],
+                    "name" : "oval_outer",
+                    "aspectRatioLocked" : true,
+                    "id" : "KeM:Ic74",
+                    "boxShadows" : [
+                      {
+                        "x" : 0,
+                        "color" : "rgba(0,0,0,0.25)",
+                        "enabled" : false,
+                        "y" : 2,
+                        "__class" : "BoxShadow",
+                        "inset" : false,
+                        "blur" : 5
+                      }
+                    ],
+                    "constraintsLocked" : false,
+                    "left" : 1,
+                    "bottom" : -11,
+                    "height" : 47,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "width" : 47,
+                    "widthFactor" : null,
+                    "targetName" : null,
+                    "heightFactor" : null,
+                    "fillColor" : "rgb(255, 255, 255)",
+                    "borderColor" : "rgb(255, 255, 255)",
+                    "centerAnchorY" : 0.7340425531914894,
                     "opacity" : 1,
                     "visible" : true,
                     "clip" : false
@@ -2821,13 +2822,13 @@
                 "constraintsLocked" : false,
                 "right" : null,
                 "radiusPerCorner" : false,
-                "centerAnchorY" : 0.9069981583793738,
+                "centerAnchorY" : 0.8977900552486188,
                 "visible" : true,
                 "borderLeft" : 1,
                 "heightFactor" : null,
                 "radiusTopLeft" : 0,
                 "targetName" : null,
-                "bottom" : 27,
+                "bottom" : 32,
                 "width" : 47
               },
               {
@@ -5616,7 +5617,7 @@
             "radiusBottomLeft" : 0,
             "rotation" : 0,
             "__class" : "RectangleNode",
-            "id" : "quST@fm+",
+            "id" : "8QlxYw?1",
             "fillColor" : "transparent",
             "aspectRatioLocked" : false,
             "widthFactor" : null,
@@ -5653,7 +5654,7 @@
                 "radiusBottomLeft" : 0,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
-                "id" : "_1Zz.eb_",
+                "id" : "goTUTa#]",
                 "fillColor" : "rgb(0, 0, 0)",
                 "aspectRatioLocked" : false,
                 "widthFactor" : null,
@@ -5689,7 +5690,7 @@
 
                 ],
                 "fillEnabled" : true,
-                "parentid" : "quST@fm+",
+                "parentid" : "8QlxYw?1",
                 "borderRight" : 1,
                 "name" : "camera_bg",
                 "height" : 543,
@@ -5715,7 +5716,7 @@
                 "radiusBottomLeft" : 0,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
-                "id" : "Ne{X+b2:",
+                "id" : "(dd<P..z",
                 "fillColor" : "transparent",
                 "aspectRatioLocked" : false,
                 "widthFactor" : null,
@@ -5749,162 +5750,112 @@
                 "radiusBottomRight" : 0,
                 "children" : [
                   {
-                    "__class" : "OvalNode",
-                    "fillType" : "color",
+                    "__class" : "TextNode",
                     "locked" : false,
-                    "centerAnchorX" : 0.5,
-                    "parentid" : "Ne{X+b2:",
+                    "centerAnchorX" : 0.5212765957446809,
+                    "parentid" : "(dd<P..z",
                     "rotation" : 0,
-                    "fillEnabled" : false,
-                    "top" : 0,
-                    "borderWidth" : 3,
+                    "top" : null,
                     "right" : 0,
-                    "borderEnabled" : true,
-                    "children" : [
-                      {
-                        "__class" : "TextNode",
-                        "locked" : false,
-                        "centerAnchorX" : 0.5106382978723404,
-                        "parentid" : "R>oa\/!l+",
-                        "rotation" : 0,
-                        "top" : null,
-                        "right" : 6,
-                        "styledText" : {
-                          "blocks" : [
+                    "styledText" : {
+                      "blocks" : [
+                        {
+                          "depth" : 0,
+                          "inlineStyleRanges" : [
                             {
-                              "depth" : 0,
-                              "inlineStyleRanges" : [
-                                {
-                                  "length" : 5,
-                                  "style" : "LETTERSPACING:0",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 5,
-                                  "style" : "LINEHEIGHT:1.2",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 5,
-                                  "style" : "FONT:Avenir-Book",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 5,
-                                  "style" : "COLOR:rgb(255, 255, 255)",
-                                  "offset" : 0
-                                },
-                                {
-                                  "length" : 5,
-                                  "style" : "SIZE:12",
-                                  "offset" : 0
-                                }
-                              ],
-                              "entityRanges" : [
-
-                              ],
-                              "data" : {
-                                "emptyStyle" : [
-                                  "LETTERSPACING:0",
-                                  "LINEHEIGHT:1.2",
-                                  "FONT:Avenir-Book",
-                                  "COLOR:rgb(255, 255, 255)",
-                                  "SIZE:12"
-                                ]
-                              },
-                              "text" : "Photo",
-                              "key" : "1g3gv",
-                              "type" : "unstyled"
+                              "length" : 5,
+                              "style" : "LETTERSPACING:0",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 5,
+                              "style" : "LINEHEIGHT:1.2",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 5,
+                              "style" : "FONT:Avenir-Book",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 5,
+                              "style" : "COLOR:rgb(255, 255, 255)",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 5,
+                              "style" : "SIZE:16",
+                              "offset" : 0
                             }
                           ],
-                          "__class" : "StyledTextDraft",
-                          "entityMap" : {
+                          "entityRanges" : [
 
-                          }
-                        },
-                        "name" : null,
-                        "shadows" : [
-                          {
-                            "y" : 2,
-                            "enabled" : false,
-                            "blur" : 5,
-                            "x" : 0,
-                            "__class" : "Shadow",
-                            "color" : "rgba(0,0,0,0.25)"
-                          }
-                        ],
-                        "id" : "EbE'LDhW",
-                        "x" : 163,
-                        "constraintsLocked" : false,
-                        "left" : 7,
-                        "bottom" : -17,
-                        "height" : 13,
-                        "opacity" : 1,
-                        "width" : 34,
-                        "widthFactor" : null,
-                        "targetName" : null,
-                        "heightFactor" : null,
-                        "editable" : false,
-                        "visible" : true,
-                        "centerAnchorY" : 1.223404255319149,
-                        "autoSize" : false,
-                        "y" : 508
+                          ],
+                          "data" : {
+                            "emptyStyle" : [
+                              "LETTERSPACING:0",
+                              "LINEHEIGHT:1.2",
+                              "FONT:Avenir-Book",
+                              "COLOR:rgb(255, 255, 255)",
+                              "SIZE:16"
+                            ]
+                          },
+                          "text" : "Photo",
+                          "key" : "1g3gv",
+                          "type" : "unstyled"
+                        }
+                      ],
+                      "__class" : "StyledTextDraft",
+                      "entityMap" : {
+
                       }
-                    ],
-                    "name" : "oval_outer",
-                    "aspectRatioLocked" : true,
-                    "id" : "R>oa\/!l+",
-                    "boxShadows" : [
-                      {
-                        "x" : 0,
-                        "color" : "rgba(0,0,0,0.25)",
-                        "enabled" : false,
-                        "y" : 2,
-                        "__class" : "BoxShadow",
-                        "inset" : false,
-                        "blur" : 5
-                      }
-                    ],
-                    "constraintsLocked" : false,
-                    "left" : 0,
-                    "bottom" : null,
-                    "height" : 47,
-                    "fillGradient" : {
-                      "end" : "rgba(0,0,0,0)",
-                      "alpha" : 1,
-                      "angle" : 0,
-                      "__class" : "LinearGradient",
-                      "start" : "black"
                     },
-                    "width" : 47,
+                    "name" : null,
+                    "shadows" : [
+                      {
+                        "y" : 2,
+                        "enabled" : false,
+                        "blur" : 5,
+                        "x" : 0,
+                        "__class" : "Shadow",
+                        "color" : "rgba(0,0,0,0.25)"
+                      }
+                    ],
+                    "id" : "&paWQ%Uv",
+                    "x" : 163,
+                    "constraintsLocked" : false,
+                    "left" : 2,
+                    "bottom" : -20,
+                    "height" : 16,
+                    "opacity" : 1,
+                    "width" : 45,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
-                    "fillColor" : "rgb(255, 255, 255)",
-                    "borderColor" : "rgb(255, 255, 255)",
-                    "centerAnchorY" : 0.5,
-                    "opacity" : 1,
-                    "visible" : true,
-                    "clip" : false
+                    "editable" : false,
+                    "visible" : false,
+                    "centerAnchorY" : 1.25531914893617,
+                    "autoSize" : false,
+                    "y" : 508
                   },
                   {
                     "__class" : "OvalNode",
                     "fillType" : "color",
                     "locked" : false,
-                    "centerAnchorX" : 0.5,
-                    "parentid" : "Ne{X+b2:",
+                    "centerAnchorX" : 0.5212765957446809,
+                    "parentid" : "(dd<P..z",
                     "rotation" : 0,
                     "fillEnabled" : true,
-                    "top" : 6,
+                    "top" : null,
                     "borderWidth" : 3,
-                    "right" : 6,
+                    "right" : 5,
                     "borderEnabled" : false,
                     "children" : [
 
                     ],
                     "name" : "oval_inner",
                     "aspectRatioLocked" : true,
-                    "id" : "klFoREq&",
+                    "id" : "66y!R^JM",
                     "boxShadows" : [
                       {
                         "x" : 0,
@@ -5917,8 +5868,8 @@
                       }
                     ],
                     "constraintsLocked" : false,
-                    "left" : 6,
-                    "bottom" : null,
+                    "left" : 7,
+                    "bottom" : -5,
                     "height" : 35,
                     "fillGradient" : {
                       "end" : "rgba(0,0,0,0)",
@@ -5933,14 +5884,65 @@
                     "heightFactor" : null,
                     "fillColor" : "rgb(255, 255, 255)",
                     "borderColor" : "rgba(0, 0, 0, 0)",
-                    "centerAnchorY" : 0.5,
+                    "centerAnchorY" : 0.7340425531914894,
+                    "opacity" : 1,
+                    "visible" : true,
+                    "clip" : false
+                  },
+                  {
+                    "__class" : "OvalNode",
+                    "fillType" : "color",
+                    "locked" : false,
+                    "centerAnchorX" : 0.5212765957446809,
+                    "parentid" : "(dd<P..z",
+                    "rotation" : 0,
+                    "fillEnabled" : false,
+                    "top" : null,
+                    "borderWidth" : 3,
+                    "right" : -1,
+                    "borderEnabled" : true,
+                    "children" : [
+
+                    ],
+                    "name" : "oval_outer",
+                    "aspectRatioLocked" : true,
+                    "id" : "vrg\/Fy9$",
+                    "boxShadows" : [
+                      {
+                        "x" : 0,
+                        "color" : "rgba(0,0,0,0.25)",
+                        "enabled" : false,
+                        "y" : 2,
+                        "__class" : "BoxShadow",
+                        "inset" : false,
+                        "blur" : 5
+                      }
+                    ],
+                    "constraintsLocked" : false,
+                    "left" : 1,
+                    "bottom" : -11,
+                    "height" : 47,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "width" : 47,
+                    "widthFactor" : null,
+                    "targetName" : null,
+                    "heightFactor" : null,
+                    "fillColor" : "rgb(255, 255, 255)",
+                    "borderColor" : "rgb(255, 255, 255)",
+                    "centerAnchorY" : 0.7340425531914894,
                     "opacity" : 1,
                     "visible" : true,
                     "clip" : false
                   }
                 ],
                 "fillEnabled" : true,
-                "parentid" : "quST@fm+",
+                "parentid" : "8QlxYw?1",
                 "borderRight" : 1,
                 "name" : "camera_btn",
                 "height" : 47,
@@ -5953,20 +5955,20 @@
                 "constraintsLocked" : false,
                 "right" : null,
                 "radiusPerCorner" : false,
-                "centerAnchorY" : 0.9069981583793738,
+                "centerAnchorY" : 0.8977900552486188,
                 "visible" : true,
                 "borderLeft" : 1,
                 "heightFactor" : null,
                 "radiusTopLeft" : 0,
                 "targetName" : null,
-                "bottom" : 27,
+                "bottom" : 32,
                 "width" : 47
               },
               {
                 "radiusBottomLeft" : 100,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
-                "id" : "-Af5M?k2",
+                "id" : "a]O:0<u<",
                 "fillColor" : "rgb(50, 192, 206)",
                 "aspectRatioLocked" : false,
                 "widthFactor" : null,
@@ -6003,7 +6005,7 @@
                     "__class" : "TextNode",
                     "locked" : false,
                     "centerAnchorX" : 0.509090909090909,
-                    "parentid" : "-Af5M?k2",
+                    "parentid" : "a]O:0<u<",
                     "rotation" : 0,
                     "top" : null,
                     "right" : null,
@@ -6071,7 +6073,7 @@
                         "color" : "rgba(0,0,0,0.25)"
                       }
                     ],
-                    "id" : "tD(g^j}c",
+                    "id" : "'vE),+O8",
                     "x" : 83,
                     "constraintsLocked" : false,
                     "left" : null,
@@ -6090,7 +6092,7 @@
                   }
                 ],
                 "fillEnabled" : true,
-                "parentid" : "quST@fm+",
+                "parentid" : "8QlxYw?1",
                 "borderRight" : 1,
                 "name" : "save_btn",
                 "height" : 42,
@@ -6116,7 +6118,7 @@
                 "radiusBottomLeft" : 0,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
-                "id" : "C#&h_1o8",
+                "id" : "y&58vtjr",
                 "fillColor" : "rgb(255, 255, 255)",
                 "aspectRatioLocked" : true,
                 "widthFactor" : null,
@@ -6152,7 +6154,7 @@
 
                 ],
                 "fillEnabled" : true,
-                "parentid" : "quST@fm+",
+                "parentid" : "8QlxYw?1",
                 "borderRight" : 1,
                 "name" : "camera_preview",
                 "height" : 79,
@@ -6179,7 +6181,7 @@
                 "fillType" : "color",
                 "locked" : false,
                 "centerAnchorX" : 0.8813333333333333,
-                "parentid" : "quST@fm+",
+                "parentid" : "8QlxYw?1",
                 "rotation" : 0,
                 "fillEnabled" : true,
                 "top" : null,
@@ -6191,7 +6193,7 @@
                     "radiusBottomLeft" : 0,
                     "rotation" : 0,
                     "__class" : "ImageNode",
-                    "id" : "r~lsA61K",
+                    "id" : "_=N9H&R`",
                     "fillColor" : "transparent",
                     "aspectRatioLocked" : true,
                     "imageBackgroundSize" : "Cover",
@@ -6220,7 +6222,7 @@
 
                     ],
                     "fillEnabled" : false,
-                    "parentid" : "}SeQSr}3",
+                    "parentid" : "q5`X0:(2",
                     "borderRight" : 1,
                     "image" : "ugEbhpywjdJqOVc3pMl07BLUoFKx8unXwznR5ZXR50J9waKywHcpefavZOD2kyDC2GZISoydGwVpSWu8mw.svg",
                     "name" : "shape",
@@ -6249,7 +6251,7 @@
                 ],
                 "name" : "shape",
                 "aspectRatioLocked" : true,
-                "id" : "}SeQSr}3",
+                "id" : "q5`X0:(2",
                 "boxShadows" : [
                   {
                     "x" : 0,
@@ -6288,7 +6290,7 @@
                 "fillType" : "color",
                 "locked" : false,
                 "centerAnchorX" : 0.7426666666666667,
-                "parentid" : "quST@fm+",
+                "parentid" : "8QlxYw?1",
                 "rotation" : 0,
                 "fillEnabled" : true,
                 "top" : null,
@@ -6300,7 +6302,7 @@
                     "radiusBottomLeft" : 0,
                     "rotation" : 0,
                     "__class" : "ImageNode",
-                    "id" : "a>?=^GP%",
+                    "id" : "CX+^O-4j",
                     "fillColor" : "rgb(255, 26, 26)",
                     "aspectRatioLocked" : true,
                     "imageBackgroundSize" : "Cover",
@@ -6329,7 +6331,7 @@
 
                     ],
                     "fillEnabled" : false,
-                    "parentid" : "4u`Nx]gQ",
+                    "parentid" : "UX<rmL}a",
                     "borderRight" : 1,
                     "image" : "X9rshQFiMQD6cKSSd2wKGDW5uCYJ3idMw9dFCOrttQeaOzqkuJe5RGH0E7tJKLkpmYXB57ST5B1bZcFOgg.svg",
                     "name" : "text",
@@ -6358,7 +6360,7 @@
                 ],
                 "name" : "text",
                 "aspectRatioLocked" : true,
-                "id" : "4u`Nx]gQ",
+                "id" : "UX<rmL}a",
                 "boxShadows" : [
                   {
                     "x" : 0,
@@ -6650,7 +6652,7 @@
                     "centerAnchorX" : 0.5084745762711864,
                     "parentid" : "(?Mq_5KO",
                     "rotation" : 0,
-                    "top" : -1,
+                    "top" : -3,
                     "right" : 5,
                     "styledText" : {
                       "blocks" : [
@@ -6720,7 +6722,7 @@
                     "x" : 121,
                     "constraintsLocked" : false,
                     "left" : 6,
-                    "bottom" : 2,
+                    "bottom" : null,
                     "height" : 17,
                     "opacity" : 1,
                     "width" : 48,
@@ -6728,8 +6730,8 @@
                     "targetName" : null,
                     "heightFactor" : null,
                     "editable" : false,
-                    "visible" : true,
-                    "centerAnchorY" : 0.4166666666666667,
+                    "visible" : false,
+                    "centerAnchorY" : 0.3055555555555556,
                     "autoSize" : false,
                     "y" : 32
                   },
@@ -6739,35 +6741,35 @@
                     "centerAnchorX" : 0.5254237288135594,
                     "parentid" : "(?Mq_5KO",
                     "rotation" : 0,
-                    "top" : -1,
-                    "right" : -65,
+                    "top" : -3,
+                    "right" : -78,
                     "styledText" : {
                       "blocks" : [
                         {
                           "depth" : 0,
                           "inlineStyleRanges" : [
                             {
-                              "length" : 25,
+                              "length" : 28,
                               "style" : "COLOR:#000000",
                               "offset" : 0
                             },
                             {
-                              "length" : 25,
+                              "length" : 28,
                               "style" : "SIZE:16",
                               "offset" : 0
                             },
                             {
-                              "length" : 25,
+                              "length" : 28,
                               "style" : "LETTERSPACING:0",
                               "offset" : 0
                             },
                             {
-                              "length" : 25,
+                              "length" : 28,
                               "style" : "LINEHEIGHT:1.2",
                               "offset" : 0
                             },
                             {
-                              "length" : 25,
+                              "length" : 28,
                               "style" : "FONT:Avenir-Book",
                               "offset" : 0
                             }
@@ -6784,7 +6786,7 @@
                               "FONT:Avenir-Book"
                             ]
                           },
-                          "text" : "Foreign Lange Translation",
+                          "text" : "Foreign Language Translation",
                           "key" : "1g3gv",
                           "type" : "unstyled"
                         }
@@ -6808,17 +6810,17 @@
                     "id" : "TfvEJZmI",
                     "x" : 121,
                     "constraintsLocked" : false,
-                    "left" : -62,
-                    "bottom" : -3,
+                    "left" : -75,
+                    "bottom" : -1,
                     "height" : 22,
                     "opacity" : 1,
-                    "width" : 186,
+                    "width" : 212,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
                     "editable" : false,
-                    "visible" : true,
-                    "centerAnchorY" : 0.5555555555555556,
+                    "visible" : false,
+                    "centerAnchorY" : 0.4444444444444444,
                     "autoSize" : false,
                     "y" : 32
                   },
@@ -6828,7 +6830,7 @@
                     "centerAnchorX" : 0.5,
                     "parentid" : "(?Mq_5KO",
                     "rotation" : 0,
-                    "top" : -1,
+                    "top" : -3,
                     "right" : 0,
                     "styledText" : {
                       "blocks" : [
@@ -6919,7 +6921,7 @@
                     "x" : 121,
                     "constraintsLocked" : false,
                     "left" : 0,
-                    "bottom" : 2,
+                    "bottom" : null,
                     "height" : 17,
                     "opacity" : 1,
                     "width" : 59,
@@ -6927,46 +6929,46 @@
                     "targetName" : "title_camera",
                     "heightFactor" : null,
                     "editable" : false,
-                    "visible" : true,
-                    "centerAnchorY" : 0.4166666666666667,
+                    "visible" : false,
+                    "centerAnchorY" : 0.3055555555555556,
                     "autoSize" : false,
                     "y" : 32
                   },
                   {
                     "__class" : "TextNode",
                     "locked" : true,
-                    "centerAnchorX" : 0.5084745762711864,
+                    "centerAnchorX" : 0.576271186440678,
                     "parentid" : "(?Mq_5KO",
                     "rotation" : 0,
-                    "top" : -1,
-                    "right" : 2,
+                    "top" : -3,
+                    "right" : -33,
                     "styledText" : {
                       "blocks" : [
                         {
                           "depth" : 0,
                           "inlineStyleRanges" : [
                             {
-                              "length" : 6,
+                              "length" : 15,
                               "style" : "COLOR:#000000",
                               "offset" : 0
                             },
                             {
-                              "length" : 6,
+                              "length" : 15,
                               "style" : "SIZE:16",
                               "offset" : 0
                             },
                             {
-                              "length" : 6,
+                              "length" : 15,
                               "style" : "LETTERSPACING:0",
                               "offset" : 0
                             },
                             {
-                              "length" : 6,
+                              "length" : 15,
                               "style" : "LINEHEIGHT:1.2",
                               "offset" : 0
                             },
                             {
-                              "length" : 6,
+                              "length" : 15,
                               "style" : "FONT:Avenir-Book",
                               "offset" : 0
                             }
@@ -6983,7 +6985,7 @@
                               "FONT:Avenir-Book"
                             ]
                           },
-                          "text" : "People",
+                          "text" : "Person Involved",
                           "key" : "1g3gv",
                           "type" : "unstyled"
                         }
@@ -7007,17 +7009,17 @@
                     "id" : "l(oL*LKf",
                     "x" : 121,
                     "constraintsLocked" : false,
-                    "left" : 3,
-                    "bottom" : 2,
+                    "left" : -24,
+                    "bottom" : null,
                     "height" : 17,
                     "opacity" : 1,
-                    "width" : 54,
+                    "width" : 116,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
                     "editable" : false,
-                    "visible" : true,
-                    "centerAnchorY" : 0.4166666666666667,
+                    "visible" : false,
+                    "centerAnchorY" : 0.3055555555555556,
                     "autoSize" : false,
                     "y" : 32
                   },
@@ -7027,7 +7029,7 @@
                     "centerAnchorX" : 0.5084745762711864,
                     "parentid" : "(?Mq_5KO",
                     "rotation" : 0,
-                    "top" : -1,
+                    "top" : -3,
                     "right" : 9,
                     "styledText" : {
                       "blocks" : [
@@ -7097,7 +7099,7 @@
                     "x" : 121,
                     "constraintsLocked" : false,
                     "left" : 10,
-                    "bottom" : 2,
+                    "bottom" : null,
                     "height" : 17,
                     "opacity" : 1,
                     "width" : 40,
@@ -7105,8 +7107,8 @@
                     "targetName" : null,
                     "heightFactor" : null,
                     "editable" : false,
-                    "visible" : true,
-                    "centerAnchorY" : 0.4166666666666667,
+                    "visible" : false,
+                    "centerAnchorY" : 0.3055555555555556,
                     "autoSize" : false,
                     "y" : 32
                   }
@@ -7126,7 +7128,7 @@
                 "right" : null,
                 "radiusPerCorner" : false,
                 "centerAnchorY" : 0.71875,
-                "visible" : false,
+                "visible" : true,
                 "borderLeft" : 1,
                 "heightFactor" : null,
                 "radiusTopLeft" : 0,
@@ -8200,7 +8202,7 @@
                 "clip" : false,
                 "borderColor" : "#222",
                 "left" : 75,
-                "locked" : true,
+                "locked" : false,
                 "fillGradient" : {
                   "end" : "rgba(0,0,0,0)",
                   "alpha" : 1,
@@ -8232,7 +8234,7 @@
                     "centerAnchorX" : 0.48,
                     "parentid" : "DgBzH.Jr",
                     "rotation" : 0,
-                    "locked" : true,
+                    "locked" : false,
                     "intrinsicWidth" : 24,
                     "top" : 8,
                     "right" : null,
@@ -8273,40 +8275,40 @@
                   },
                   {
                     "__class" : "TextNode",
-                    "locked" : true,
-                    "centerAnchorX" : 0.48,
+                    "locked" : false,
+                    "centerAnchorX" : 0.5066666666666667,
                     "parentid" : "DgBzH.Jr",
                     "rotation" : 0,
                     "top" : null,
-                    "right" : null,
+                    "right" : 8,
                     "styledText" : {
                       "blocks" : [
                         {
                           "depth" : 0,
                           "inlineStyleRanges" : [
                             {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "LETTERSPACING:0",
                               "offset" : 0
                             },
                             {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "LINEHEIGHT:1.2",
                               "offset" : 0
                             },
                             {
-                              "length" : 5,
-                              "style" : "COLOR:rgb(50, 192, 206)",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "SIZE:12",
                               "offset" : 0
                             },
                             {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "FONT:Avenir-Medium",
+                              "offset" : 0
+                            },
+                            {
+                              "length" : 9,
+                              "style" : "COLOR:rgb(50, 192, 206)",
                               "offset" : 0
                             }
                           ],
@@ -8317,12 +8319,12 @@
                             "emptyStyle" : [
                               "LETTERSPACING:0",
                               "LINEHEIGHT:1.2",
-                              "COLOR:rgb(50, 192, 206)",
                               "SIZE:12",
-                              "FONT:Avenir-Medium"
+                              "FONT:Avenir-Medium",
+                              "COLOR:rgb(50, 192, 206)"
                             ]
                           },
-                          "text" : "Voice",
+                          "text" : "Recording",
                           "key" : "1g3gv",
                           "type" : "unstyled"
                         }
@@ -8343,20 +8345,20 @@
                         "color" : "rgba(0,0,0,0.25)"
                       }
                     ],
-                    "id" : "2w2y4%9C",
+                    "id" : "Ab_6Ch;n",
                     "x" : 17,
                     "constraintsLocked" : false,
-                    "left" : null,
-                    "bottom" : 9,
-                    "height" : 12,
+                    "left" : 9,
+                    "bottom" : 7,
+                    "height" : 14,
                     "opacity" : 0,
-                    "width" : 30,
+                    "width" : 58,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
                     "editable" : false,
                     "visible" : true,
-                    "centerAnchorY" : 0.75,
+                    "centerAnchorY" : 0.7666666666666667,
                     "autoSize" : false,
                     "y" : 37
                   },
@@ -8367,7 +8369,7 @@
                     "centerAnchorX" : 0.48,
                     "parentid" : "DgBzH.Jr",
                     "rotation" : 0,
-                    "locked" : true,
+                    "locked" : false,
                     "intrinsicWidth" : 24,
                     "top" : 8,
                     "right" : null,
@@ -8408,39 +8410,39 @@
                   },
                   {
                     "__class" : "TextNode",
-                    "locked" : true,
-                    "centerAnchorX" : 0.48,
+                    "locked" : false,
+                    "centerAnchorX" : 0.5066666666666667,
                     "parentid" : "DgBzH.Jr",
                     "rotation" : 0,
                     "top" : null,
-                    "right" : null,
+                    "right" : 8,
                     "styledText" : {
                       "blocks" : [
                         {
                           "depth" : 0,
                           "inlineStyleRanges" : [
                             {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "LETTERSPACING:0",
                               "offset" : 0
                             },
                             {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "LINEHEIGHT:1.2",
                               "offset" : 0
                             },
                             {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "COLOR:rgb(155, 153, 169)",
                               "offset" : 0
                             },
                             {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "SIZE:12",
                               "offset" : 0
                             },
                             {
-                              "length" : 5,
+                              "length" : 9,
                               "style" : "FONT:Avenir-Medium",
                               "offset" : 0
                             }
@@ -8457,7 +8459,7 @@
                               "FONT:Avenir-Medium"
                             ]
                           },
-                          "text" : "Voice",
+                          "text" : "Recording",
                           "key" : "1g3gv",
                           "type" : "unstyled"
                         }
@@ -8481,17 +8483,17 @@
                     "id" : "id>v@(r;",
                     "x" : 17,
                     "constraintsLocked" : false,
-                    "left" : null,
-                    "bottom" : 9,
-                    "height" : 12,
+                    "left" : 9,
+                    "bottom" : 7,
+                    "height" : 14,
                     "opacity" : 1,
-                    "width" : 30,
+                    "width" : 58,
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
                     "editable" : false,
                     "visible" : true,
-                    "centerAnchorY" : 0.75,
+                    "centerAnchorY" : 0.7666666666666667,
                     "autoSize" : false,
                     "y" : 37
                   }
