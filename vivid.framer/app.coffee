@@ -561,17 +561,11 @@ init = (device) ->
 				for layer in item.children
 					layer.animate(state)
 			item.animate(state)
-		# for item in tabGroup
-		#	item.animate(state)
 
 
 	###
 	Defatult
-	###
-	notesTab.animate("active", {instant: true})
-	notesTitle.animate("active", {instant: true})
-	notesView.animate("active", {instant: true})
-	
+	###	
 	setStateTab(notes, "active")
 
 	# Testing
