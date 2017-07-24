@@ -1,10 +1,19 @@
-# Module setting (firebase, input)
-{Firebase} = require 'firebase'
-firebase = new Firebase
-	projectID: "vivid-6124d"
-	secret: "gj2baisq18Z679XxNlxBosxtR4KBR5NLwwpQIVoA"
+# phone and desktop setting
+# 		     People fSize      image
+# phone           16         rotateFix
+# deaktop         25         no rotate
 
-InputModule = require "input"
+init = (device) ->
+	# Module setting (firebase, input)
+	{Firebase} = require 'firebase'
+	firebase = new Firebase
+		projectID: "vivid-6124d"
+		secret: "gj2baisq18Z679XxNlxBosxtR4KBR5NLwwpQIVoA"
+	
+	InputModule = require "input"
+
+init("phone")
+
 
 # User setting
 generateUUID = ->
@@ -15,6 +24,11 @@ generateUUID = ->
 username = "vita"
 uuid = generateUUID()
 caseID = "case1"
+
+
+# Framer.Device.onChange "orientation", ->
+# 	print Framer.Device.orientation
+
 
 # Save session
 firebase.post(
@@ -68,7 +82,28 @@ for view in viewGroup
 		active:
 			visible: true
 
-# Camera View
+# Animation function
+shakeAnimate = (ele, duration) ->
+	animA = ele.animate
+		properties: {x: formEleArray[0].x + 4}
+		time: 0.1
+		curve: "linear"
+	animB = ele.animate
+		properties: {x: formEleArray[0].x - 4}
+		time: 0.1
+		curve: "linear"
+		
+	animA.on Events.AnimationEnd, -> animB.start()
+	animB.on Events.AnimationEnd, -> animA.start()
+	
+	Utils.delay duration, ->
+		animA.stop()
+		animB.stop()
+
+rotateFix = (ele, degree) ->
+	ele.rotation = degree
+
+# Camera view
 
 # # load cameralayer (only works on Android + Chrome)
 # activateCamera = ->
@@ -107,19 +142,19 @@ cameraPreview.states =
 		visible: false
 cameraShapeBtn.states = 
 	active:
-		visible: true
-	inactive:
 		visible: false
+	anotation:
+		visible: true
 cameraTextBtn.states = 
 	active:
-		visible: true
-	inactive:
 		visible: false
+	anotation:
+		visible: true
 cameraAnnotationSaveBtn.states = 
 	active:
-		visible: true
-	inactive:
 		visible: false
+	anotation:
+		visible: true
 	
 cameraBtn.html = """
     <input type="file" id="cameraBtn" accept="image/*"/ style="display: none">
@@ -147,53 +182,40 @@ imageReader = ->
 				{type: 'img', data: img, location: "300 S Craig St.", created_at: new Date()})
 			# render to preview box
 			cameraPreview.image = img
-			cameraPreview.rotation = 90
+			# rotateFix(cameraPreview, 90)
 
 # check preview
 cameraPreview.on Events.Click, ->
 	if cameraPreview.image != undefined
 		cameraBg.image = cameraPreview.image
+		# rotateFix(cameraBg, 90)
 		# hide camera preview box and camera button
 		cameraPreview.animate("inactive")
 		cameraBtn.animate("inactive")
 		# show annotation buttons
-		cameraAnnotationSaveBtn.animate("active")
-		cameraShapeBtn.animate("active")
-		cameraTextBtn.animate("active")
+		cameraAnnotationSaveBtn.animate("anotation")
+		cameraShapeBtn.animate("anotation")
+		cameraTextBtn.animate("anotation")
 
 resetCamera = ->
-	cameraAnnotationSaveBtn.animate("inactive")
-	cameraShapeBtn.animate("inactive")
-	cameraTextBtn.animate("inactive")
+	# hide all annotation buttons
+	cameraPreview.animate("inactive")
 	cameraPreview.image = null
-	cameraPreview.rotation = 0
 	cameraBg.image = null
+# 	rotateFix(cameraPreview, 0)
+# 	rotateFix(cameraPreview, 0)
 
 cameraAnnotationSaveBtn.onTap ->
-	# transfer the annotated image to DB
+	# TODO transfer the annotated image to DB
 	
 	# back to the original state
 	tabConf("default", "default", "active", "default", "default", "default")
+	setStateTab(camera, "active")
 	resetCamera()
 
-# Animation function
-shakeAnimate = (ele, duration) ->
-	animA = ele.animate
-		properties: {x: formEleArray[0].x + 4}
-		time: 0.1
-		curve: "linear"
-	animB = ele.animate
-		properties: {x: formEleArray[0].x - 4}
-		time: 0.1
-		curve: "linear"
-		
-	animA.on Events.AnimationEnd, -> animB.start()
-	animB.on Events.AnimationEnd, -> animA.start()
+# TODO annotate image
+# cameraShapeBtn.onTap ->
 	
-	Utils.delay duration, ->
-		animA.stop()
-		animB.stop()
-
 
 # People view
 scanIDbtn = peopleView.childrenWithName("scan_btn")[0]
@@ -212,9 +234,6 @@ personDoneBtn.states =
 personDoneBtn.states.animationOptions =
 		curve: Spring(tension: 250, friction: 25)
 		time: 0.3
-	
-
-
 
 
 # scroll
@@ -293,7 +312,6 @@ appendForm = (popData) ->
 			x: row.width * 0.35
 			fontSize: fSize
 			placeholder: if itemName == 'name' then 'Required' else ''
-			#placeholderColor: if itemName == 'name' then '#8B8B8B' else ''
 			text: if popData then itemText else ''
 		
 		formEleArray.push(row)
@@ -313,9 +331,6 @@ appendForm = (popData) ->
 			formData["#{input.name}"] = @value)
 
 appendForm(false)
-
-
-
 
 
 # ID scan
@@ -348,8 +363,6 @@ idReader = ->
 		arrayLen = inputform.label.length
 		for i in [0...arrayLen]
 			formData["#{inputform.name[i]}"] = "#{inputform.content[i]}"
-		
-
 
 
 addPersonImg = ->
@@ -367,7 +380,7 @@ clearForm = ->
 	
 # Save person info
 personSaveBtn.onTap ->
-	print formData
+	#print formData
 	# transfer to firebase
 	if formData.name != ""
 		firebase.post(
@@ -399,8 +412,6 @@ personSaveBtn.onTap ->
 # press done
 personDoneBtn.onTap ->
 	setStateTab(people, "active")
-
-
 
 # Summary view
 summaryBtn = navbar.childrenWithName("summary_icon")[0]
@@ -468,12 +479,13 @@ renderRes = (dataSet) ->
 							parent: summaryScroll.content
 							width: size
 							height: size
-							rotation: if type == 'img' then 90 else 0 
 							x: size*i + xOffSet
 							y: size*j + yOffSet
 						
 						switch type
-							when 'img' then dataBox.image = data.data
+							when 'img' 
+								dataBox.image = data.data
+								# rotateFix(dataBox, 90)
 							when 'people' then dataBox.image = data.data.img
 
 
@@ -487,9 +499,6 @@ retrieveDB = ->
 
 
 
-
-
-
 # Defatult
 # notesTab.animate("active", {instant: true})
 # notesTitle.animate("active", {instant: true})
@@ -500,10 +509,11 @@ peopleTitle.animate("active", {instant: true})
 peopleView.animate("active", {instant: true})
 peopleScroll.animate("active", {instant: true})
 
+
 # Tab Group
 notes = [notesTab, notesTitle, notesView]
 voice = [voiceTab, voiceTitle, voiceView]
-camera = [cameraTab, cameraTitle, cameraView, cameraBtn]
+camera = [cameraTab, cameraTitle, cameraView, cameraBtn, cameraShapeBtn, cameraTextBtn, cameraAnnotationSaveBtn]
 people = [peopleTab, peopleTitle, peopleView, personDoneBtn, peopleScroll]
 maps = [mapsTab, mapsTitle]
 summary = [summaryView, summaryScroll]
@@ -537,7 +547,7 @@ voiceTab.onTap ->
 	tabConf("default", "active", "default", "default", "default", "default")
 cameraTab.onTap ->
 	tabConf("default", "default", "active", "default", "default", "default")
-# 	activateCamera()	
+	resetCamera()
 peopleTab.onTap ->
 	tabConf("default", "default", "default", "active", "default", "default")	
 mapsTab.onTap ->
