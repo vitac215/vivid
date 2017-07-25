@@ -1,7 +1,10 @@
 # phone and desktop setting
-# 		     People fSize      image
-# phone           16         rotateFix
-# deaktop         25         no rotate
+# 		              phone          deaktop
+# People fSize         16              25
+# image              rotateFix        no rotate
+# drawing offset       0.5             1.5
+
+
 
 
 ###
@@ -28,7 +31,6 @@ shakeAnimate = (ele, duration) ->
 Init
 ###
 init = (device) ->
-	
 	###
 	Device config
 	###
@@ -37,11 +39,90 @@ init = (device) ->
 			fontSize = 25
 			rotateFix = (ele, degree) ->
 				ele.rotation = degree
+			drawingOffset = 0.5
 		when "desktop"
 			fontSize = 16
 			rotateFix = (ele, degree) ->
 				return
+			drawingOffset = 1.5
+
+	###
+	UTL function
+	###
+	# create a canvas layer for drawing
+	createCanvas = (parent, size, placeAfter) -> 
+		canvas = new Layer
+			visible: true  # change to false
+			parent: parent
+			size: size
+			# backgroundColor: "rgba(0, 0, 0, 0, 0)"
+		
+		canvas.states = 
+			default:
+				visible: false
+			active:
+				visible: true
+		
+		canvas.draggable.props =
+			vertical: false
+			horizontal: false
+			
+		# put canvas to the bottom of the camera_annotation_tool layer
+		canvas.placeBehind(placeAfter)
+		
+		return canvas
 	
+	
+	startDrawing = (canvas) ->
+		# Get the position of the canvas
+		ele = document.getElementsByName("camera_view")[1]
+		rect = ele.getBoundingClientRect()
+		canvasLeftOffset = rect.left
+		canvasTopOffset = rect.top
+		
+		print canvasLeftOffset
+		print canvasTopOffset
+		
+		# drawing function
+		draw = (e) ->
+			drawS = 5
+			drawx = (Events.touchEvent(e).clientX - canvasLeftOffset)
+			drawy = (Events.touchEvent(e).clientY - canvasTopOffset)
+			print drawx + ", " + drawy
+			
+			if drawing 
+				layer = new Layer
+					parent: canvas
+					name: "drawing"
+					height: drawS
+					width: drawS
+					x: drawx*drawingOffset
+					y: drawy*drawingOffset
+					scale: 1
+					borderRadius: "50%"
+					backgroundColor: "red"
+	
+	
+		drawing = false
+		
+		canvas.onTouchMove (event) -> 
+			# print "move"
+			draw(event)
+		
+		canvas.onTouchStart (event) ->
+			drawing = true
+			draw(event)
+	
+		canvas.onTouchEnd -> 
+			# print "drag end"
+			drawing = false
+	
+	endDrawing = (canvas) ->
+		canvas.destroy()	
+
+
+
+
 	###
 	Module setting (firebase, input)
 	###
@@ -74,7 +155,6 @@ init = (device) ->
 	firebase.post(
 		"/#{caseID}/#{uuid}/meta",
 		{username: username, location: "300 S Craig St. - Zone 1", time: new Date()})
-
 
 
 	###
@@ -154,12 +234,15 @@ init = (device) ->
 	###
 	Camera view
 	###
+	
+	# camera layers
 	cameraBtn = cameraView.childrenWithName("camera_btn")[0]
 	cameraPreview = cameraView.childrenWithName("camera_preview")[0]
+	cameraAnnoTool = cameraView.childrenWithName("camera_annotation_tool")[0]
 	cameraBg = cameraView.childrenWithName("camera_bg")[0]
-	cameraShapeBtn = cameraView.childrenWithName("shape")[0]
-	cameraTextBtn = cameraView.childrenWithName("text")[0]
-	cameraAnnotationSaveBtn = cameraView.childrenWithName("save_btn")[0]
+	cameraShapeBtn = cameraAnnoTool.childrenWithName("shape")[0]
+	cameraTextBtn = cameraAnnoTool.childrenWithName("text")[0]
+	cameraAnnotationSaveBtn = cameraAnnoTool.childrenWithName("save_btn")[0]
 
 	cameraBtn.states =
 		active:
@@ -171,21 +254,22 @@ init = (device) ->
 			visible: true
 		inactive:
 			visible: false
-	cameraShapeBtn.states =
+	cameraAnnoTool.states =
 		active:
 			visible: false
-		anotation:
+		annotation:
 			visible: true
-	cameraTextBtn.states =
+	cameraShapeBtn.states = 
 		active:
-			visible: false
-		anotation:
-			visible: true
-	cameraAnnotationSaveBtn.states =
+			opacity: 0.5
+		annotation:
+			opacity: 1
+	cameraTextBtn.states = 
 		active:
-			visible: false
-		anotation:
-			visible: true
+			opacity: 0.5
+		annotation:
+			opacity: 1
+
 
 	cameraBtn.html = """
 	    <input type="file" id="cameraBtn" accept="image/*"/ style="display: none">
@@ -193,6 +277,7 @@ init = (device) ->
 	cameraInput = document.getElementById("cameraBtn")
 	cameraBtn.on Events.Click, ->
 		cameraInput.click()
+
 
 	# take photos
 	cameraInput.onchange = ->
@@ -215,18 +300,23 @@ init = (device) ->
 				cameraPreview.image = img
 				rotateFix(cameraPreview, 90)
 
+
+	# canvas = null
+	canvas = createCanvas(cameraAnnoTool, cameraBg.size, cameraTextBtn)
 	# check preview
 	cameraPreview.on Events.Click, ->
-		if cameraPreview.image != undefined
-			cameraBg.image = cameraPreview.image
+		# create a canvas layer for drawing
+		canvas = createCanvas(cameraAnnoTool, cameraBg.size, cameraTextBtn)
+		print canvas
+		img = cameraPreview.image
+		if img != undefined
+			canvas.image = img
 			rotateFix(cameraBg, 90)
 			# hide camera preview box and camera button
 			cameraPreview.animate("inactive")
 			cameraBtn.animate("inactive")
 			# show annotation buttons
-			cameraAnnotationSaveBtn.animate("anotation")
-			cameraShapeBtn.animate("anotation")
-			cameraTextBtn.animate("anotation")
+			cameraAnnoTool.animate("annotation")
 
 	resetCamera = ->
 		# hide all annotation buttons
@@ -235,8 +325,17 @@ init = (device) ->
 		cameraBg.image = null
 		rotateFix(cameraPreview, 0)
 		rotateFix(cameraPreview, 0)
-
+	
+	
+	# Annotate an image (shape button)
+	cameraShapeBtn.onTap -> 
+		cameraShapeBtn.animate("annotation")
+		startDrawing(canvas)
+	
+	
+	# Save annotated image
 	cameraAnnotationSaveBtn.onTap ->
+		endDrawing(canvas)
 		# TODO transfer the annotated image to DB
 
 		# back to the original state
@@ -244,8 +343,6 @@ init = (device) ->
 		setStateTab(camera, "active")
 		resetCamera()
 
-	# TODO annotate image
-	# cameraShapeBtn.onTap ->
 
 
 
@@ -544,7 +641,7 @@ init = (device) ->
 	###
 	notes = [notesTab, notesTitle, notesView]
 	voice = [voiceTab, voiceTitle, voiceView]
-	camera = [cameraTab, cameraTitle, cameraView, cameraBtn, cameraShapeBtn, cameraTextBtn, cameraAnnotationSaveBtn]
+	camera = [cameraTab, cameraTitle, cameraView, cameraBtn, cameraAnnoTool, cameraShapeBtn, cameraTextBtn]
 	people = [peopleTab, peopleTitle, peopleView, personDoneBtn, peopleScroll]
 	maps = [mapsTab, mapsTitle]
 	summary = [summaryView, summaryScroll]
@@ -569,13 +666,14 @@ init = (device) ->
 	###
 	Defatult
 	###	
-	setStateTab(notes, "active")
-
-	# Testing
-	# peopleTab.animate("active", {instant: true})
-	# peopleTitle.animate("active", {instant: true})
-	# peopleView.animate("active", {instant: true})
-	# peopleScroll.animate("active", {instant: true})
+	# setStateTab(notes, "active")
+	setStateTab(camera, "active")
+	
+	#testing
+	cameraPreview.animate("inactive")
+	cameraBtn.animate("inactive")
+	# show annotation buttons
+	cameraAnnoTool.animate("annotation")
 
 
 	###

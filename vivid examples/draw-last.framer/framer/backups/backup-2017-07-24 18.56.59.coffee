@@ -10,8 +10,8 @@ draw = (e) ->
 # 	print "draw"
 # 	print drawing 
 	
-	drawx = Events.touchEvent(e).clientX
-	drawy = Events.touchEvent(e).clientY
+	x = Events.touchEvent(e).clientX
+	y = Events.touchEvent(e).clientY
 	drawS = 15
 	
 	

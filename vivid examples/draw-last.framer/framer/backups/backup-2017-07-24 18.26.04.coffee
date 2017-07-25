@@ -10,22 +10,18 @@ draw = (e) ->
 # 	print "draw"
 # 	print drawing 
 	
-	drawx = Events.touchEvent(e).clientX
-	drawy = Events.touchEvent(e).clientY
-	drawS = 15
+	x = Events.touchEvent(e).clientX
+	y = Events.touchEvent(e).clientY
 	
-	
-	if drawing 
-		layer = new Layer
-			parent: canvas
-			name: "drawing"
-			height: drawS
-			width: drawS
-			x: drawx + drawS*2
-			y: drawy - drawS*2
-			scale: 1
-			borderRadius: "50%"
-			backgroundColor: "red"
+	if drawing then new Layer
+		parent: canvas
+		x: x - 50
+		y: y - 50
+		borderRadius: "50%"
+		scale: 1
+		borderWidth: 1
+		borderColor: "rgba(0, 0, 0, .2)"
+		backgroundColor: Utils.randomColor()
 
 
 drawing = false
@@ -40,9 +36,9 @@ canvas.onTouchMove (event) ->
 	print "on touch move"
 	draw(event)
 	
-canvas.onDragEnd -> 
-	print "on drag end"
-	drawing = false
+# canvas.onDragEnd -> 
+# 	print "on drag end"
+# 	drawing = false
 
 
 

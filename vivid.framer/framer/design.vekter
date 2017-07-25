@@ -2560,7 +2560,7 @@
                 "parentid" : "l7UKhZ`1",
                 "borderRight" : 1,
                 "name" : "camera_bg",
-                "height" : 543,
+                "height" : 545,
                 "borderWidth" : 1,
                 "top" : 0,
                 "borderTop" : 1,
@@ -2822,164 +2822,14 @@
                 "constraintsLocked" : false,
                 "right" : null,
                 "radiusPerCorner" : false,
-                "centerAnchorY" : 0.8977900552486188,
+                "centerAnchorY" : 0.8944954128440367,
                 "visible" : true,
                 "borderLeft" : 1,
                 "heightFactor" : null,
                 "radiusTopLeft" : 0,
                 "targetName" : null,
-                "bottom" : 32,
-                "width" : 47
-              },
-              {
-                "radiusBottomLeft" : 100,
-                "rotation" : 0,
-                "__class" : "RectangleNode",
-                "id" : "~XQ%o*Qa",
-                "fillColor" : "rgb(50, 192, 206)",
-                "aspectRatioLocked" : false,
-                "widthFactor" : null,
-                "opacity" : 1,
-                "clip" : false,
-                "borderColor" : "#222",
-                "left" : null,
-                "locked" : false,
-                "fillGradient" : {
-                  "end" : "rgba(0,0,0,0)",
-                  "alpha" : 1,
-                  "angle" : 0,
-                  "__class" : "LinearGradient",
-                  "start" : "black"
-                },
-                "radius" : 100,
-                "boxShadows" : [
-                  {
-                    "x" : 0,
-                    "color" : "rgba(0,0,0,0.25)",
-                    "enabled" : false,
-                    "y" : 2,
-                    "__class" : "BoxShadow",
-                    "inset" : false,
-                    "blur" : 5
-                  }
-                ],
-                "centerAnchorX" : 0.4986666666666666,
-                "borderPerSide" : false,
-                "fillType" : "color",
-                "radiusBottomRight" : 100,
-                "children" : [
-                  {
-                    "__class" : "TextNode",
-                    "locked" : false,
-                    "centerAnchorX" : 0.509090909090909,
-                    "parentid" : "~XQ%o*Qa",
-                    "rotation" : 0,
-                    "top" : null,
-                    "right" : null,
-                    "styledText" : {
-                      "blocks" : [
-                        {
-                          "depth" : 0,
-                          "inlineStyleRanges" : [
-                            {
-                              "length" : 4,
-                              "style" : "LETTERSPACING:0",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 4,
-                              "style" : "LINEHEIGHT:1.2",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 4,
-                              "style" : "COLOR:rgb(255, 255, 255)",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 4,
-                              "style" : "SIZE:16",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 4,
-                              "style" : "FONT:Avenir-Heavy",
-                              "offset" : 0
-                            }
-                          ],
-                          "entityRanges" : [
-
-                          ],
-                          "data" : {
-                            "emptyStyle" : [
-                              "LETTERSPACING:0",
-                              "LINEHEIGHT:1.2",
-                              "COLOR:rgb(255, 255, 255)",
-                              "SIZE:16",
-                              "FONT:Avenir-Heavy"
-                            ]
-                          },
-                          "text" : "SAVE",
-                          "key" : "1g3gv",
-                          "type" : "unstyled"
-                        }
-                      ],
-                      "__class" : "StyledTextDraft",
-                      "entityMap" : {
-
-                      }
-                    },
-                    "name" : null,
-                    "shadows" : [
-                      {
-                        "y" : 2,
-                        "enabled" : false,
-                        "blur" : 5,
-                        "x" : 0,
-                        "__class" : "Shadow",
-                        "color" : "rgba(0,0,0,0.25)"
-                      }
-                    ],
-                    "id" : "uK@_|<@|",
-                    "x" : 83,
-                    "constraintsLocked" : false,
-                    "left" : null,
-                    "bottom" : null,
-                    "height" : 16,
-                    "opacity" : 1,
-                    "width" : 42,
-                    "widthFactor" : null,
-                    "targetName" : null,
-                    "heightFactor" : null,
-                    "editable" : false,
-                    "visible" : true,
-                    "centerAnchorY" : 0.5,
-                    "autoSize" : false,
-                    "y" : 6
-                  }
-                ],
-                "fillEnabled" : true,
-                "parentid" : "l7UKhZ`1",
-                "borderRight" : 1,
-                "name" : "save_btn",
-                "height" : 42,
-                "borderWidth" : 1,
-                "top" : null,
-                "borderTop" : 1,
-                "radiusTopRight" : 100,
-                "borderBottom" : 1,
-                "borderEnabled" : false,
-                "constraintsLocked" : false,
-                "right" : null,
-                "radiusPerCorner" : false,
-                "centerAnchorY" : 0.914364640883978,
-                "visible" : false,
-                "borderLeft" : 1,
-                "heightFactor" : null,
-                "radiusTopLeft" : 100,
-                "targetName" : null,
                 "bottom" : 34,
-                "width" : 110
+                "width" : 47
               },
               {
                 "radiusBottomLeft" : 0,
@@ -3034,43 +2884,128 @@
                 "constraintsLocked" : false,
                 "right" : null,
                 "radiusPerCorner" : false,
-                "centerAnchorY" : 0.8830570902394107,
+                "centerAnchorY" : 0.8798165137614679,
                 "visible" : false,
                 "borderLeft" : 1,
                 "heightFactor" : null,
                 "radiusTopLeft" : 0,
                 "targetName" : null,
-                "bottom" : 24,
+                "bottom" : 26,
                 "width" : 79
               },
               {
-                "__class" : "OvalNode",
-                "fillType" : "color",
-                "locked" : false,
-                "centerAnchorX" : 0.8813333333333333,
-                "parentid" : "l7UKhZ`1",
+                "radiusBottomLeft" : 0,
                 "rotation" : 0,
-                "fillEnabled" : true,
-                "top" : null,
-                "borderWidth" : 1,
-                "right" : 27,
-                "borderEnabled" : false,
+                "__class" : "RectangleNode",
+                "id" : "XKXU#fTM",
+                "fillColor" : "rgba(0,170,255,0.5)",
+                "aspectRatioLocked" : false,
+                "widthFactor" : null,
+                "opacity" : 1,
+                "clip" : false,
+                "borderColor" : "#222",
+                "left" : 0,
+                "locked" : false,
+                "fillGradient" : {
+                  "end" : "rgba(0,0,0,0)",
+                  "alpha" : 1,
+                  "angle" : 0,
+                  "__class" : "LinearGradient",
+                  "start" : "black"
+                },
+                "radius" : 0,
+                "boxShadows" : [
+                  {
+                    "x" : 0,
+                    "color" : "rgba(0,0,0,0.25)",
+                    "enabled" : false,
+                    "y" : 2,
+                    "__class" : "BoxShadow",
+                    "inset" : false,
+                    "blur" : 5
+                  }
+                ],
+                "centerAnchorX" : 0.5,
+                "borderPerSide" : false,
+                "fillType" : "color",
+                "radiusBottomRight" : 0,
                 "children" : [
                   {
-                    "radiusBottomLeft" : 0,
-                    "rotation" : 0,
-                    "__class" : "ImageNode",
-                    "id" : "+%R0{v>E",
-                    "fillColor" : "transparent",
-                    "aspectRatioLocked" : true,
-                    "imageBackgroundSize" : "Cover",
-                    "widthFactor" : null,
-                    "opacity" : 1,
-                    "clip" : false,
-                    "borderColor" : "#222",
-                    "left" : 6,
+                    "__class" : "OvalNode",
+                    "fillType" : "color",
                     "locked" : false,
-                    "radius" : 0,
+                    "centerAnchorX" : 0.7413333333333333,
+                    "parentid" : "XKXU#fTM",
+                    "rotation" : 0,
+                    "fillEnabled" : true,
+                    "top" : null,
+                    "borderWidth" : 1,
+                    "right" : 76,
+                    "borderEnabled" : false,
+                    "children" : [
+                      {
+                        "radiusBottomLeft" : 0,
+                        "rotation" : 0,
+                        "__class" : "ImageNode",
+                        "id" : "rbf<c_U3",
+                        "fillColor" : "rgb(255, 26, 26)",
+                        "aspectRatioLocked" : true,
+                        "imageBackgroundSize" : "Cover",
+                        "widthFactor" : null,
+                        "opacity" : 1,
+                        "clip" : false,
+                        "borderColor" : "#222",
+                        "left" : null,
+                        "locked" : false,
+                        "radius" : 0,
+                        "boxShadows" : [
+                          {
+                            "x" : 0,
+                            "color" : "rgba(0,0,0,0.25)",
+                            "enabled" : false,
+                            "y" : 2,
+                            "__class" : "BoxShadow",
+                            "inset" : false,
+                            "blur" : 5
+                          }
+                        ],
+                        "centerAnchorX" : 0.5119047619047619,
+                        "borderPerSide" : false,
+                        "radiusBottomRight" : 0,
+                        "children" : [
+
+                        ],
+                        "fillEnabled" : false,
+                        "parentid" : "I?v'#*mH",
+                        "borderRight" : 1,
+                        "image" : "X9rshQFiMQD6cKSSd2wKGDW5uCYJ3idMw9dFCOrttQeaOzqkuJe5RGH0E7tJKLkpmYXB57ST5B1bZcFOgg.svg",
+                        "name" : "text",
+                        "height" : 22,
+                        "borderWidth" : 1,
+                        "top" : 8,
+                        "borderTop" : 1,
+                        "radiusTopRight" : 0,
+                        "intrinsicWidth" : 34,
+                        "borderBottom" : 1,
+                        "originalFilename" : "font - FontAwesome.svg",
+                        "borderEnabled" : false,
+                        "constraintsLocked" : false,
+                        "right" : null,
+                        "radiusPerCorner" : false,
+                        "centerAnchorY" : 0.4523809523809524,
+                        "visible" : true,
+                        "borderLeft" : 1,
+                        "heightFactor" : null,
+                        "intrinsicHeight" : 32,
+                        "radiusTopLeft" : 0,
+                        "targetName" : null,
+                        "bottom" : null,
+                        "width" : 23
+                      }
+                    ],
+                    "name" : "text",
+                    "aspectRatioLocked" : true,
+                    "id" : "I?v'#*mH",
                     "boxShadows" : [
                       {
                         "x" : 0,
@@ -3082,193 +3017,319 @@
                         "blur" : 5
                       }
                     ],
-                    "centerAnchorX" : 0.5,
-                    "borderPerSide" : false,
-                    "radiusBottomRight" : 0,
+                    "constraintsLocked" : false,
+                    "left" : null,
+                    "bottom" : 34,
+                    "height" : 42,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "width" : 42,
+                    "widthFactor" : null,
+                    "targetName" : null,
+                    "heightFactor" : null,
+                    "fillColor" : "rgb(50, 192, 206)",
+                    "borderColor" : "#222",
+                    "centerAnchorY" : 0.8987108655616943,
+                    "opacity" : 1,
+                    "visible" : true,
+                    "clip" : false
+                  },
+                  {
+                    "__class" : "OvalNode",
+                    "fillType" : "color",
+                    "locked" : false,
+                    "centerAnchorX" : 0.8826666666666667,
+                    "parentid" : "XKXU#fTM",
+                    "rotation" : 0,
+                    "fillEnabled" : true,
+                    "top" : null,
+                    "borderWidth" : 1,
+                    "right" : 24,
+                    "borderEnabled" : false,
                     "children" : [
+                      {
+                        "radiusBottomLeft" : 0,
+                        "rotation" : 0,
+                        "__class" : "ImageNode",
+                        "id" : "+%R0{v>E",
+                        "fillColor" : "transparent",
+                        "aspectRatioLocked" : true,
+                        "imageBackgroundSize" : "Cover",
+                        "widthFactor" : null,
+                        "opacity" : 1,
+                        "clip" : false,
+                        "borderColor" : "#222",
+                        "left" : null,
+                        "locked" : false,
+                        "radius" : 0,
+                        "boxShadows" : [
+                          {
+                            "x" : 0,
+                            "color" : "rgba(0,0,0,0.25)",
+                            "enabled" : false,
+                            "y" : 2,
+                            "__class" : "BoxShadow",
+                            "inset" : false,
+                            "blur" : 5
+                          }
+                        ],
+                        "centerAnchorX" : 0.4875,
+                        "borderPerSide" : false,
+                        "radiusBottomRight" : 0,
+                        "children" : [
 
+                        ],
+                        "fillEnabled" : false,
+                        "parentid" : "v{W0e1)l",
+                        "borderRight" : 1,
+                        "image" : "ugEbhpywjdJqOVc3pMl07BLUoFKx8unXwznR5ZXR50J9waKywHcpefavZOD2kyDC2GZISoydGwVpSWu8mw.svg",
+                        "name" : "shape",
+                        "height" : 22,
+                        "borderWidth" : 1,
+                        "top" : null,
+                        "borderTop" : 1,
+                        "radiusTopRight" : 0,
+                        "intrinsicWidth" : 32,
+                        "borderBottom" : 1,
+                        "originalFilename" : "Shape.svg",
+                        "borderEnabled" : false,
+                        "constraintsLocked" : false,
+                        "right" : null,
+                        "radiusPerCorner" : false,
+                        "centerAnchorY" : 0.525,
+                        "visible" : true,
+                        "borderLeft" : 1,
+                        "heightFactor" : null,
+                        "intrinsicHeight" : 31,
+                        "radiusTopLeft" : 0,
+                        "targetName" : null,
+                        "bottom" : null,
+                        "width" : 23
+                      }
                     ],
-                    "fillEnabled" : false,
-                    "parentid" : "v{W0e1)l",
-                    "borderRight" : 1,
-                    "image" : "ugEbhpywjdJqOVc3pMl07BLUoFKx8unXwznR5ZXR50J9waKywHcpefavZOD2kyDC2GZISoydGwVpSWu8mw.svg",
                     "name" : "shape",
-                    "height" : 22,
+                    "aspectRatioLocked" : true,
+                    "id" : "v{W0e1)l",
+                    "boxShadows" : [
+                      {
+                        "x" : 0,
+                        "color" : "rgba(0,0,0,0.25)",
+                        "enabled" : false,
+                        "y" : 2,
+                        "__class" : "BoxShadow",
+                        "inset" : false,
+                        "blur" : 5
+                      }
+                    ],
+                    "constraintsLocked" : false,
+                    "left" : null,
+                    "bottom" : 36,
+                    "height" : 40,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "width" : 40,
+                    "widthFactor" : null,
+                    "targetName" : null,
+                    "heightFactor" : null,
+                    "fillColor" : "rgb(50, 192, 206)",
+                    "borderColor" : "#222",
+                    "centerAnchorY" : 0.8968692449355433,
+                    "opacity" : 1,
+                    "visible" : true,
+                    "clip" : false
+                  },
+                  {
+                    "radiusBottomLeft" : 100,
+                    "rotation" : 0,
+                    "__class" : "RectangleNode",
+                    "id" : "~XQ%o*Qa",
+                    "fillColor" : "rgb(50, 192, 206)",
+                    "aspectRatioLocked" : false,
+                    "widthFactor" : null,
+                    "opacity" : 1,
+                    "clip" : false,
+                    "borderColor" : "#222",
+                    "left" : null,
+                    "locked" : false,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "radius" : 100,
+                    "boxShadows" : [
+                      {
+                        "x" : 0,
+                        "color" : "rgba(0,0,0,0.25)",
+                        "enabled" : false,
+                        "y" : 2,
+                        "__class" : "BoxShadow",
+                        "inset" : false,
+                        "blur" : 5
+                      }
+                    ],
+                    "centerAnchorX" : 0.4986666666666666,
+                    "borderPerSide" : false,
+                    "fillType" : "color",
+                    "radiusBottomRight" : 100,
+                    "children" : [
+                      {
+                        "__class" : "TextNode",
+                        "locked" : false,
+                        "centerAnchorX" : 0.509090909090909,
+                        "parentid" : "~XQ%o*Qa",
+                        "rotation" : 0,
+                        "top" : null,
+                        "right" : null,
+                        "styledText" : {
+                          "blocks" : [
+                            {
+                              "depth" : 0,
+                              "inlineStyleRanges" : [
+                                {
+                                  "length" : 4,
+                                  "style" : "LETTERSPACING:0",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 4,
+                                  "style" : "LINEHEIGHT:1.2",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 4,
+                                  "style" : "COLOR:rgb(255, 255, 255)",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 4,
+                                  "style" : "SIZE:16",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 4,
+                                  "style" : "FONT:Avenir-Heavy",
+                                  "offset" : 0
+                                }
+                              ],
+                              "entityRanges" : [
+
+                              ],
+                              "data" : {
+                                "emptyStyle" : [
+                                  "LETTERSPACING:0",
+                                  "LINEHEIGHT:1.2",
+                                  "COLOR:rgb(255, 255, 255)",
+                                  "SIZE:16",
+                                  "FONT:Avenir-Heavy"
+                                ]
+                              },
+                              "text" : "SAVE",
+                              "key" : "1g3gv",
+                              "type" : "unstyled"
+                            }
+                          ],
+                          "__class" : "StyledTextDraft",
+                          "entityMap" : {
+
+                          }
+                        },
+                        "name" : null,
+                        "shadows" : [
+                          {
+                            "y" : 2,
+                            "enabled" : false,
+                            "blur" : 5,
+                            "x" : 0,
+                            "__class" : "Shadow",
+                            "color" : "rgba(0,0,0,0.25)"
+                          }
+                        ],
+                        "id" : "uK@_|<@|",
+                        "x" : 83,
+                        "constraintsLocked" : false,
+                        "left" : null,
+                        "bottom" : null,
+                        "height" : 16,
+                        "opacity" : 1,
+                        "width" : 42,
+                        "widthFactor" : null,
+                        "targetName" : null,
+                        "heightFactor" : null,
+                        "editable" : false,
+                        "visible" : true,
+                        "centerAnchorY" : 0.5,
+                        "autoSize" : false,
+                        "y" : 6
+                      }
+                    ],
+                    "fillEnabled" : true,
+                    "parentid" : "XKXU#fTM",
+                    "borderRight" : 1,
+                    "name" : "save_btn",
+                    "height" : 42,
                     "borderWidth" : 1,
                     "top" : null,
                     "borderTop" : 1,
-                    "radiusTopRight" : 0,
-                    "intrinsicWidth" : 32,
+                    "radiusTopRight" : 100,
                     "borderBottom" : 1,
-                    "originalFilename" : "Shape.svg",
                     "borderEnabled" : false,
                     "constraintsLocked" : false,
-                    "right" : 6,
+                    "right" : null,
                     "radiusPerCorner" : false,
-                    "centerAnchorY" : 0.5142857142857142,
+                    "centerAnchorY" : 0.8987108655616943,
                     "visible" : true,
                     "borderLeft" : 1,
                     "heightFactor" : null,
-                    "intrinsicHeight" : 31,
-                    "radiusTopLeft" : 0,
+                    "radiusTopLeft" : 100,
                     "targetName" : null,
-                    "bottom" : 6,
-                    "width" : 23
+                    "bottom" : 34,
+                    "width" : 110
                   }
                 ],
-                "name" : "shape",
-                "aspectRatioLocked" : true,
-                "id" : "v{W0e1)l",
-                "boxShadows" : [
-                  {
-                    "x" : 0,
-                    "color" : "rgba(0,0,0,0.25)",
-                    "enabled" : false,
-                    "y" : 2,
-                    "__class" : "BoxShadow",
-                    "inset" : false,
-                    "blur" : 5
-                  }
-                ],
-                "constraintsLocked" : false,
-                "left" : null,
-                "bottom" : 38,
-                "height" : 35,
-                "fillGradient" : {
-                  "end" : "rgba(0,0,0,0)",
-                  "alpha" : 1,
-                  "angle" : 0,
-                  "__class" : "LinearGradient",
-                  "start" : "black"
-                },
-                "width" : 35,
-                "widthFactor" : null,
-                "targetName" : null,
-                "heightFactor" : null,
-                "fillColor" : "rgb(50, 192, 206)",
-                "borderColor" : "#222",
-                "centerAnchorY" : 0.8977900552486188,
-                "opacity" : 1,
-                "visible" : false,
-                "clip" : false
-              },
-              {
-                "__class" : "OvalNode",
-                "fillType" : "color",
-                "locked" : false,
-                "centerAnchorX" : 0.7426666666666667,
-                "parentid" : "l7UKhZ`1",
-                "rotation" : 0,
                 "fillEnabled" : true,
-                "top" : null,
+                "parentid" : "l7UKhZ`1",
+                "borderRight" : 1,
+                "name" : "camera_annotation_tool",
+                "height" : 543,
                 "borderWidth" : 1,
-                "right" : 79,
+                "top" : 0,
+                "borderTop" : 1,
+                "radiusTopRight" : 0,
+                "borderBottom" : 1,
                 "borderEnabled" : false,
-                "children" : [
-                  {
-                    "radiusBottomLeft" : 0,
-                    "rotation" : 0,
-                    "__class" : "ImageNode",
-                    "id" : "rbf<c_U3",
-                    "fillColor" : "rgb(255, 26, 26)",
-                    "aspectRatioLocked" : true,
-                    "imageBackgroundSize" : "Cover",
-                    "widthFactor" : null,
-                    "opacity" : 1,
-                    "clip" : false,
-                    "borderColor" : "#222",
-                    "left" : 6,
-                    "locked" : false,
-                    "radius" : 0,
-                    "boxShadows" : [
-                      {
-                        "x" : 0,
-                        "color" : "rgba(0,0,0,0.25)",
-                        "enabled" : false,
-                        "y" : 2,
-                        "__class" : "BoxShadow",
-                        "inset" : false,
-                        "blur" : 5
-                      }
-                    ],
-                    "centerAnchorX" : 0.5,
-                    "borderPerSide" : false,
-                    "radiusBottomRight" : 0,
-                    "children" : [
-
-                    ],
-                    "fillEnabled" : false,
-                    "parentid" : "I?v'#*mH",
-                    "borderRight" : 1,
-                    "image" : "X9rshQFiMQD6cKSSd2wKGDW5uCYJ3idMw9dFCOrttQeaOzqkuJe5RGH0E7tJKLkpmYXB57ST5B1bZcFOgg.svg",
-                    "name" : "text",
-                    "height" : 22,
-                    "borderWidth" : 1,
-                    "top" : 5,
-                    "borderTop" : 1,
-                    "radiusTopRight" : 0,
-                    "intrinsicWidth" : 34,
-                    "borderBottom" : 1,
-                    "originalFilename" : "font - FontAwesome.svg",
-                    "borderEnabled" : false,
-                    "constraintsLocked" : false,
-                    "right" : 6,
-                    "radiusPerCorner" : false,
-                    "centerAnchorY" : 0.4571428571428571,
-                    "visible" : true,
-                    "borderLeft" : 1,
-                    "heightFactor" : null,
-                    "intrinsicHeight" : 32,
-                    "radiusTopLeft" : 0,
-                    "targetName" : null,
-                    "bottom" : null,
-                    "width" : 23
-                  }
-                ],
-                "name" : "text",
-                "aspectRatioLocked" : true,
-                "id" : "I?v'#*mH",
-                "boxShadows" : [
-                  {
-                    "x" : 0,
-                    "color" : "rgba(0,0,0,0.25)",
-                    "enabled" : false,
-                    "y" : 2,
-                    "__class" : "BoxShadow",
-                    "inset" : false,
-                    "blur" : 5
-                  }
-                ],
                 "constraintsLocked" : false,
-                "left" : null,
-                "bottom" : 38,
-                "height" : 35,
-                "fillGradient" : {
-                  "end" : "rgba(0,0,0,0)",
-                  "alpha" : 1,
-                  "angle" : 0,
-                  "__class" : "LinearGradient",
-                  "start" : "black"
-                },
-                "width" : 35,
-                "widthFactor" : null,
-                "targetName" : null,
-                "heightFactor" : null,
-                "fillColor" : "rgb(50, 192, 206)",
-                "borderColor" : "#222",
-                "centerAnchorY" : 0.8977900552486188,
-                "opacity" : 1,
+                "right" : 0,
+                "radiusPerCorner" : false,
+                "centerAnchorY" : 0.4981651376146789,
                 "visible" : false,
-                "clip" : false
+                "borderLeft" : 1,
+                "heightFactor" : null,
+                "radiusTopLeft" : 0,
+                "targetName" : null,
+                "bottom" : 2,
+                "width" : 375
               }
             ],
             "fillEnabled" : true,
             "parentid" : "vJ!tS3&@",
             "borderRight" : 1,
             "name" : "camera_view",
-            "height" : 543,
+            "height" : 545,
             "borderWidth" : 1,
-            "top" : 64,
+            "top" : 62,
             "borderTop" : 1,
             "radiusTopRight" : 0,
             "borderBottom" : 1,
@@ -3276,7 +3337,7 @@
             "constraintsLocked" : false,
             "right" : 0,
             "radiusPerCorner" : false,
-            "centerAnchorY" : 0.5029985007496252,
+            "centerAnchorY" : 0.5014992503748126,
             "visible" : true,
             "borderLeft" : 1,
             "heightFactor" : null,
@@ -5617,7 +5678,7 @@
             "radiusBottomLeft" : 0,
             "rotation" : 0,
             "__class" : "RectangleNode",
-            "id" : "8QlxYw?1",
+            "id" : "%udW?!S8",
             "fillColor" : "transparent",
             "aspectRatioLocked" : false,
             "widthFactor" : null,
@@ -5654,7 +5715,7 @@
                 "radiusBottomLeft" : 0,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
-                "id" : "goTUTa#]",
+                "id" : "CmB%H@lL",
                 "fillColor" : "rgb(0, 0, 0)",
                 "aspectRatioLocked" : false,
                 "widthFactor" : null,
@@ -5690,10 +5751,10 @@
 
                 ],
                 "fillEnabled" : true,
-                "parentid" : "8QlxYw?1",
+                "parentid" : "%udW?!S8",
                 "borderRight" : 1,
                 "name" : "camera_bg",
-                "height" : 543,
+                "height" : 545,
                 "borderWidth" : 1,
                 "top" : 0,
                 "borderTop" : 1,
@@ -5716,7 +5777,7 @@
                 "radiusBottomLeft" : 0,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
-                "id" : "(dd<P..z",
+                "id" : "=?HiKB=w",
                 "fillColor" : "transparent",
                 "aspectRatioLocked" : false,
                 "widthFactor" : null,
@@ -5753,7 +5814,7 @@
                     "__class" : "TextNode",
                     "locked" : false,
                     "centerAnchorX" : 0.5212765957446809,
-                    "parentid" : "(dd<P..z",
+                    "parentid" : "=?HiKB=w",
                     "rotation" : 0,
                     "top" : null,
                     "right" : 0,
@@ -5821,7 +5882,7 @@
                         "color" : "rgba(0,0,0,0.25)"
                       }
                     ],
-                    "id" : "&paWQ%Uv",
+                    "id" : "k6}n7_u0",
                     "x" : 163,
                     "constraintsLocked" : false,
                     "left" : 2,
@@ -5843,7 +5904,7 @@
                     "fillType" : "color",
                     "locked" : false,
                     "centerAnchorX" : 0.5212765957446809,
-                    "parentid" : "(dd<P..z",
+                    "parentid" : "=?HiKB=w",
                     "rotation" : 0,
                     "fillEnabled" : true,
                     "top" : null,
@@ -5855,7 +5916,7 @@
                     ],
                     "name" : "oval_inner",
                     "aspectRatioLocked" : true,
-                    "id" : "66y!R^JM",
+                    "id" : "$Ea?r#J(",
                     "boxShadows" : [
                       {
                         "x" : 0,
@@ -5894,7 +5955,7 @@
                     "fillType" : "color",
                     "locked" : false,
                     "centerAnchorX" : 0.5212765957446809,
-                    "parentid" : "(dd<P..z",
+                    "parentid" : "=?HiKB=w",
                     "rotation" : 0,
                     "fillEnabled" : false,
                     "top" : null,
@@ -5906,7 +5967,7 @@
                     ],
                     "name" : "oval_outer",
                     "aspectRatioLocked" : true,
-                    "id" : "vrg\/Fy9$",
+                    "id" : "LS_f_4gd",
                     "boxShadows" : [
                       {
                         "x" : 0,
@@ -5942,7 +6003,7 @@
                   }
                 ],
                 "fillEnabled" : true,
-                "parentid" : "8QlxYw?1",
+                "parentid" : "%udW?!S8",
                 "borderRight" : 1,
                 "name" : "camera_btn",
                 "height" : 47,
@@ -5955,170 +6016,20 @@
                 "constraintsLocked" : false,
                 "right" : null,
                 "radiusPerCorner" : false,
-                "centerAnchorY" : 0.8977900552486188,
+                "centerAnchorY" : 0.8944954128440367,
                 "visible" : true,
                 "borderLeft" : 1,
                 "heightFactor" : null,
                 "radiusTopLeft" : 0,
                 "targetName" : null,
-                "bottom" : 32,
-                "width" : 47
-              },
-              {
-                "radiusBottomLeft" : 100,
-                "rotation" : 0,
-                "__class" : "RectangleNode",
-                "id" : "a]O:0<u<",
-                "fillColor" : "rgb(50, 192, 206)",
-                "aspectRatioLocked" : false,
-                "widthFactor" : null,
-                "opacity" : 1,
-                "clip" : false,
-                "borderColor" : "#222",
-                "left" : null,
-                "locked" : false,
-                "fillGradient" : {
-                  "end" : "rgba(0,0,0,0)",
-                  "alpha" : 1,
-                  "angle" : 0,
-                  "__class" : "LinearGradient",
-                  "start" : "black"
-                },
-                "radius" : 100,
-                "boxShadows" : [
-                  {
-                    "x" : 0,
-                    "color" : "rgba(0,0,0,0.25)",
-                    "enabled" : false,
-                    "y" : 2,
-                    "__class" : "BoxShadow",
-                    "inset" : false,
-                    "blur" : 5
-                  }
-                ],
-                "centerAnchorX" : 0.4986666666666666,
-                "borderPerSide" : false,
-                "fillType" : "color",
-                "radiusBottomRight" : 100,
-                "children" : [
-                  {
-                    "__class" : "TextNode",
-                    "locked" : false,
-                    "centerAnchorX" : 0.509090909090909,
-                    "parentid" : "a]O:0<u<",
-                    "rotation" : 0,
-                    "top" : null,
-                    "right" : null,
-                    "styledText" : {
-                      "blocks" : [
-                        {
-                          "depth" : 0,
-                          "inlineStyleRanges" : [
-                            {
-                              "length" : 4,
-                              "style" : "LETTERSPACING:0",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 4,
-                              "style" : "LINEHEIGHT:1.2",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 4,
-                              "style" : "COLOR:rgb(255, 255, 255)",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 4,
-                              "style" : "SIZE:16",
-                              "offset" : 0
-                            },
-                            {
-                              "length" : 4,
-                              "style" : "FONT:Avenir-Heavy",
-                              "offset" : 0
-                            }
-                          ],
-                          "entityRanges" : [
-
-                          ],
-                          "data" : {
-                            "emptyStyle" : [
-                              "LETTERSPACING:0",
-                              "LINEHEIGHT:1.2",
-                              "COLOR:rgb(255, 255, 255)",
-                              "SIZE:16",
-                              "FONT:Avenir-Heavy"
-                            ]
-                          },
-                          "text" : "SAVE",
-                          "key" : "1g3gv",
-                          "type" : "unstyled"
-                        }
-                      ],
-                      "__class" : "StyledTextDraft",
-                      "entityMap" : {
-
-                      }
-                    },
-                    "name" : null,
-                    "shadows" : [
-                      {
-                        "y" : 2,
-                        "enabled" : false,
-                        "blur" : 5,
-                        "x" : 0,
-                        "__class" : "Shadow",
-                        "color" : "rgba(0,0,0,0.25)"
-                      }
-                    ],
-                    "id" : "'vE),+O8",
-                    "x" : 83,
-                    "constraintsLocked" : false,
-                    "left" : null,
-                    "bottom" : null,
-                    "height" : 16,
-                    "opacity" : 1,
-                    "width" : 42,
-                    "widthFactor" : null,
-                    "targetName" : null,
-                    "heightFactor" : null,
-                    "editable" : false,
-                    "visible" : true,
-                    "centerAnchorY" : 0.5,
-                    "autoSize" : false,
-                    "y" : 6
-                  }
-                ],
-                "fillEnabled" : true,
-                "parentid" : "8QlxYw?1",
-                "borderRight" : 1,
-                "name" : "save_btn",
-                "height" : 42,
-                "borderWidth" : 1,
-                "top" : null,
-                "borderTop" : 1,
-                "radiusTopRight" : 100,
-                "borderBottom" : 1,
-                "borderEnabled" : false,
-                "constraintsLocked" : false,
-                "right" : null,
-                "radiusPerCorner" : false,
-                "centerAnchorY" : 0.914364640883978,
-                "visible" : false,
-                "borderLeft" : 1,
-                "heightFactor" : null,
-                "radiusTopLeft" : 100,
-                "targetName" : null,
                 "bottom" : 34,
-                "width" : 110
+                "width" : 47
               },
               {
                 "radiusBottomLeft" : 0,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
-                "id" : "y&58vtjr",
+                "id" : "n>qBu.'}",
                 "fillColor" : "rgb(255, 255, 255)",
                 "aspectRatioLocked" : true,
                 "widthFactor" : null,
@@ -6154,7 +6065,7 @@
 
                 ],
                 "fillEnabled" : true,
-                "parentid" : "8QlxYw?1",
+                "parentid" : "%udW?!S8",
                 "borderRight" : 1,
                 "name" : "camera_preview",
                 "height" : 79,
@@ -6167,43 +6078,128 @@
                 "constraintsLocked" : false,
                 "right" : null,
                 "radiusPerCorner" : false,
-                "centerAnchorY" : 0.8830570902394107,
+                "centerAnchorY" : 0.8798165137614679,
                 "visible" : false,
                 "borderLeft" : 1,
                 "heightFactor" : null,
                 "radiusTopLeft" : 0,
                 "targetName" : null,
-                "bottom" : 24,
+                "bottom" : 26,
                 "width" : 79
               },
               {
-                "__class" : "OvalNode",
-                "fillType" : "color",
-                "locked" : false,
-                "centerAnchorX" : 0.8813333333333333,
-                "parentid" : "8QlxYw?1",
+                "radiusBottomLeft" : 0,
                 "rotation" : 0,
-                "fillEnabled" : true,
-                "top" : null,
-                "borderWidth" : 1,
-                "right" : 27,
-                "borderEnabled" : false,
+                "__class" : "RectangleNode",
+                "id" : "x=`hf[qE",
+                "fillColor" : "rgba(0,170,255,0.5)",
+                "aspectRatioLocked" : false,
+                "widthFactor" : null,
+                "opacity" : 1,
+                "clip" : false,
+                "borderColor" : "#222",
+                "left" : 0,
+                "locked" : false,
+                "fillGradient" : {
+                  "end" : "rgba(0,0,0,0)",
+                  "alpha" : 1,
+                  "angle" : 0,
+                  "__class" : "LinearGradient",
+                  "start" : "black"
+                },
+                "radius" : 0,
+                "boxShadows" : [
+                  {
+                    "x" : 0,
+                    "color" : "rgba(0,0,0,0.25)",
+                    "enabled" : false,
+                    "y" : 2,
+                    "__class" : "BoxShadow",
+                    "inset" : false,
+                    "blur" : 5
+                  }
+                ],
+                "centerAnchorX" : 0.5,
+                "borderPerSide" : false,
+                "fillType" : "color",
+                "radiusBottomRight" : 0,
                 "children" : [
                   {
-                    "radiusBottomLeft" : 0,
-                    "rotation" : 0,
-                    "__class" : "ImageNode",
-                    "id" : "_=N9H&R`",
-                    "fillColor" : "transparent",
-                    "aspectRatioLocked" : true,
-                    "imageBackgroundSize" : "Cover",
-                    "widthFactor" : null,
-                    "opacity" : 1,
-                    "clip" : false,
-                    "borderColor" : "#222",
-                    "left" : 6,
+                    "__class" : "OvalNode",
+                    "fillType" : "color",
                     "locked" : false,
-                    "radius" : 0,
+                    "centerAnchorX" : 0.7413333333333333,
+                    "parentid" : "x=`hf[qE",
+                    "rotation" : 0,
+                    "fillEnabled" : true,
+                    "top" : null,
+                    "borderWidth" : 1,
+                    "right" : 76,
+                    "borderEnabled" : false,
+                    "children" : [
+                      {
+                        "radiusBottomLeft" : 0,
+                        "rotation" : 0,
+                        "__class" : "ImageNode",
+                        "id" : "joE..a^a",
+                        "fillColor" : "rgb(255, 26, 26)",
+                        "aspectRatioLocked" : true,
+                        "imageBackgroundSize" : "Cover",
+                        "widthFactor" : null,
+                        "opacity" : 1,
+                        "clip" : false,
+                        "borderColor" : "#222",
+                        "left" : null,
+                        "locked" : false,
+                        "radius" : 0,
+                        "boxShadows" : [
+                          {
+                            "x" : 0,
+                            "color" : "rgba(0,0,0,0.25)",
+                            "enabled" : false,
+                            "y" : 2,
+                            "__class" : "BoxShadow",
+                            "inset" : false,
+                            "blur" : 5
+                          }
+                        ],
+                        "centerAnchorX" : 0.5119047619047619,
+                        "borderPerSide" : false,
+                        "radiusBottomRight" : 0,
+                        "children" : [
+
+                        ],
+                        "fillEnabled" : false,
+                        "parentid" : "OdC~&]_a",
+                        "borderRight" : 1,
+                        "image" : "X9rshQFiMQD6cKSSd2wKGDW5uCYJ3idMw9dFCOrttQeaOzqkuJe5RGH0E7tJKLkpmYXB57ST5B1bZcFOgg.svg",
+                        "name" : "text",
+                        "height" : 22,
+                        "borderWidth" : 1,
+                        "top" : 8,
+                        "borderTop" : 1,
+                        "radiusTopRight" : 0,
+                        "intrinsicWidth" : 34,
+                        "borderBottom" : 1,
+                        "originalFilename" : "font - FontAwesome.svg",
+                        "borderEnabled" : false,
+                        "constraintsLocked" : false,
+                        "right" : null,
+                        "radiusPerCorner" : false,
+                        "centerAnchorY" : 0.4523809523809524,
+                        "visible" : true,
+                        "borderLeft" : 1,
+                        "heightFactor" : null,
+                        "intrinsicHeight" : 32,
+                        "radiusTopLeft" : 0,
+                        "targetName" : null,
+                        "bottom" : null,
+                        "width" : 23
+                      }
+                    ],
+                    "name" : "text",
+                    "aspectRatioLocked" : true,
+                    "id" : "OdC~&]_a",
                     "boxShadows" : [
                       {
                         "x" : 0,
@@ -6215,193 +6211,319 @@
                         "blur" : 5
                       }
                     ],
-                    "centerAnchorX" : 0.5,
-                    "borderPerSide" : false,
-                    "radiusBottomRight" : 0,
+                    "constraintsLocked" : false,
+                    "left" : null,
+                    "bottom" : 34,
+                    "height" : 42,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "width" : 42,
+                    "widthFactor" : null,
+                    "targetName" : null,
+                    "heightFactor" : null,
+                    "fillColor" : "rgb(50, 192, 206)",
+                    "borderColor" : "#222",
+                    "centerAnchorY" : 0.8987108655616943,
+                    "opacity" : 1,
+                    "visible" : true,
+                    "clip" : false
+                  },
+                  {
+                    "__class" : "OvalNode",
+                    "fillType" : "color",
+                    "locked" : false,
+                    "centerAnchorX" : 0.8826666666666667,
+                    "parentid" : "x=`hf[qE",
+                    "rotation" : 0,
+                    "fillEnabled" : true,
+                    "top" : null,
+                    "borderWidth" : 1,
+                    "right" : 24,
+                    "borderEnabled" : false,
                     "children" : [
+                      {
+                        "radiusBottomLeft" : 0,
+                        "rotation" : 0,
+                        "__class" : "ImageNode",
+                        "id" : "OeN*;tVn",
+                        "fillColor" : "transparent",
+                        "aspectRatioLocked" : true,
+                        "imageBackgroundSize" : "Cover",
+                        "widthFactor" : null,
+                        "opacity" : 1,
+                        "clip" : false,
+                        "borderColor" : "#222",
+                        "left" : null,
+                        "locked" : false,
+                        "radius" : 0,
+                        "boxShadows" : [
+                          {
+                            "x" : 0,
+                            "color" : "rgba(0,0,0,0.25)",
+                            "enabled" : false,
+                            "y" : 2,
+                            "__class" : "BoxShadow",
+                            "inset" : false,
+                            "blur" : 5
+                          }
+                        ],
+                        "centerAnchorX" : 0.4875,
+                        "borderPerSide" : false,
+                        "radiusBottomRight" : 0,
+                        "children" : [
 
+                        ],
+                        "fillEnabled" : false,
+                        "parentid" : "8[awBk6G",
+                        "borderRight" : 1,
+                        "image" : "ugEbhpywjdJqOVc3pMl07BLUoFKx8unXwznR5ZXR50J9waKywHcpefavZOD2kyDC2GZISoydGwVpSWu8mw.svg",
+                        "name" : "shape",
+                        "height" : 22,
+                        "borderWidth" : 1,
+                        "top" : null,
+                        "borderTop" : 1,
+                        "radiusTopRight" : 0,
+                        "intrinsicWidth" : 32,
+                        "borderBottom" : 1,
+                        "originalFilename" : "Shape.svg",
+                        "borderEnabled" : false,
+                        "constraintsLocked" : false,
+                        "right" : null,
+                        "radiusPerCorner" : false,
+                        "centerAnchorY" : 0.525,
+                        "visible" : true,
+                        "borderLeft" : 1,
+                        "heightFactor" : null,
+                        "intrinsicHeight" : 31,
+                        "radiusTopLeft" : 0,
+                        "targetName" : null,
+                        "bottom" : null,
+                        "width" : 23
+                      }
                     ],
-                    "fillEnabled" : false,
-                    "parentid" : "q5`X0:(2",
-                    "borderRight" : 1,
-                    "image" : "ugEbhpywjdJqOVc3pMl07BLUoFKx8unXwznR5ZXR50J9waKywHcpefavZOD2kyDC2GZISoydGwVpSWu8mw.svg",
                     "name" : "shape",
-                    "height" : 22,
+                    "aspectRatioLocked" : true,
+                    "id" : "8[awBk6G",
+                    "boxShadows" : [
+                      {
+                        "x" : 0,
+                        "color" : "rgba(0,0,0,0.25)",
+                        "enabled" : false,
+                        "y" : 2,
+                        "__class" : "BoxShadow",
+                        "inset" : false,
+                        "blur" : 5
+                      }
+                    ],
+                    "constraintsLocked" : false,
+                    "left" : null,
+                    "bottom" : 36,
+                    "height" : 40,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "width" : 40,
+                    "widthFactor" : null,
+                    "targetName" : null,
+                    "heightFactor" : null,
+                    "fillColor" : "rgb(50, 192, 206)",
+                    "borderColor" : "#222",
+                    "centerAnchorY" : 0.8968692449355433,
+                    "opacity" : 1,
+                    "visible" : true,
+                    "clip" : false
+                  },
+                  {
+                    "radiusBottomLeft" : 100,
+                    "rotation" : 0,
+                    "__class" : "RectangleNode",
+                    "id" : "1&|?-7[+",
+                    "fillColor" : "rgb(50, 192, 206)",
+                    "aspectRatioLocked" : false,
+                    "widthFactor" : null,
+                    "opacity" : 1,
+                    "clip" : false,
+                    "borderColor" : "#222",
+                    "left" : null,
+                    "locked" : false,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "radius" : 100,
+                    "boxShadows" : [
+                      {
+                        "x" : 0,
+                        "color" : "rgba(0,0,0,0.25)",
+                        "enabled" : false,
+                        "y" : 2,
+                        "__class" : "BoxShadow",
+                        "inset" : false,
+                        "blur" : 5
+                      }
+                    ],
+                    "centerAnchorX" : 0.4986666666666666,
+                    "borderPerSide" : false,
+                    "fillType" : "color",
+                    "radiusBottomRight" : 100,
+                    "children" : [
+                      {
+                        "__class" : "TextNode",
+                        "locked" : false,
+                        "centerAnchorX" : 0.509090909090909,
+                        "parentid" : "1&|?-7[+",
+                        "rotation" : 0,
+                        "top" : null,
+                        "right" : null,
+                        "styledText" : {
+                          "blocks" : [
+                            {
+                              "depth" : 0,
+                              "inlineStyleRanges" : [
+                                {
+                                  "length" : 4,
+                                  "style" : "LETTERSPACING:0",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 4,
+                                  "style" : "LINEHEIGHT:1.2",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 4,
+                                  "style" : "COLOR:rgb(255, 255, 255)",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 4,
+                                  "style" : "SIZE:16",
+                                  "offset" : 0
+                                },
+                                {
+                                  "length" : 4,
+                                  "style" : "FONT:Avenir-Heavy",
+                                  "offset" : 0
+                                }
+                              ],
+                              "entityRanges" : [
+
+                              ],
+                              "data" : {
+                                "emptyStyle" : [
+                                  "LETTERSPACING:0",
+                                  "LINEHEIGHT:1.2",
+                                  "COLOR:rgb(255, 255, 255)",
+                                  "SIZE:16",
+                                  "FONT:Avenir-Heavy"
+                                ]
+                              },
+                              "text" : "SAVE",
+                              "key" : "1g3gv",
+                              "type" : "unstyled"
+                            }
+                          ],
+                          "__class" : "StyledTextDraft",
+                          "entityMap" : {
+
+                          }
+                        },
+                        "name" : null,
+                        "shadows" : [
+                          {
+                            "y" : 2,
+                            "enabled" : false,
+                            "blur" : 5,
+                            "x" : 0,
+                            "__class" : "Shadow",
+                            "color" : "rgba(0,0,0,0.25)"
+                          }
+                        ],
+                        "id" : "G*vA[U&_",
+                        "x" : 83,
+                        "constraintsLocked" : false,
+                        "left" : null,
+                        "bottom" : null,
+                        "height" : 16,
+                        "opacity" : 1,
+                        "width" : 42,
+                        "widthFactor" : null,
+                        "targetName" : null,
+                        "heightFactor" : null,
+                        "editable" : false,
+                        "visible" : true,
+                        "centerAnchorY" : 0.5,
+                        "autoSize" : false,
+                        "y" : 6
+                      }
+                    ],
+                    "fillEnabled" : true,
+                    "parentid" : "x=`hf[qE",
+                    "borderRight" : 1,
+                    "name" : "save_btn",
+                    "height" : 42,
                     "borderWidth" : 1,
                     "top" : null,
                     "borderTop" : 1,
-                    "radiusTopRight" : 0,
-                    "intrinsicWidth" : 32,
+                    "radiusTopRight" : 100,
                     "borderBottom" : 1,
-                    "originalFilename" : "Shape.svg",
                     "borderEnabled" : false,
                     "constraintsLocked" : false,
-                    "right" : 6,
+                    "right" : null,
                     "radiusPerCorner" : false,
-                    "centerAnchorY" : 0.5142857142857142,
+                    "centerAnchorY" : 0.8987108655616943,
                     "visible" : true,
                     "borderLeft" : 1,
                     "heightFactor" : null,
-                    "intrinsicHeight" : 31,
-                    "radiusTopLeft" : 0,
+                    "radiusTopLeft" : 100,
                     "targetName" : null,
-                    "bottom" : 6,
-                    "width" : 23
+                    "bottom" : 34,
+                    "width" : 110
                   }
                 ],
-                "name" : "shape",
-                "aspectRatioLocked" : true,
-                "id" : "q5`X0:(2",
-                "boxShadows" : [
-                  {
-                    "x" : 0,
-                    "color" : "rgba(0,0,0,0.25)",
-                    "enabled" : false,
-                    "y" : 2,
-                    "__class" : "BoxShadow",
-                    "inset" : false,
-                    "blur" : 5
-                  }
-                ],
-                "constraintsLocked" : false,
-                "left" : null,
-                "bottom" : 38,
-                "height" : 35,
-                "fillGradient" : {
-                  "end" : "rgba(0,0,0,0)",
-                  "alpha" : 1,
-                  "angle" : 0,
-                  "__class" : "LinearGradient",
-                  "start" : "black"
-                },
-                "width" : 35,
-                "widthFactor" : null,
-                "targetName" : null,
-                "heightFactor" : null,
-                "fillColor" : "rgb(50, 192, 206)",
-                "borderColor" : "#222",
-                "centerAnchorY" : 0.8977900552486188,
-                "opacity" : 1,
-                "visible" : false,
-                "clip" : false
-              },
-              {
-                "__class" : "OvalNode",
-                "fillType" : "color",
-                "locked" : false,
-                "centerAnchorX" : 0.7426666666666667,
-                "parentid" : "8QlxYw?1",
-                "rotation" : 0,
                 "fillEnabled" : true,
-                "top" : null,
+                "parentid" : "%udW?!S8",
+                "borderRight" : 1,
+                "name" : "camera_annotation_tool",
+                "height" : 543,
                 "borderWidth" : 1,
-                "right" : 79,
+                "top" : 0,
+                "borderTop" : 1,
+                "radiusTopRight" : 0,
+                "borderBottom" : 1,
                 "borderEnabled" : false,
-                "children" : [
-                  {
-                    "radiusBottomLeft" : 0,
-                    "rotation" : 0,
-                    "__class" : "ImageNode",
-                    "id" : "CX+^O-4j",
-                    "fillColor" : "rgb(255, 26, 26)",
-                    "aspectRatioLocked" : true,
-                    "imageBackgroundSize" : "Cover",
-                    "widthFactor" : null,
-                    "opacity" : 1,
-                    "clip" : false,
-                    "borderColor" : "#222",
-                    "left" : 6,
-                    "locked" : false,
-                    "radius" : 0,
-                    "boxShadows" : [
-                      {
-                        "x" : 0,
-                        "color" : "rgba(0,0,0,0.25)",
-                        "enabled" : false,
-                        "y" : 2,
-                        "__class" : "BoxShadow",
-                        "inset" : false,
-                        "blur" : 5
-                      }
-                    ],
-                    "centerAnchorX" : 0.5,
-                    "borderPerSide" : false,
-                    "radiusBottomRight" : 0,
-                    "children" : [
-
-                    ],
-                    "fillEnabled" : false,
-                    "parentid" : "UX<rmL}a",
-                    "borderRight" : 1,
-                    "image" : "X9rshQFiMQD6cKSSd2wKGDW5uCYJ3idMw9dFCOrttQeaOzqkuJe5RGH0E7tJKLkpmYXB57ST5B1bZcFOgg.svg",
-                    "name" : "text",
-                    "height" : 22,
-                    "borderWidth" : 1,
-                    "top" : 5,
-                    "borderTop" : 1,
-                    "radiusTopRight" : 0,
-                    "intrinsicWidth" : 34,
-                    "borderBottom" : 1,
-                    "originalFilename" : "font - FontAwesome.svg",
-                    "borderEnabled" : false,
-                    "constraintsLocked" : false,
-                    "right" : 6,
-                    "radiusPerCorner" : false,
-                    "centerAnchorY" : 0.4571428571428571,
-                    "visible" : true,
-                    "borderLeft" : 1,
-                    "heightFactor" : null,
-                    "intrinsicHeight" : 32,
-                    "radiusTopLeft" : 0,
-                    "targetName" : null,
-                    "bottom" : null,
-                    "width" : 23
-                  }
-                ],
-                "name" : "text",
-                "aspectRatioLocked" : true,
-                "id" : "UX<rmL}a",
-                "boxShadows" : [
-                  {
-                    "x" : 0,
-                    "color" : "rgba(0,0,0,0.25)",
-                    "enabled" : false,
-                    "y" : 2,
-                    "__class" : "BoxShadow",
-                    "inset" : false,
-                    "blur" : 5
-                  }
-                ],
                 "constraintsLocked" : false,
-                "left" : null,
-                "bottom" : 38,
-                "height" : 35,
-                "fillGradient" : {
-                  "end" : "rgba(0,0,0,0)",
-                  "alpha" : 1,
-                  "angle" : 0,
-                  "__class" : "LinearGradient",
-                  "start" : "black"
-                },
-                "width" : 35,
-                "widthFactor" : null,
-                "targetName" : null,
-                "heightFactor" : null,
-                "fillColor" : "rgb(50, 192, 206)",
-                "borderColor" : "#222",
-                "centerAnchorY" : 0.8977900552486188,
-                "opacity" : 1,
+                "right" : 0,
+                "radiusPerCorner" : false,
+                "centerAnchorY" : 0.4981651376146789,
                 "visible" : false,
-                "clip" : false
+                "borderLeft" : 1,
+                "heightFactor" : null,
+                "radiusTopLeft" : 0,
+                "targetName" : null,
+                "bottom" : 2,
+                "width" : 375
               }
             ],
             "fillEnabled" : true,
             "parentid" : ".M2%R43w",
             "borderRight" : 1,
             "name" : "camera_view",
-            "height" : 543,
+            "height" : 545,
             "borderWidth" : 1,
-            "top" : 64,
+            "top" : 62,
             "borderTop" : 1,
             "radiusTopRight" : 0,
             "borderBottom" : 1,
@@ -6409,7 +6531,7 @@
             "constraintsLocked" : false,
             "right" : 0,
             "radiusPerCorner" : false,
-            "centerAnchorY" : 0.5029985007496252,
+            "centerAnchorY" : 0.5014992503748126,
             "visible" : false,
             "borderLeft" : 1,
             "heightFactor" : null,

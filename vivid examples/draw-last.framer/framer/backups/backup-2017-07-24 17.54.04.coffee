@@ -7,47 +7,27 @@ canvas.draggable.props =
 	horizontal: false
 
 draw = (e) ->
-# 	print "draw"
-# 	print drawing 
+	x = Events.touchEvent(e).clientX
+	y = Events.touchEvent(e).clientY
 	
-	drawx = Events.touchEvent(e).clientX
-	drawy = Events.touchEvent(e).clientY
-	drawS = 15
+	if drawing then new Layer
+		x: x - 50
+		y: y - 50
+		borderRadius: "50%"
+		scale: 1
+		borderWidth: 1
+		borderColor: "rgba(0, 0, 0, .2)"
+		backgroundColor: Utils.randomColor()
 	
-	
-	if drawing 
-		layer = new Layer
-			parent: canvas
-			name: "drawing"
-			height: drawS
-			width: drawS
-			x: drawx + drawS*2
-			y: drawy - drawS*2
-			scale: 1
-			borderRadius: "50%"
-			backgroundColor: "red"
-
-
 drawing = false
 	
 canvas.onTouchStart (event) ->
-	print "on touch start"
 	text.destroy()
 	drawing = true	
 	draw(event)
 
-canvas.onTouchMove (event) -> 
-	print "on touch move"
-	draw(event)
-	
-canvas.onDragEnd -> 
-	print "on drag end"
-	drawing = false
-
-
-
-
-
+canvas.onTouchMove (event) -> draw(event)
+canvas.onDragEnd -> drawing = false
 
 text = new Layer
 	backgroundColor: ""
