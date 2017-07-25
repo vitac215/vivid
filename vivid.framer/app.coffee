@@ -498,8 +498,9 @@ init = (device) ->
 	inputform = {
 		label: ["Name", "DOB", "Address", "Height", "Notes"],
 		name: ["name", "dob", "address", "height", "notes"],
-		content: ["Michael M", "04/13/1976", "2345 Park Street, PA 15224", "412-000-01234", "5'03''", "Mentally disabled"]}
+		content: ["Michael M", "04/13/1976", "2345 Park Street, PA 15224", "5'03''", "Mentally disabled"]}
 	sampleIDImg = "images/id_sample.png"
+	defaultIDImg = "images/person_default.png"
 
 	inputsArray = []
 	formEleArray = []
@@ -606,6 +607,9 @@ init = (device) ->
 	addPersonImg = ->
 		personImgPlaceholder.visible = false
 		personImg.image = sampleIDImg
+	removePersonImg = ->
+		personImgPlaceholder.visible = true
+		personImg.image = null
 
 	# reset form
 	clearForm = ->
@@ -625,7 +629,7 @@ init = (device) ->
 				"/#{caseID}/captured",
 				{type: 'people',
 				data: {
-					img: sampleIDImg,
+					img: if personImg.image then personImg.image else defaultIDImg,
 					name: formData.name,
 					address: formData.address,
 					phone: formData.phone,
@@ -651,6 +655,7 @@ init = (device) ->
 	# press done
 	personDoneBtn.onTap ->
 		setStateTab(people, "active")
+		removePersonImg()
 
 
 

@@ -1459,8 +1459,8 @@
                 "widthFactor" : null,
                 "targetName" : null,
                 "heightFactor" : null,
-                "fillColor" : "rgba(80, 210, 194, 0)",
-                "opacity" : 1,
+                "fillColor" : "rgb(80, 210, 194)",
+                "opacity" : 0,
                 "centerAnchorY" : 0.5427286356821589,
                 "visible" : true
               }
@@ -5025,7 +5025,7 @@
             "radiusBottomLeft" : 0,
             "rotation" : 0,
             "__class" : "RectangleNode",
-            "id" : "B>j%#xe&",
+            "id" : "6eP+kZY<",
             "fillColor" : "transparent",
             "aspectRatioLocked" : false,
             "widthFactor" : null,
@@ -5062,7 +5062,7 @@
                 "radiusBottomLeft" : 100,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
-                "id" : "XoY=[jGI",
+                "id" : ":iCC\/XIe",
                 "fillColor" : "rgb(50, 192, 206)",
                 "aspectRatioLocked" : false,
                 "widthFactor" : null,
@@ -5099,7 +5099,7 @@
                     "__class" : "TextNode",
                     "locked" : false,
                     "centerAnchorX" : 0.509090909090909,
-                    "parentid" : "XoY=[jGI",
+                    "parentid" : ":iCC\/XIe",
                     "rotation" : 0,
                     "top" : null,
                     "right" : null,
@@ -5167,7 +5167,7 @@
                         "color" : "rgba(0,0,0,0.25)"
                       }
                     ],
-                    "id" : ".wA`Yx6y",
+                    "id" : "cT{E~uNy",
                     "x" : 83,
                     "constraintsLocked" : false,
                     "left" : null,
@@ -5186,7 +5186,7 @@
                   }
                 ],
                 "fillEnabled" : true,
-                "parentid" : "B>j%#xe&",
+                "parentid" : "6eP+kZY<",
                 "borderRight" : 1,
                 "name" : "save_btn",
                 "height" : 42,
@@ -5213,7 +5213,7 @@
                 "fillType" : "color",
                 "locked" : false,
                 "centerAnchorX" : 0.4973333333333333,
-                "parentid" : "B>j%#xe&",
+                "parentid" : "6eP+kZY<",
                 "rotation" : 0,
                 "fillEnabled" : false,
                 "top" : 79,
@@ -5226,7 +5226,7 @@
                     "fillType" : "color",
                     "originalFilename" : "person_add",
                     "centerAnchorX" : 0.4789473684210526,
-                    "parentid" : "Im4&04{`",
+                    "parentid" : "ndpYWz:A",
                     "rotation" : 0,
                     "locked" : false,
                     "intrinsicWidth" : 24,
@@ -5245,7 +5245,7 @@
                       }
                     ],
                     "aspectRatioLocked" : true,
-                    "id" : "xkZ$Z'0B",
+                    "id" : "BGbt!To]",
                     "svg" : "<?xml version=\"1.0\"?><svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z\"><\/path><\/svg>",
                     "constraintsLocked" : false,
                     "left" : 13,
@@ -5270,7 +5270,7 @@
                 ],
                 "name" : "person_img",
                 "aspectRatioLocked" : true,
-                "id" : "Im4&04{`",
+                "id" : "ndpYWz:A",
                 "boxShadows" : [
                   {
                     "x" : 0,
@@ -5309,7 +5309,7 @@
                 "fillType" : "color",
                 "originalFilename" : "check_circle",
                 "centerAnchorX" : 0.5013333333333333,
-                "parentid" : "B>j%#xe&",
+                "parentid" : "6eP+kZY<",
                 "rotation" : 0,
                 "locked" : false,
                 "intrinsicWidth" : 24,
@@ -5328,7 +5328,7 @@
                   }
                 ],
                 "aspectRatioLocked" : true,
-                "id" : "$zWBVE7K",
+                "id" : "#Ybb>5<)",
                 "svg" : "<?xml version=\"1.0\"?><svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\"><\/path><\/svg>",
                 "constraintsLocked" : false,
                 "left" : null,
@@ -5345,8 +5345,8 @@
                 "widthFactor" : null,
                 "targetName" : null,
                 "heightFactor" : null,
-                "fillColor" : "rgba(80, 210, 194, 0)",
-                "opacity" : 1,
+                "fillColor" : "rgb(80, 210, 194)",
+                "opacity" : 0,
                 "centerAnchorY" : 0.5427286356821589,
                 "visible" : true
               }
