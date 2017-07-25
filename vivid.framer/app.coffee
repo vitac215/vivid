@@ -498,7 +498,7 @@ init = (device) ->
 	inputform = {
 		label: ["Name", "DOB", "Address", "Height", "Notes"],
 		name: ["name", "dob", "address", "height", "notes"],
-		content: ["Michael M", "04/13/1976", "2345 Park Street, PA 15224", "5'03''", "Mentally disabled"]}
+		content: ["Michael M", "04/13/1976", "2345 Park Street, PA", "5'03''", "Mentally disabled"]}
 	sampleIDImg = "images/id_sample.png"
 	defaultIDImg = "images/person_default.png"
 
@@ -508,54 +508,59 @@ init = (device) ->
 
 	# append form to the scroll content
 	appendForm = (popData) ->
-		h = 40
-		w = 335
-		xPos = 20
-		yPos = personImg.y + personImg.height + 20
-		rowMargin = 5
-		labelWidthRatio = 0.35
-		fSize = fontSize
-
-		arrayLen = inputform.label.length
-		for i in [0...arrayLen]
-			itemLabel = inputform.label[i]
-			itemName = inputform.name[i]
-			itemText = inputform.content[i]
-			yOffSet = (if i == 0 then yPos else yPos + rowMargin*i)
-
-			row = new Layer
-				parent: peopleScroll.content
-				name: itemName
-				height: if itemName == 'notes' then 80 else h
-				width: w
-				x: xPos
-				y: h*i + yOffSet
-				backgroundColor: "#fff"
-
-			label = new TextLayer
-				parent: row
-				padding: 10
-				height: row.height
-				width: row.width * labelWidthRatio
-				text: itemLabel
-				fontSize: fSize
-				fontWeight: 500
-				color: "#4A4A4A"
-
-			input = new InputModule.Input
-				parent: row
-				name: itemName
-				setup: false
-				height: row.height * 0.5
-				width: row.width * (1-labelWidthRatio) * 0.9
-				x: row.width * 0.35
-				fontSize: fSize
-				placeholder: if itemName == 'name' then 'Required' else ''
-				text: if popData then itemText else ''
-
-			formEleArray.push(row)
-			inputsArray.push(input)
-
+		
+		
+		createFormLayers = (scroll) ->
+			h = 40
+			w = 335
+			xPos = 20
+			yPos = personImg.y + personImg.height + 20
+			rowMargin = 5
+			labelWidthRatio = 0.35
+			fSize = fontSize
+			
+			arrayLen = inputform.label.length
+			for i in [0...arrayLen]
+				itemLabel = inputform.label[i]
+				itemName = inputform.name[i]
+				itemText = inputform.content[i]
+				yOffSet = (if i == 0 then yPos else yPos + rowMargin*i)
+	
+				row = new Layer
+					parent: scroll.content
+					name: itemName
+					height: if itemName == 'notes' then 80 else h
+					width: w
+					x: xPos
+					y: h*i + yOffSet
+					backgroundColor: "#fff"
+	
+				label = new TextLayer
+					parent: row
+					padding: 10
+					height: row.height
+					width: row.width * labelWidthRatio
+					text: itemLabel
+					fontSize: fSize
+					fontWeight: 500
+					color: "#4A4A4A"
+	
+				input = new InputModule.Input
+					parent: row
+					name: itemName
+					setup: false
+					height: row.height * 0.5
+					width: row.width * (1-labelWidthRatio) * 0.9
+					x: row.width * 0.35
+					fontSize: fSize
+					placeholder: if itemName == 'name' then 'Required' else ''
+					text: if popData then itemText else ''
+	
+				formEleArray.push(row)
+				inputsArray.push(input)
+	
+		createFormLayers(peopleScroll)
+		
 		# add states for the required field
 		requiredRow = formEleArray[0]
 		requiredRow.scale = 1
@@ -631,10 +636,9 @@ init = (device) ->
 				data: {
 					img: if personImg.image then personImg.image else defaultIDImg,
 					name: formData.name,
+					dob: formData.dob,
 					address: formData.address,
-					phone: formData.phone,
-					race: formData.race,
-					mark: formData.mark,
+					height: formData.height,
 					notes: formData.notes,
 					},
 				location: "300 S Craig St.",
@@ -664,6 +668,7 @@ init = (device) ->
 	Summary view
 	###
 	summaryBtn = navbar.childrenWithName("summary_icon")[0]
+	previewScroll = null
 	summaryScroll = new ScrollComponent
 	summaryScroll.props =
 		parent: summaryView
@@ -673,6 +678,26 @@ init = (device) ->
 	summaryScroll.states =
 		active:
 			visible: true
+	
+	createPreviewScroll = () ->
+		previewScroll = new ScrollComponent
+		previewScroll.props =
+			name: "previewScroll"
+			parent: summaryView
+			width: Screen.width
+			height: Screen.height - navbar.height - menu_nav.height
+			x: 0
+			y: navbar.height
+			scrollHorizontal: false
+			backgroundColor: "#F8F8F9"
+		previewScroll.states = 
+			active:
+				visible: true
+			inactive:
+				visible: false
+		previewScroll.animate('inactive')
+		return previewScroll
+
 
 	renderRes = (dataSet) ->
 		# clear the page
@@ -680,6 +705,9 @@ init = (device) ->
 		if dataSet?
 			dataArray = _.toArray(dataSet).reverse()
 			# print "dataArray ", dataArray
+			
+			# create the preview scroll
+			previewScroll = createPreviewScroll()
 
 			# render the view
 			xPos = 17
@@ -732,6 +760,86 @@ init = (device) ->
 									dataBox.image = data.data
 									rotateFix(dataBox, 90)
 								when 'people' then dataBox.image = data.data.img
+							
+							dataBoxListenPreview = (dataBox, data) ->
+								# create the preview layer
+								createPreviewLayer = (dataBox, type, previewScroll) ->
+									previewLayer = new Layer
+										parent: previewScroll.content
+										size: Screen.size
+										backgroundColor: "#F8F8F9"
+										
+									switch type
+										when 'img'
+											previewLayer.image = dataBox.image
+										
+										when 'people'
+											img = new Layer
+												parent: previewLayer
+												image: data.data.img
+												size: 110
+											img.center()
+											img.y = 10
+											
+											h = 40
+											w = 335
+											xPos = 20
+											yPos = img.y + img.height + 40
+											rowMargin = 5
+											labelWidthRatio = 0.35
+											fSize = fontSize
+											
+											# print data.data
+											arrayLen = inputform.label.length
+											for i in [0...arrayLen]
+												itemLabel = inputform.label[i]
+												itemName = inputform.name[i]
+												yOffSet = (if i == 0 then yPos else yPos + rowMargin*i)
+												
+												row = new Layer
+													parent: previewScroll.content
+													name: itemName
+													height: if itemName == 'notes' then 80 else h
+													width: w
+													x: xPos
+													y: h*i + yOffSet
+													backgroundColor: "#fff"
+											
+												label = new TextLayer
+													parent: row
+													padding: 10
+													height: row.height
+													width: row.width * labelWidthRatio
+													text: itemLabel
+													fontSize: fSize
+													fontWeight: 500
+													color: "#4A4A4A"
+												
+												info = new TextLayer
+													parent: row
+													padding: 10
+													height: row.height
+													width: row.width * (1-labelWidthRatio) * 0.9
+													x: 100
+													text: data.data[itemName]
+													fontSize: fSize
+													fontWeight: 500
+													color: "#444444"
+													
+											
+									previewScroll.animate('active')
+												
+								
+								# click on a data box to preview
+								dataBox.onTap -> 
+									createPreviewLayer(this, data.type, previewScroll)
+							
+							dataBoxListenPreview(dataBox, data)
+							
+										
+							
+								
+							
 		# if no data, reload
 		else 
 			nodata = new TextLayer
@@ -770,6 +878,8 @@ init = (device) ->
 	###
 	# Set state for tabs
 	setStateTab = (tabGroup, state) ->
+		if previewScroll
+			previewScroll.destroy()
 		for i in [0...tabGroup.length]
 			item = tabGroup[i]
 			# for the tab item
@@ -782,6 +892,7 @@ init = (device) ->
 	Defatult
 	###	
 	setStateTab(notes, "active")
+
 
 
 	###
