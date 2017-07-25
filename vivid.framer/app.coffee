@@ -262,6 +262,7 @@ init = (device) ->
 	cameraTitle = navbar.childrenWithName("title")[0].childrenWithName("title_camera")[0]
 	peopleTitle = navbar.childrenWithName("title")[0].childrenWithName("title_people")[0]
 	mapsTitle = navbar.childrenWithName("title")[0].childrenWithName("title_maps")[0]
+	summaryTitle = navbar.childrenWithName("title")[0].childrenWithName("title_summary")[0]
 
 	for title in navbar.childrenWithName("title")[0].children
 		title.states =
@@ -668,7 +669,6 @@ init = (device) ->
 	Summary view
 	###
 	summaryBtn = navbar.childrenWithName("summary_icon")[0]
-	previewScroll = null
 	summaryScroll = new ScrollComponent
 	summaryScroll.props =
 		parent: summaryView
@@ -697,11 +697,19 @@ init = (device) ->
 				visible: false
 		previewScroll.animate('inactive')
 		return previewScroll
+	
+	removePreviewScroll = () ->
+		previewScrolls = summaryView.childrenWithName("previewScroll")
+		for layer in previewScrolls
+			layer.destroy()
 
 
 	renderRes = (dataSet) ->
 		# clear the page
 		summaryScroll.content.children.forEach((layer) -> layer.destroy())
+		# remove all preview scroll
+		removePreviewScroll()
+		
 		if dataSet?
 			dataArray = _.toArray(dataSet).reverse()
 			# print "dataArray ", dataArray
@@ -869,7 +877,7 @@ init = (device) ->
 	camera = [cameraTab, cameraTitle, cameraView, cameraBtn, cameraAnnoTool, cameraShapeBtn, cameraTextBtn]
 	people = [peopleTab, peopleTitle, peopleView, personDoneBtn, peopleScroll]
 	maps = [mapsTab, mapsTitle]
-	summary = [summaryView, summaryScroll]
+	summary = [summaryView, summaryTitle, summaryScroll]
 
 
 
@@ -878,8 +886,6 @@ init = (device) ->
 	###
 	# Set state for tabs
 	setStateTab = (tabGroup, state) ->
-		if previewScroll
-			previewScroll.destroy()
 		for i in [0...tabGroup.length]
 			item = tabGroup[i]
 			# for the tab item
