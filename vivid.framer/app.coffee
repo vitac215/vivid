@@ -2,7 +2,8 @@
 # 		              phone          deaktop
 # People fSize         16              25
 # image              rotateFix        no rotate
-# drawing offset       0.5             1.5
+# drawing offset        1              1.6
+# canvas size offset    4               1
 
 
 
@@ -39,88 +40,176 @@ init = (device) ->
 			fontSize = 25
 			rotateFix = (ele, degree) ->
 				ele.rotation = degree
-			drawingOffset = 0.5
+			drawingOffset = 1
+			canvasSizeOffset = 4
 		when "desktop"
 			fontSize = 16
 			rotateFix = (ele, degree) ->
 				return
-			drawingOffset = 1.5
+			drawingOffset = 1.6
+			canvasSizeOffset = 1
 
 	###
 	UTL function
 	###
 	# create a canvas layer for drawing
 	createCanvas = (parent, size, placeAfter) -> 
-		canvas = new Layer
+		canvasView = new Layer
 			visible: true  # change to false
 			parent: parent
 			size: size
 			# backgroundColor: "rgba(0, 0, 0, 0, 0)"
 		
-		canvas.states = 
+		canvasView.states = 
 			default:
 				visible: false
 			active:
 				visible: true
 		
-		canvas.draggable.props =
+		canvasView.draggable.props =
 			vertical: false
 			horizontal: false
 			
 		# put canvas to the bottom of the camera_annotation_tool layer
-		canvas.placeBehind(placeAfter)
+		canvasView.placeBehind(placeAfter)
 		
-		return canvas
-	
-	
+		# insert actual canvas element
+		canvas = document.createElement("canvas");
+		canvas.width = size.width * canvasSizeOffset
+		canvas.height = size.height * canvasSizeOffset
+		canvasView._element.appendChild(canvas);
+		# get context
+		ctx = canvas.getContext("2d");
+		ctx.strokeStyle = "red";
+		ctx.lineWidth = 5;
+		
+		canvasObj = 
+			view: canvasView
+			ele: canvas
+			ctx: ctx
+		return canvasObj
+
+
+
 	startDrawing = (canvas) ->
-		# Get the position of the canvas
-		ele = document.getElementsByName("camera_view")[1]
+		# Get a regular interval for drawing to the screen
+		requestAnimFrame = ((cb) ->
+			return (cb) ->
+				window.setTimeout(cb, 1000/60))()
+		
+		view = canvas.view
+		ele = canvas.ele
+		ctx = canvas.ctx
 		rect = ele.getBoundingClientRect()
-		canvasLeftOffset = rect.left
-		canvasTopOffset = rect.top
 		
-		print canvasLeftOffset
-		print canvasTopOffset
-		
-		# drawing function
-		draw = (e) ->
-			drawS = 5
-			drawx = (Events.touchEvent(e).clientX - canvasLeftOffset)
-			drawy = (Events.touchEvent(e).clientY - canvasTopOffset)
-			print drawx + ", " + drawy
-			
-			if drawing 
-				layer = new Layer
-					parent: canvas
-					name: "drawing"
-					height: drawS
-					width: drawS
-					x: drawx*drawingOffset
-					y: drawy*drawingOffset
-					scale: 1
-					borderRadius: "50%"
-					backgroundColor: "red"
-	
-	
 		drawing = false
+		mousePos = 
+			x: rect.left
+			y: rect.top
+		lastPos = mousePos
 		
-		canvas.onTouchMove (event) -> 
-			# print "move"
-			draw(event)
+		getTouchPos = (e) ->
+			return posObj =
+				x: (Events.touchEvent(e).clientX - rect.left)*drawingOffset
+				y: (Events.touchEvent(e).clientY - rect.top)*drawingOffset
 		
-		canvas.onTouchStart (event) ->
+		# touch event listeners
+		view.onTouchStart (event) -> 
 			drawing = true
-			draw(event)
-	
-		canvas.onTouchEnd -> 
-			# print "drag end"
+			lastPos = getTouchPos(event)
+		view.onTouchEnd (event) ->
 			drawing = false
+		view.onTouchMove (event) -> 
+			mousePos = getTouchPos(event)
+
+# 		getMousePos = (e) ->
+# 			return posObj =
+# 				x: (e.clientX - rect.left)*drawingOffset
+# 				y: (e.clientY - rect.top)*drawingOffset
+# 				
+# 		# touch event listeners
+# 		view.onTouchStart (event) -> 
+# 			touch = Events.touchEvent(event)
+# 			mouseEvent = new MouseEvent("mousedown", {
+# 				clientX: touch.clientX,
+# 				clientY: touch.clientY
+# 			});
+# 			ele.dispatchEvent(mouseEvent);
+# 		view.onTouchEnd (event) ->
+# 			touch = Events.touchEvent(event)
+# 			mouseEvent = new MouseEvent("mouseup", {
+# 				clientX: touch.clientX,
+# 				clientY: touch.clientY
+# 			});
+# 			ele.dispatchEvent(mouseEvent);
+# 		view.onTouchMove (event) -> 
+# 			touch = Events.touchEvent(event)
+# 			mouseEvent = new MouseEvent("mousemove", {
+# 				clientX: touch.clientX,
+# 				clientY: touch.clientY
+# 			});
+# 			ele.dispatchEvent(mouseEvent);
+# 				
+# 		# mouse event listeners
+# 		view.onMouseDown (event) -> 
+# 			drawing = true
+# 			lastPos = getMousePos(event)
+# 		view.onMouseUp (event) ->
+# 			drawing = false
+# 		view.onMouseMove (event) -> 
+# 			mousePos = getMousePos(event)
+		
+		renderCanvas = () ->
+			if drawing
+				ctx.moveTo(lastPos.x, lastPos.y)
+				ctx.lineTo(mousePos.x, mousePos.y)
+				ctx.stroke()
+				lastPos = mousePos
+		
+		drawLoop = () -> 
+			requestAnimFrame(drawLoop)
+			renderCanvas()
+		drawLoop()
+		
+		
 	
-	endDrawing = (canvas) ->
-		canvas.destroy()	
-
-
+# 	startDrawing = (canvas) ->
+# 		# Get the position of the canvas
+# 		ele = document.getElementsByName("camera_view")[1]
+# 		rect = ele.getBoundingClientRect()
+# 		canvasLeftOffset = rect.left
+# 		canvasTopOffset = rect.top
+# 		
+# 		# drawing function
+# 		draw = (e) ->
+# 			drawS = 5
+# 			drawx = (Events.touchEvent(e).clientX - canvasLeftOffset)
+# 			drawy = (Events.touchEvent(e).clientY - canvasTopOffset)
+# 			
+# 			if drawing 
+# 				layer = new Layer
+# 					parent: canvas
+# 					name: "drawing"
+# 					height: drawS
+# 					width: drawS
+# 					x: drawx*drawingOffset
+# 					y: drawy*drawingOffset
+# 					scale: 1
+# 					borderRadius: "50%"
+# 					backgroundColor: "red"
+# 	
+# 		drawing = false
+# 		
+# 		canvas.onTouchMove (event) -> 
+# 			draw(event)
+# 		
+# 		canvas.onTouchStart (event) ->
+# 			drawing = true
+# 			draw(event)
+# 	
+# 		canvas.onTouchEnd -> 
+# 			drawing = false
+	
 
 
 	###
@@ -307,11 +396,14 @@ init = (device) ->
 	cameraPreview.on Events.Click, ->
 		# create a canvas layer for drawing
 		canvas = createCanvas(cameraAnnoTool, cameraBg.size, cameraTextBtn)
-		print canvas
 		img = cameraPreview.image
 		if img != undefined
-			canvas.image = img
-			rotateFix(cameraBg, 90)
+			# load image to canvas
+			#canvas.view.image = img
+			imgObj = new Image()
+			imgObj.src = img
+			canvas.ctx.drawImage(imgObj, 0, 0)
+			rotateFix(canvas.view, 90)
 			# hide camera preview box and camera button
 			cameraPreview.animate("inactive")
 			cameraBtn.animate("inactive")
@@ -322,9 +414,9 @@ init = (device) ->
 		# hide all annotation buttons
 		cameraPreview.animate("inactive")
 		cameraPreview.image = null
-		cameraBg.image = null
+		canvas.view.image = null
 		rotateFix(cameraPreview, 0)
-		rotateFix(cameraPreview, 0)
+		rotateFix(canvas.view, 0)
 	
 	
 	# Annotate an image (shape button)
@@ -335,10 +427,13 @@ init = (device) ->
 	
 	# Save annotated image
 	cameraAnnotationSaveBtn.onTap ->
-		endDrawing(canvas)
-		# TODO transfer the annotated image to DB
-
+		# transfer the annotated image to DB
+		img = canvas.ele.toDataURL()
+		firebase.post(
+					"/#{caseID}/#{uuid}/captured",
+					{type: 'img', data: img, location: "300 S Craig St.", created_at: new Date()})
 		# back to the original state
+		canvas.view.destroy()
 		tabConf("default", "default", "active", "default", "default", "default")
 		setStateTab(camera, "active")
 		resetCamera()
@@ -661,8 +756,6 @@ init = (device) ->
 					layer.animate(state)
 			item.animate(state)
 
-
-
 	###
 	Defatult
 	###	
@@ -707,5 +800,6 @@ init = (device) ->
 	summaryBtn.onTap ->
 		tabConf("default", "default", "default", "default", "default", "active")
 		retrieveDB()
+	
 
 init("desktop")

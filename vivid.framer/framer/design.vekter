@@ -8975,7 +8975,7 @@
                 "width" : 75
               }
             ],
-            "fillEnabled" : false,
+            "fillEnabled" : true,
             "parentid" : ".M2%R43w",
             "borderRight" : 1,
             "name" : "menu_nav",

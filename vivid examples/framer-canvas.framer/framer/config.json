@@ -1,0 +1,20 @@
+{
+  "updateDelay" : 0.3,
+  "designModeSelected" : 0,
+  "cachedDeviceHeight" : 0,
+  "contentScale" : 1,
+  "cachedDeviceWidth" : 0,
+  "deviceType" : "custom",
+  "sharedPrototype" : 1,
+  "propertyPanelToggleStates" : {
+
+  },
+  "projectId" : "53C3486F-09ED-4673-A7DC-9EFE0BFB40BC",
+  "deviceOrientation" : 0,
+  "selectedHand" : "",
+  "showBezel" : 0,
+  "foldedCodeRanges" : [
+
+  ],
+  "deviceScale" : -1
+}
