@@ -545,17 +545,31 @@ init = (device) ->
 					fontSize: fSize
 					fontWeight: 500
 					color: "#4A4A4A"
-	
-				input = new InputModule.Input
-					parent: row
-					name: itemName
-					setup: false
-					height: row.height * 0.5
-					width: row.width * (1-labelWidthRatio) * 0.9
-					x: row.width * 0.35
-					fontSize: fSize
-					placeholder: if itemName == 'name' then 'Required' else ''
-					text: if popData then itemText else ''
+				
+				if itemName != 'notes'
+					input = new InputModule.Input
+						parent: row
+						name: itemName
+						setup: false
+						height: row.height * 0.5
+						width: row.width * (1-labelWidthRatio) * 0.9
+						x: row.width * 0.35
+						fontSize: fSize
+						placeholder: if itemName == 'name' then 'Required' else ''
+						text: if popData then itemText else ''
+				else 
+					input = new InputModule.Input
+						parent: row
+						name: itemName
+						setup: false
+						height: row.height * 0.8
+						width: row.width * (1-labelWidthRatio) * 0.9
+						x: row.width * 0.35
+						fontSize: fSize
+						text: if popData then itemText else ''
+					input.style =
+						"word-wrap": "break-word"
+						"word-break": "break-word"
 	
 				formEleArray.push(row)
 				inputsArray.push(input)
