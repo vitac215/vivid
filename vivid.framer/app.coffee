@@ -6,28 +6,6 @@
 # canvas size offset    4               1
 
 
-
-
-###
-Animation function
-###
-shakeAnimate = (ele, duration) ->
-	animA = ele.animate
-		properties: {x: formEleArray[0].x + 4}
-		time: 0.1
-		curve: "linear"
-	animB = ele.animate
-		properties: {x: formEleArray[0].x - 4}
-		time: 0.1
-		curve: "linear"
-
-	animA.on Events.AnimationEnd, -> animB.start()
-	animB.on Events.AnimationEnd, -> animA.start()
-
-	Utils.delay duration, ->
-		animA.stop()
-		animB.stop()
-
 ###
 Init
 ###
@@ -88,8 +66,6 @@ init = (device) ->
 			ele: canvas
 			ctx: ctx
 		return canvasObj
-
-
 
 	startDrawing = (canvas) ->
 		# Get a regular interval for drawing to the screen
@@ -171,7 +147,6 @@ init = (device) ->
 			renderCanvas()
 		drawLoop()
 		
-		
 	
 # 	startDrawing = (canvas) ->
 # 		# Get the position of the canvas
@@ -213,6 +188,29 @@ init = (device) ->
 
 
 	###
+	Animation function
+	###
+	shakeAnimate = (ele, duration) ->
+		animA = ele.animate
+			properties: {x: formEleArray[0].x + 4}
+			time: 0.1
+			curve: "linear"
+		animB = ele.animate
+			properties: {x: formEleArray[0].x - 4}
+			time: 0.1
+			curve: "linear"
+	
+		animA.on Events.AnimationEnd, -> animB.start()
+		animB.on Events.AnimationEnd, -> animA.start()
+	
+		Utils.delay duration, ->
+			animA.stop()
+			animB.stop()
+
+
+
+
+	###
 	Module setting (firebase, input)
 	###
 	{Firebase} = require 'firebase'
@@ -232,9 +230,11 @@ init = (device) ->
 			return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 		return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 
-	username = "vita"
-	uuid = generateUUID()
+	USERNAME = "vita"
+	UUID = generateUUID()
 	caseID = "case1"
+	LOCATION = "300 S Craig St. - Zone 1"
+	TIME = new Date()
 
 
 
@@ -242,8 +242,13 @@ init = (device) ->
 	Save session
 	###
 	firebase.post(
-		"/#{caseID}/#{uuid}/meta",
-		{username: username, location: "300 S Craig St. - Zone 1", time: new Date()})
+		"/#{caseID}/users/#{UUID}",
+		{uuid: UUID,
+		username: USERNAME})
+# 	firebase.post(
+# 		"/#{caseID}/meta",
+# 		{location: LOCATION, 
+# 		time: TIME})
 
 
 	###
@@ -383,8 +388,12 @@ init = (device) ->
 				img = reader.result
 				# transfer to firebase
 				firebase.post(
-					"/#{caseID}/#{uuid}/captured",
-					{type: 'img', data: img, location: "300 S Craig St.", created_at: new Date()})
+					"/#{caseID}/captured",
+					{type: 'img', 
+					data: img, 
+					location: "300 S Craig St.",
+					created_at: new Date(),
+					author: UUID})
 				# render to preview box
 				cameraPreview.image = img
 				rotateFix(cameraPreview, 90)
@@ -430,8 +439,12 @@ init = (device) ->
 		# transfer the annotated image to DB
 		img = canvas.ele.toDataURL()
 		firebase.post(
-					"/#{caseID}/#{uuid}/captured",
-					{type: 'img', data: img, location: "300 S Craig St.", created_at: new Date()})
+					"/#{caseID}/captured",
+					{type: 'img', 
+					data: img, 
+					location: "300 S Craig St.",
+					created_at: new Date(),
+					author: UUID})
 		# back to the original state
 		canvas.view.destroy()
 		tabConf("default", "default", "active", "default", "default", "default")
@@ -444,7 +457,6 @@ init = (device) ->
 	###
 	People view
 	###
-	scanIDbtn = peopleView.childrenWithName("scan_btn")[0]
 	personImg = peopleView.childrenWithName("person_img")[0]
 	personImgPlaceholder = personImg.children[0]
 	personSaveBtn = peopleView.childrenWithName("save_btn")[0]
@@ -479,14 +491,14 @@ init = (device) ->
 
 	appendToScroll = (toAppendArray, scrollPage) ->
 		toAppendArray.forEach((layer) -> layer.parent = scrollPage.content)
-	appendToScroll([scanIDbtn, personImg, personSaveBtn], peopleScroll)
+	appendToScroll([personImg, personSaveBtn], peopleScroll)
 
 
 	# input
 	inputform = {
-		label: ["Name", "Address", "Phone", "Race", "Mark", "Notes"],
-		name: ["name", "address", "phone", "race", "mark", "notes"],
-		content: ["Michael M", "2345 Park Street, PA 15224", "412-000-01234", "White", "Birthmark below neck", "Check warrant"]}
+		label: ["Name", "DOB", "Address", "Height", "Notes"],
+		name: ["name", "dob", "address", "height", "notes"],
+		content: ["Michael M", "04/13/1976", "2345 Park Street, PA 15224", "412-000-01234", "5'03''", "Mentally disabled"]}
 	sampleIDImg = "images/id_sample.png"
 
 	inputsArray = []
@@ -498,7 +510,7 @@ init = (device) ->
 		h = 40
 		w = 335
 		xPos = 20
-		yPos = scanIDbtn.y + 50
+		yPos = personImg.y + personImg.height + 20
 		rowMargin = 5
 		labelWidthRatio = 0.35
 		fSize = fontSize
@@ -560,11 +572,11 @@ init = (device) ->
 
 
 	# ID scan
-	scanIDbtn.html = """
+	personImg.html = """
 	    <input type="file" id="scanBtn" accept="image/*"/ style="display: none">
 	"""
 	scanInput = document.getElementById("scanBtn")
-	scanIDbtn.on Events.Click, ->
+	personImg.on Events.Click, ->
 		scanInput.click()
 
 	# scan/take photo of ID
@@ -610,7 +622,7 @@ init = (device) ->
 		# transfer to firebase
 		if formData.name != ""
 			firebase.post(
-				"/#{caseID}/#{uuid}/captured",
+				"/#{caseID}/captured",
 				{type: 'people',
 				data: {
 					img: sampleIDImg,
@@ -622,7 +634,8 @@ init = (device) ->
 					notes: formData.notes,
 					},
 				location: "300 S Craig St.",
-				created_at: new Date()})
+				created_at: new Date(),
+				author: UUID})
 			# "done" animation
 			peopleScroll.animate('inactive')
 			personDoneBtn.bringToFront()
@@ -659,12 +672,8 @@ init = (device) ->
 	renderRes = (dataSet) ->
 		# clear the page
 		summaryScroll.content.children.forEach((layer) -> layer.destroy())
-
-		# print "data from firebase: ", dataSet
 		if dataSet?
-			meta = _.toArray(dataSet.meta)[0]
-			dataArray = _.toArray(dataSet.captured)
-			# print "meta ", meta
+			dataArray = _.toArray(dataSet).reverse()
 			# print "dataArray ", dataArray
 
 			# render the view
@@ -672,14 +681,14 @@ init = (device) ->
 			yPos = navbar.height
 			loc = new TextLayer
 				parent: summaryScroll.content
-				text: "#{if meta.location then meta.location else 'Location'}"
+				text: LOCATION
 				fontSize: 15
 				color: '#4A4A4A'
 				x: xPos
 				y: yPos + 16
 			time = new TextLayer
 				parent: summaryScroll.content
-				text: "#{if meta.time then meta.time else 'Time'}"
+				text: TIME
 				fontSize: 10
 				color: '#4A4A4A'
 				x: xPos
@@ -718,7 +727,15 @@ init = (device) ->
 									dataBox.image = data.data
 									rotateFix(dataBox, 90)
 								when 'people' then dataBox.image = data.data.img
-
+		# if no data, reload
+		else 
+			nodata = new TextLayer
+				parent: summaryScroll.content
+				text: "No Data"
+				fontSize: 15
+				color: '#4A4A4A'
+				x: 20
+				y:navbar.height + 20
 
 
 
@@ -726,8 +743,8 @@ init = (device) ->
 	Receive captured evidence from firebase
 	###
 	retrieveDB = ->
-		firebase.get "/#{caseID}/#{uuid}", (res) ->
-			renderRes(res)
+		firebase.get("/#{caseID}/captured", ((res) ->
+			renderRes(res)), {orderBy: "created_at"})
 
 
 
@@ -759,14 +776,7 @@ init = (device) ->
 	###
 	Defatult
 	###	
-	# setStateTab(notes, "active")
-	setStateTab(camera, "active")
-	
-	#testing
-	cameraPreview.animate("inactive")
-	cameraBtn.animate("inactive")
-	# show annotation buttons
-	cameraAnnoTool.animate("annotation")
+	setStateTab(notes, "active")
 
 
 	###
