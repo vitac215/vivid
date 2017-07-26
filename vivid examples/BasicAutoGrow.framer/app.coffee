@@ -37,7 +37,7 @@ text = new AutoGrowInput
 # 	reflowSiblings: true
 	style: "box-sizing" : "border-box"
 	resizeParent: true
-	fontSize: 24
+	fontSize: 5
 	padding: "16px 16px 36px 16px"
 	parentBottomPadding: pd
 	placeHolder: "Say something"

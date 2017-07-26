@@ -462,6 +462,26 @@ init = (device) ->
 	notesToolBtns = notesView.childrenWithName("tool_btns")[0]
 	notesHeader = notesView.childrenWithName("header")[0]
 	
+	# add a scroll layer
+	
+	notesLayer = new AutoGrowInput
+		parent: notesView
+		height: notesView.height - notesHeader.height - notesToolBtns.height - 30
+		width: notesView.width
+		x: 0
+		y: notesHeader.y + notesHeader.height + 20
+		borderColor: "#dedede"
+		borderRadius: 3
+		borderWidth: 1
+		resizeParent: true
+		fontSize: fontSize
+		lineHeight: fontSize + 10
+		padding: "16px 16px 16px 16px"
+		placeHolder: "Type your notes"
+	notesLayer.style =
+		"box-sizing" : "border-box"
+	notesLayer.placeBehind(notesToolBtns)
+			
 # 	notesLayer = new InputModule.Input
 # 		parent: notesView
 # 		name: "notesLayer"
