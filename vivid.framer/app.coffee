@@ -492,8 +492,28 @@ init = (device) ->
 	notesLayer.style =
 		"box-sizing" : "border-box"
 			
-	notesLayer.placeBehind(notesToolBtns)
+	# notes scroll layer
+	notesScroll = new ScrollComponent
+	notesScroll.props =
+		parent: notesView
+		width: notesLayer.width
+		height: viewSize.height
+		scrollHorizontal: false
+		scrollVertical: false
+# 		contentInset:
+# 			top: navbar.height
+# 			bottom: menu_nav.height
+	notesScroll.states =
+		active:
+			visible: true
+		inactive:
+			visible: false
 	
+	#notesHeader.parent = notesScroll.content
+	notesLayer.parent = notesScroll.content
+	notesScroll.placeBehind(notesToolBtns)
+
+
 
 
 
