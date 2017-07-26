@@ -4564,7 +4564,7 @@
                 "rotation" : 0,
                 "__class" : "RectangleNode",
                 "id" : "?6kG[3g+",
-                "fillColor" : "transparent",
+                "fillColor" : "rgb(248, 248, 249)",
                 "aspectRatioLocked" : false,
                 "widthFactor" : null,
                 "opacity" : 1,

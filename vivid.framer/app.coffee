@@ -27,6 +27,7 @@ init = (device) ->
 			drawingOffset = 1.6
 			canvasSizeOffset = 1
 
+
 	###
 	UTL function
 	###
@@ -328,6 +329,16 @@ init = (device) ->
 
 
 	###
+	Global variable
+	###
+	viewSize = 
+		width: Screen.width
+		height: Screen.height - navbar.height - menu_nav.height
+
+
+
+
+	###
 	Camera view
 	###
 	
@@ -461,9 +472,8 @@ init = (device) ->
 	###
 	notesToolBtns = notesView.childrenWithName("tool_btns")[0]
 	notesHeader = notesView.childrenWithName("header")[0]
-	
-	# add a scroll layer
-	
+
+	# notes textarea input
 	notesLayer = new AutoGrowInput
 		parent: notesView
 		height: notesView.height - notesHeader.height - notesToolBtns.height - 30
@@ -473,30 +483,17 @@ init = (device) ->
 		borderColor: "#dedede"
 		borderRadius: 3
 		borderWidth: 1
-		resizeParent: true
+		resizeParent: false
 		fontSize: fontSize
 		lineHeight: fontSize + 10
 		padding: "16px 16px 16px 16px"
 		placeHolder: "Type your notes"
+		value: "I was dispatched to the corner of Murray Av. and Darlington to investigate a hit and run. Victim says he was about to turn the light and was hit by a red car. The man inside veered towards Forbes and took off. Victim possibly recognized the perpetrators license plate. By memory he thought it to be:"
 	notesLayer.style =
 		"box-sizing" : "border-box"
-	notesLayer.placeBehind(notesToolBtns)
 			
-# 	notesLayer = new InputModule.Input
-# 		parent: notesView
-# 		name: "notesLayer"
-# 		setup: false
-# 		height: notesView.height - notesHeader.height - notesToolBtns.height - 50
-# 		width: notesView.width - 20
-# 		x: 0
-# 		y: notesHeader.y + notesHeader.height + 20
-# 		fontSize: fontSize
-# 		placeholder: "enter your notes"
-# 		backgroundColor: "#fff"
-# 	notesLayer.style =
-# 		"word-wrap": "break-word"
-# 		"word-break": "break-word"
-
+	notesLayer.placeBehind(notesToolBtns)
+	
 
 
 
@@ -748,8 +745,9 @@ init = (device) ->
 		previewScroll.props =
 			name: "previewScroll"
 			parent: summaryView
-			width: Screen.width
-			height: Screen.height - navbar.height - menu_nav.height
+			# width: Screen.width
+			# height: Screen.height - navbar.height - menu_nav.height
+			size: viewSize
 			x: 0
 			y: navbar.height
 			scrollHorizontal: false
