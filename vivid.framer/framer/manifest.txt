@@ -1,32 +1,4 @@
 app.coffee
-framer/backups/backup-2017-07-25 17.50.57.coffee
-framer/backups/backup-2017-07-25 17.51.57.coffee
-framer/backups/backup-2017-07-25 17.52.57.coffee
-framer/backups/backup-2017-07-25 17.53.57.coffee
-framer/backups/backup-2017-07-25 17.54.57.coffee
-framer/backups/backup-2017-07-25 17.55.57.coffee
-framer/backups/backup-2017-07-25 17.56.57.coffee
-framer/backups/backup-2017-07-25 17.57.57.coffee
-framer/backups/backup-2017-07-25 17.58.57.coffee
-framer/backups/backup-2017-07-25 18.01.57.coffee
-framer/backups/backup-2017-07-25 18.02.57.coffee
-framer/backups/backup-2017-07-25 18.06.57.coffee
-framer/backups/backup-2017-07-25 18.10.57.vekter
-framer/backups/backup-2017-07-25 18.11.57.vekter
-framer/backups/backup-2017-07-25 18.12.57.vekter
-framer/backups/backup-2017-07-25 18.13.57.vekter
-framer/backups/backup-2017-07-25 18.14.57.vekter
-framer/backups/backup-2017-07-25 18.15.57.vekter
-framer/backups/backup-2017-07-25 18.17.57.vekter
-framer/backups/backup-2017-07-25 18.18.57.vekter
-framer/backups/backup-2017-07-25 18.19.57.vekter
-framer/backups/backup-2017-07-25 18.20.57.vekter
-framer/backups/backup-2017-07-25 18.21.57.vekter
-framer/backups/backup-2017-07-25 18.22.57.vekter
-framer/backups/backup-2017-07-25 18.23.57.vekter
-framer/backups/backup-2017-07-25 18.24.57.vekter
-framer/backups/backup-2017-07-25 18.25.57.vekter
-framer/backups/backup-2017-07-25 18.28.57.vekter
 framer/backups/backup-2017-07-25 18.29.58.vekter
 framer/backups/backup-2017-07-25 18.30.57.coffee
 framer/backups/backup-2017-07-25 18.34.57.coffee
@@ -39,6 +11,35 @@ framer/backups/backup-2017-07-25 18.43.57.coffee
 framer/backups/backup-2017-07-25 18.54.57.coffee
 framer/backups/backup-2017-07-25 18.55.58.coffee
 framer/backups/backup-2017-07-25 18.56.57.coffee
+framer/backups/backup-2017-07-25 18.57.57.coffee
+framer/backups/backup-2017-07-25 18.58.57.coffee
+framer/backups/backup-2017-07-25 19.00.57.vekter
+framer/backups/backup-2017-07-25 19.01.57.coffee
+framer/backups/backup-2017-07-25 19.01.57.vekter
+framer/backups/backup-2017-07-25 19.02.57.coffee
+framer/backups/backup-2017-07-25 19.03.57.coffee
+framer/backups/backup-2017-07-25 19.04.57.coffee
+framer/backups/backup-2017-07-25 19.04.57.vekter
+framer/backups/backup-2017-07-25 19.05.57.coffee
+framer/backups/backup-2017-07-25 19.05.57.vekter
+framer/backups/backup-2017-07-25 19.06.57.coffee
+framer/backups/backup-2017-07-25 19.06.57.vekter
+framer/backups/backup-2017-07-25 19.07.57.coffee
+framer/backups/backup-2017-07-25 19.08.57.coffee
+framer/backups/backup-2017-07-25 19.09.57.coffee
+framer/backups/backup-2017-07-25 19.11.49.coffee
+framer/backups/backup-2017-07-25 19.11.49.vekter
+framer/backups/backup-2017-07-25 19.12.49.coffee
+framer/backups/backup-2017-07-25 19.13.49.coffee
+framer/backups/backup-2017-07-25 19.20.49.coffee
+framer/backups/backup-2017-07-26 00.37.46.coffee
+framer/backups/backup-2017-07-26 00.38.46.coffee
+framer/backups/backup-2017-07-26 00.39.46.coffee
+framer/backups/backup-2017-07-26 00.40.46.coffee
+framer/backups/backup-2017-07-26 00.41.47.coffee
+framer/backups/backup-2017-07-26 00.42.46.coffee
+framer/backups/backup-2017-07-26 00.44.46.coffee
+framer/backups/backup-2017-07-26 00.47.46.vekter
 framer/coffee-script.js
 framer/config.json
 framer/design.vekter
@@ -101,6 +102,7 @@ imported/notes@1x/images/Layer-tabs-qte4nja5.png
 imported/notes@1x/layers.json
 imported/notes@1x/layers.json.js
 index.html
+modules/AutoGrowInput.coffee
 modules/CameraLayer.coffee
 modules/firebase.coffee
 modules/input.coffee

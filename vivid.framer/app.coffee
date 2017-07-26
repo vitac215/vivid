@@ -219,6 +219,7 @@ init = (device) ->
 		secret: "gj2baisq18Z679XxNlxBosxtR4KBR5NLwwpQIVoA"
 
 	InputModule = require "input"
+	{AutoGrowInput} = require "AutoGrowInput"
 
 
 
@@ -456,6 +457,30 @@ init = (device) ->
 
 
 	###
+	Notes view
+	###
+	notesToolBtns = notesView.childrenWithName("tool_btns")[0]
+	notesHeader = notesView.childrenWithName("header")[0]
+	
+# 	notesLayer = new InputModule.Input
+# 		parent: notesView
+# 		name: "notesLayer"
+# 		setup: false
+# 		height: notesView.height - notesHeader.height - notesToolBtns.height - 50
+# 		width: notesView.width - 20
+# 		x: 0
+# 		y: notesHeader.y + notesHeader.height + 20
+# 		fontSize: fontSize
+# 		placeholder: "enter your notes"
+# 		backgroundColor: "#fff"
+# 	notesLayer.style =
+# 		"word-wrap": "break-word"
+# 		"word-break": "break-word"
+
+
+
+
+	###
 	People view
 	###
 	personImg = peopleView.childrenWithName("person_img")[0]
@@ -505,7 +530,7 @@ init = (device) ->
 
 	inputsArray = []
 	formEleArray = []
-	formData = {name: "", address: "", phone: "", race: "", mark: "", notes: ""}
+	formData = {name: "", dob: "", address: "", height: "", notes: ""}
 
 	# append form to the scroll content
 	appendForm = (popData) ->
@@ -535,6 +560,10 @@ init = (device) ->
 					x: xPos
 					y: h*i + yOffSet
 					backgroundColor: "#fff"
+					borderRadius: 3
+					shadowY: 1
+					shadowBlur: 3
+					shadowColor: "rgba(0,0,0,.15)"
 	
 				label = new TextLayer
 					parent: row
@@ -543,8 +572,9 @@ init = (device) ->
 					width: row.width * labelWidthRatio
 					text: itemLabel
 					fontSize: fSize
-					fontWeight: 500
 					color: "#4A4A4A"
+				label.style = 
+					fontWeight: "600"
 				
 				if itemName != 'notes'
 					input = new InputModule.Input
@@ -826,6 +856,10 @@ init = (device) ->
 													x: xPos
 													y: h*i + yOffSet
 													backgroundColor: "#fff"
+													borderRadius: 3
+													shadowY: 1
+													shadowBlur: 3
+													shadowColor: "rgba(0,0,0,.15)"
 											
 												label = new TextLayer
 													parent: row
@@ -834,8 +868,9 @@ init = (device) ->
 													width: row.width * labelWidthRatio
 													text: itemLabel
 													fontSize: fSize
-													fontWeight: 500
 													color: "#4A4A4A"
+												label.style = 
+													fontWeight: "600"
 												
 												info = new TextLayer
 													parent: row
