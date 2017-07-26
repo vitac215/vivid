@@ -470,8 +470,10 @@ init = (device) ->
 	###
 	Notes view
 	###
-	notesToolBtns = notesView.childrenWithName("tool_btns")[0]
 	notesHeader = notesView.childrenWithName("header")[0]
+	notesToolBtns = notesView.childrenWithName("tool_btns")[0]
+	notesShapeBtn = notesToolBtns.childrenWithName("shape")[0]
+	notesSaveBtn = notesToolBtns.childrenWithName("save_btn")[0]
 
 	# notes textarea input
 	notesLayer = new AutoGrowInput
@@ -509,11 +511,13 @@ init = (device) ->
 		inactive:
 			visible: false
 	
-	#notesHeader.parent = notesScroll.content
 	notesLayer.parent = notesScroll.content
 	notesScroll.placeBehind(notesToolBtns)
 
 
+	# TODO notes annotation
+	
+	# TODO notes save (convert to image)
 
 
 
