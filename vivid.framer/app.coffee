@@ -498,6 +498,7 @@ init = (device) ->
 	notesScroll = new ScrollComponent
 	notesScroll.props =
 		parent: notesView
+		name: "notesScroll"
 		width: notesLayer.width
 		height: viewSize.height
 		scrollHorizontal: false
@@ -514,6 +515,7 @@ init = (device) ->
 	notesLayer.parent = notesScroll.content
 	notesScroll.placeBehind(notesToolBtns)
 
+# 	print document.querySelectorAll("textarea")[0].value
 
 	# TODO notes annotation
 	
@@ -596,7 +598,7 @@ init = (device) ->
 				row = new Layer
 					parent: scroll.content
 					name: itemName
-					height: if itemName == 'notes' then 80 else h
+					height: if itemName == 'notes' then 150 else h
 					width: w
 					x: xPos
 					y: h*i + yOffSet
@@ -628,20 +630,23 @@ init = (device) ->
 						fontSize: fSize
 						placeholder: if itemName == 'name' then 'Required' else ''
 						text: if popData then itemText else ''
-				else 
-					input = new InputModule.Input
+				else 				
+					input = new AutoGrowInput
 						parent: row
-						name: itemName
-						setup: false
 						height: row.height * 0.8
 						width: row.width * (1-labelWidthRatio) * 0.9
 						x: row.width * 0.35
 						fontSize: fSize
-						text: if popData then itemText else ''
+# 						borderColor: "#dedede"
+# 						borderRadius: 3
+# 						borderWidth: 1
+						resizeParent: false
+						lineHeight: fSize + 10
+						placeholder: ""
+						padding: "5px 16px 16px 16px"
 					input.style =
-						"word-wrap": "break-word"
-						"word-break": "break-word"
-	
+						"box-sizing" : "border-box"
+		
 				formEleArray.push(row)
 				inputsArray.push(input)
 	
@@ -776,7 +781,7 @@ init = (device) ->
 			y: navbar.height
 			scrollHorizontal: false
 			backgroundColor: "#F8F8F9"
-		previewScroll.states = 
+		previewScroll.states =
 			active:
 				visible: true
 			inactive:
@@ -893,7 +898,7 @@ init = (device) ->
 												row = new Layer
 													parent: previewScroll.content
 													name: itemName
-													height: if itemName == 'notes' then 80 else h
+													height: if itemName == 'notes' then 150 else h
 													width: w
 													x: xPos
 													y: h*i + yOffSet
