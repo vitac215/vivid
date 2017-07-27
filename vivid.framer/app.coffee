@@ -33,10 +33,15 @@ init = (device) ->
 	###
 	# create a canvas layer for drawing
 	createCanvas = (parent, size, placeAfter) -> 
+		windowSize =
+			width:  window.innerWidth
+			height: window.innerHeight
+		
 		canvasView = new Layer
-			visible: true  # change to false
+			name: "canvasView"
 			parent: parent
 			size: size
+			visible: true  # change to false
 			# backgroundColor: "rgba(0, 0, 0, 0, 0)"
 		
 		canvasView.states = 
@@ -54,9 +59,12 @@ init = (device) ->
 		
 		# insert actual canvas element
 		canvas = document.createElement("canvas");
-		canvas.width = size.width * canvasSizeOffset
-		canvas.height = size.height * canvasSizeOffset
+# 		canvas.width = size.width * canvasSizeOffset
+# 		canvas.height = size.height * canvasSizeOffset
+		canvas.width = "375"
+		canvas.height = 545
 		canvasView._element.appendChild(canvas);
+		
 		# get context
 		ctx = canvas.getContext("2d");
 		ctx.strokeStyle = "red";
@@ -85,56 +93,58 @@ init = (device) ->
 			y: rect.top
 		lastPos = mousePos
 		
-		getTouchPos = (e) ->
-			return posObj =
-				x: (Events.touchEvent(e).clientX - rect.left)*drawingOffset
-				y: (Events.touchEvent(e).clientY - rect.top)*drawingOffset
-		
-		# touch event listeners
-		view.onTouchStart (event) -> 
-			drawing = true
-			lastPos = getTouchPos(event)
-		view.onTouchEnd (event) ->
-			drawing = false
-		view.onTouchMove (event) -> 
-			mousePos = getTouchPos(event)
-
-# 		getMousePos = (e) ->
+# 		getTouchPos = (e) ->
 # 			return posObj =
-# 				x: (e.clientX - rect.left)*drawingOffset
-# 				y: (e.clientY - rect.top)*drawingOffset
-# 				
+# # 				x: (Events.touchEvent(e).clientX - rect.left)*drawingOffset
+# # 				y: (Events.touchEvent(e).clientY - rect.top)*drawingOffset
+# 				x: (Events.touchEvent(e).clientX - rect.left)*drawingOffset
+# 				y: (Events.touchEvent(e).clientY - rect.top)*drawingOffset
+		
 # 		# touch event listeners
 # 		view.onTouchStart (event) -> 
-# 			touch = Events.touchEvent(event)
-# 			mouseEvent = new MouseEvent("mousedown", {
-# 				clientX: touch.clientX,
-# 				clientY: touch.clientY
-# 			});
-# 			ele.dispatchEvent(mouseEvent);
-# 		view.onTouchEnd (event) ->
-# 			touch = Events.touchEvent(event)
-# 			mouseEvent = new MouseEvent("mouseup", {
-# 				clientX: touch.clientX,
-# 				clientY: touch.clientY
-# 			});
-# 			ele.dispatchEvent(mouseEvent);
-# 		view.onTouchMove (event) -> 
-# 			touch = Events.touchEvent(event)
-# 			mouseEvent = new MouseEvent("mousemove", {
-# 				clientX: touch.clientX,
-# 				clientY: touch.clientY
-# 			});
-# 			ele.dispatchEvent(mouseEvent);
-# 				
-# 		# mouse event listeners
-# 		view.onMouseDown (event) -> 
 # 			drawing = true
-# 			lastPos = getMousePos(event)
-# 		view.onMouseUp (event) ->
+# 			lastPos = getTouchPos(event)
+# 		view.onTouchEnd (event) ->
 # 			drawing = false
-# 		view.onMouseMove (event) -> 
-# 			mousePos = getMousePos(event)
+# 		view.onTouchMove (event) -> 
+# 			mousePos = getTouchPos(event)
+
+		getMousePos = (e) ->
+			return posObj =
+				x: (e.clientX - rect.left)*drawingOffset
+				y: (e.clientY - rect.top)*drawingOffset
+				
+		# touch event listeners
+		view.onTouchStart (event) -> 
+			touch = Events.touchEvent(event)
+			mouseEvent = new MouseEvent("mousedown", {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			});
+			ele.dispatchEvent(mouseEvent);
+		view.onTouchEnd (event) ->
+			touch = Events.touchEvent(event)
+			mouseEvent = new MouseEvent("mouseup", {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			});
+			ele.dispatchEvent(mouseEvent);
+		view.onTouchMove (event) -> 
+			touch = Events.touchEvent(event)
+			mouseEvent = new MouseEvent("mousemove", {
+				clientX: touch.clientX,
+				clientY: touch.clientY
+			});
+			ele.dispatchEvent(mouseEvent);
+				
+		# mouse event listeners
+		view.onMouseDown (event) -> 
+			drawing = true
+			lastPos = getMousePos(event)
+		view.onMouseUp (event) ->
+			drawing = false
+		view.onMouseMove (event) -> 
+			mousePos = getMousePos(event)
 		
 		renderCanvas = () ->
 			if drawing
@@ -214,14 +224,16 @@ init = (device) ->
 	###
 	Module setting (firebase, input)
 	###
+	# firebase
 	{Firebase} = require 'firebase'
 	firebase = new Firebase
 		projectID: "vivid-6124d"
 		secret: "gj2baisq18Z679XxNlxBosxtR4KBR5NLwwpQIVoA"
 
+
 	InputModule = require "input"
 	{AutoGrowInput} = require "AutoGrowInput"
-
+	html2canvas = require "html2canvas"
 
 
 	###
@@ -319,14 +331,6 @@ init = (device) ->
 	mapsView = menu_nav.parent.childrenWithName("maps_view")[0]
 	summaryView = menu_nav.parent.childrenWithName("summary_view")[0]
 
-	# viewGroup = [notesView, voiceView, cameraView, peopleView, mapsView, summaryView]
-	viewGroup = [notesView, voiceView, cameraView, peopleView, summaryView]
-
-	for view in viewGroup
-		view.states =
-			active:
-				visible: true
-
 
 	###
 	Global variable
@@ -399,11 +403,14 @@ init = (device) ->
 			# when image is ready
 			reader.onload = ->
 				img = reader.result
+				
 				# transfer to firebase
 				firebase.post(
 					"/#{caseID}/captured",
 					{type: 'img', 
-					data: img, 
+					data: {
+						img: img,
+					} 
 					location: "300 S Craig St.",
 					created_at: new Date(),
 					author: UUID})
@@ -419,6 +426,7 @@ init = (device) ->
 		# create a canvas layer for drawing
 		canvas = createCanvas(cameraAnnoTool, cameraBg.size, cameraTextBtn)
 		img = cameraPreview.image
+		#cameraBg.image = img
 		if img != undefined
 			# load image to canvas
 			#canvas.view.image = img
@@ -454,10 +462,13 @@ init = (device) ->
 		firebase.post(
 					"/#{caseID}/captured",
 					{type: 'img', 
-					data: img, 
+					data: {
+						img: img,
+						},
 					location: "300 S Craig St.",
 					created_at: new Date(),
 					author: UUID})
+		
 		# back to the original state
 		canvas.view.destroy()
 		tabConf("default", "default", "active", "default", "default", "default")
@@ -475,51 +486,135 @@ init = (device) ->
 	notesShapeBtn = notesToolBtns.childrenWithName("shape")[0]
 	notesSaveBtn = notesToolBtns.childrenWithName("save_btn")[0]
 
-	# notes textarea input
-	notesLayer = new AutoGrowInput
-		parent: notesView
-		height: notesView.height - notesHeader.height - notesToolBtns.height - 30
-		width: notesView.width
-		x: 0
-		y: notesHeader.y + notesHeader.height + 20
-		borderColor: "#dedede"
-		borderRadius: 3
-		borderWidth: 1
-		resizeParent: false
-		fontSize: fontSize
-		lineHeight: fontSize + 10
-		padding: "16px 16px 16px 16px"
-		placeHolder: "Type your notes"
-		value: "I was dispatched to the corner of Murray Av. and Darlington to investigate a hit and run. Victim says he was about to turn the light and was hit by a red car. The man inside veered towards Forbes and took off. Victim possibly recognized the perpetrators license plate. By memory he thought it to be:"
-	notesLayer.style =
-		"box-sizing" : "border-box"
-			
-	# notes scroll layer
-	notesScroll = new ScrollComponent
-	notesScroll.props =
-		parent: notesView
-		name: "notesScroll"
-		width: notesLayer.width
-		height: viewSize.height
-		scrollHorizontal: false
-		scrollVertical: false
-# 		contentInset:
-# 			top: navbar.height
-# 			bottom: menu_nav.height
-	notesScroll.states =
-		active:
-			visible: true
-		inactive:
-			visible: false
 	
-	notesLayer.parent = notesScroll.content
-	notesScroll.placeBehind(notesToolBtns)
+	# create notes
+	createNotesLayer = () ->
+		notesInputContainer = new Layer
+			name: "notesInputContainer"
+			parent: notesView
+			backgroundColor: null
+			#width: notesView.width  200
+			#height: 430  200
+			width: 200
+			height: 200
+		
+		notesInputTitle = new InputModule.Input
+			name: "notesInputTitle"
+			parent: notesInputContainer
+			setup: false
+			height: 30
+			width: notesView.width
+			padding: 0
+			fontSize: 30
+			text: "Hit and Run"
+			placeholder: "New Title"
+			#autofocus: true
+		notesInputTitle.style = 
+			fontWeight: "600"
+			color: "#32C0CE"
+		
+		notesInputTime = new TextLayer
+			name: "notesInputTime"
+			parent: notesInputContainer
+			width: notesView.width
+			y: notesInputTitle.y + notesInputTitle.height + 12
+			fontSize: fontSize
+			color: "#35343D"
+			text: "July 31, 2017 at 11:43am"
+			
+			
+		notesInputText = new AutoGrowInput
+			name: "notesInput"
+			parent: notesInputContainer
+			height: notesView.height - notesInputTitle.height - notesInputTime.height - notesToolBtns.height - 40
+			width: notesView.width
+			x: 0
+			y: notesInputTime.y + notesInputTime.height + 10
+			borderColor: "#dedede"
+			borderRadius: 3
+			borderWidth: 1
+			resizeParent: false
+			fontSize: fontSize
+			lineHeight: fontSize + 10
+			padding: "16px 16px 16px 16px"
+			placeHolder: "Type your notes"
+			value: "I was dispatched to the corner of Murray Av. and Darlington to investigate a hit and run. Victim says he was about to turn the light and was hit by a red car. The man inside veered towards Forbes and took off. Victim possibly recognized the perpetrators license plate. By memory he thought it to be:"
+		notesInputText.style =
+			"box-sizing" : "border-box"
+				
+		# notes scroll layer
+		notesScroll = new ScrollComponent
+		notesScroll.props =
+			parent: notesInputContainer
+			name: "notesScroll"
+			width: notesInputText.width
+			height: viewSize.height
+			scrollHorizontal: false
+			scrollVertical: false
+	# 		contentInset:
+	# 			top: navbar.height
+	# 			bottom: menu_nav.height
+		notesScroll.states =
+			active:
+				visible: true
+			inactive:
+				visible: false
+		
+		notesInputText.parent = notesScroll.content
+		notesScroll.placeBehind(notesInputTitle)
+		
+		notesInputContainer.placeBehind(notesToolBtns)
+		
+		notesInput =
+			notesInputContainer: notesInputContainer
+			notesInputTitle: notesInputTitle
+			notesInputTime: notesInputTime
+			notesInputText: notesInputText
+		
+		return notesInput
+	
+	notesInput = createNotesLayer()
+	
+	# listen on title change
+	notesInputTitleText = "Hit and Run"
+	notesInput.notesInputTitle.on "keyup", ->
+		notesInputTitleText = @value
 
-# 	print document.querySelectorAll("textarea")[0].value
-
+	
 	# TODO notes annotation
 	
-	# TODO notes save (convert to image)
+	
+	# TODO notes save
+	notesSaveBtn.onTap ->
+		notesText = document.querySelectorAll("textarea")[0].value
+		
+		sendNotesToDB = (title, text, img) ->
+			firebase.post(
+					"/#{caseID}/captured",
+					{type: 'notes',
+					data: {
+						img: img,
+						title: notesInputTitleText
+						text: notesText,
+						time: "July 31, 2017 at 11:43am"
+						},
+					location: "300 S Craig St.",
+					created_at: new Date(),
+					author: UUID})
+		
+		# convert html to image
+		notesDOM = document.getElementsByName("notesInputContainer")[0]
+		
+		html2canvas(notesDOM, {
+			onrendered: ((canvas) ->
+				# get screenshot
+				notesScreenshot = canvas.toDataURL()
+				# send to DB
+				sendNotesToDB(notesInputTitleText, notesText, notesScreenshot)
+				# clear the the title and textarea
+				document.querySelectorAll("textarea")[0].value = ""
+				document.querySelectorAll("input")[0].value = "")
+		})
 
 
 
@@ -765,6 +860,8 @@ init = (device) ->
 		size: Screen.size
 		scrollHorizontal: false
 		visible: false
+		contentInset:
+			bottom: menu_nav.height + 20
 	summaryScroll.states =
 		active:
 			visible: true
@@ -853,12 +950,11 @@ init = (device) ->
 								height: size
 								x: size*i + xOffSet
 								y: size*j + yOffSet
-
-							switch type
-								when 'img'
-									dataBox.image = data.data
-									rotateFix(dataBox, 90)
-								when 'people' then dataBox.image = data.data.img
+								backgroundColor: "#fff"
+								image: data.data.img
+							
+							if type == 'img'
+								rotateFix(dataBox, 90)
 							
 							dataBoxListenPreview = (dataBox, data) ->
 								# create the preview layer
@@ -929,7 +1025,44 @@ init = (device) ->
 													fontSize: fSize
 													fontWeight: 500
 													color: "#444444"
-													
+										
+										when "notes"
+											# previewLayer.image = dataBox.image
+											title = new TextLayer
+												parent: previewLayer
+												height: 30
+												width: notesView.width
+												x: 42
+												y: 26
+												padding: 0
+												fontSize: 30
+												text: data.data.title
+											title.style =
+												fontWeight: "600"
+												color: "#32C0CE"
+											
+											time = new TextLayer
+												parent: previewLayer
+												width: notesView.width
+												x: title.x
+												y: title.y + title.height + 12
+												fontSize: fontSize
+												color: "#35343D"
+												text: data.data.time
+											
+											text = new TextLayer
+												parent: previewLayer
+												fontSize: fontSize
+												lineHeight: 1.8
+												width: notesView.width
+												height: notesView.height - title.height - time.height - 20
+												x: title.x
+												y: time.y + time.height + 10
+												backgroundColor: "#fff"
+												text: data.data.text
+											text.style =
+												padding: "16px"
+												
 											
 									previewScroll.animate('active')
 												
@@ -963,6 +1096,17 @@ init = (device) ->
 		firebase.get("/#{caseID}/captured", ((res) ->
 			renderRes(res)), {orderBy: "created_at"})
 
+
+	###
+	View group setup
+	###
+	# viewGroup = [notesView, voiceView, cameraView, peopleView, mapsView, summaryView]
+	viewGroup = [notesView, voiceView, cameraView, peopleView, summaryView]
+
+	for view in viewGroup
+		view.states =
+			active:
+				visible: true
 
 
 	###
