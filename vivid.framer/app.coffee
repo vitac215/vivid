@@ -2,7 +2,7 @@
 # 		              phone          deaktop
 # People fSize         16              25
 # image              rotateFix        no rotate
-# drawing offset        1              1.6
+# drawing offset        1              1.45
 # canvas size offset    4               1
 
 
@@ -24,7 +24,7 @@ init = (device) ->
 			fontSize = 16
 			rotateFix = (ele, degree) ->
 				return
-			drawingOffset = 1.6
+			drawingOffset = 1.45
 			canvasSizeOffset = 1
 
 
@@ -32,17 +32,13 @@ init = (device) ->
 	UTL function
 	###
 	# create a canvas layer for drawing
-	createCanvas = (parent, size, placeAfter) -> 
-		windowSize =
-			width:  window.innerWidth
-			height: window.innerHeight
-		
+	createCanvas = (name, parent, size, placeAfter, lineWidth) -> 
 		canvasView = new Layer
-			name: "canvasView"
+			name: name
 			parent: parent
 			size: size
-			visible: true  # change to false
-			# backgroundColor: "rgba(0, 0, 0, 0, 0)"
+			# opacity: 1  # for debugging purpose
+			backgroundColor: "rgba(0, 0, 0, 0, 0)"
 		
 		canvasView.states = 
 			default:
@@ -54,21 +50,19 @@ init = (device) ->
 			vertical: false
 			horizontal: false
 			
-		# put canvas to the bottom of the camera_annotation_tool layer
+		# put canvas to the bottom of the main layer
 		canvasView.placeBehind(placeAfter)
 		
 		# insert actual canvas element
 		canvas = document.createElement("canvas");
-# 		canvas.width = size.width * canvasSizeOffset
-# 		canvas.height = size.height * canvasSizeOffset
-		canvas.width = "375"
-		canvas.height = 545
+		canvas.width = size.width * canvasSizeOffset
+		canvas.height = size.height * canvasSizeOffset
 		canvasView._element.appendChild(canvas);
 		
 		# get context
 		ctx = canvas.getContext("2d");
 		ctx.strokeStyle = "red";
-		ctx.lineWidth = 5;
+		ctx.lineWidth = lineWidth;
 		
 		canvasObj = 
 			view: canvasView
@@ -381,7 +375,6 @@ init = (device) ->
 		annotation:
 			opacity: 1
 
-
 	cameraBtn.html = """
 	    <input type="file" id="cameraBtn" accept="image/*"/ style="display: none">
 	"""
@@ -420,20 +413,20 @@ init = (device) ->
 
 
 	# canvas = null
-	canvas = createCanvas(cameraAnnoTool, cameraBg.size, cameraTextBtn)
+	canvasCamera = createCanvas("canvasCamera", cameraAnnoTool, cameraBg.size, cameraTextBtn, 2)
 	# check preview
 	cameraPreview.on Events.Click, ->
 		# create a canvas layer for drawing
-		canvas = createCanvas(cameraAnnoTool, cameraBg.size, cameraTextBtn)
+		canvasCamera = createCanvas("canvasCamera", cameraAnnoTool, cameraBg.size, cameraTextBtn, 2)
 		img = cameraPreview.image
 		#cameraBg.image = img
 		if img != undefined
 			# load image to canvas
-			#canvas.view.image = img
+			#canvasCamera.view.image = img
 			imgObj = new Image()
 			imgObj.src = img
-			canvas.ctx.drawImage(imgObj, 0, 0)
-			rotateFix(canvas.view, 90)
+			canvasCamera.ctx.drawImage(imgObj, 0, 0)
+			rotateFix(canvasCamera.view, 90)
 			# hide camera preview box and camera button
 			cameraPreview.animate("inactive")
 			cameraBtn.animate("inactive")
@@ -444,21 +437,22 @@ init = (device) ->
 		# hide all annotation buttons
 		cameraPreview.animate("inactive")
 		cameraPreview.image = null
-		canvas.view.image = null
+		canvasCamera.view.image = null
 		rotateFix(cameraPreview, 0)
-		rotateFix(canvas.view, 0)
+		rotateFix(canvasCamera.view, 0)
 	
 	
 	# Annotate an image (shape button)
 	cameraShapeBtn.onTap -> 
-		cameraShapeBtn.animate("annotation")
-		startDrawing(canvas)
+		if cameraShapeBtn.opacity == 0.5
+			cameraShapeBtn.animate("annotation")
+			startDrawing(canvasCamera)
 	
 	
 	# Save annotated image
 	cameraAnnotationSaveBtn.onTap ->
 		# transfer the annotated image to DB
-		img = canvas.ele.toDataURL()
+		img = canvasCamera.ele.toDataURL()
 		firebase.post(
 					"/#{caseID}/captured",
 					{type: 'img', 
@@ -470,7 +464,7 @@ init = (device) ->
 					author: UUID})
 		
 		# back to the original state
-		canvas.view.destroy()
+		canvasCamera.view.destroy()
 		tabConf("default", "default", "active", "default", "default", "default")
 		setStateTab(camera, "active")
 		resetCamera()
@@ -486,8 +480,18 @@ init = (device) ->
 	notesShapeBtn = notesToolBtns.childrenWithName("shape")[0]
 	notesSaveBtn = notesToolBtns.childrenWithName("save_btn")[0]
 
+	notesShapeBtn.states = 
+		active:
+			opacity: 0.5
+		annotation:
+			opacity: 1
 	
 	# create notes
+	notesInputSize =
+		title: {height: 30, width: notesView.width}
+		time: {height: 20, width: notesView.width}
+		text: {width: notesView.width, height: notesView.height - 30 - 20 - notesToolBtns.height - 40}
+	
 	createNotesLayer = () ->
 		notesInputContainer = new Layer
 			name: "notesInputContainer"
@@ -502,8 +506,8 @@ init = (device) ->
 			name: "notesInputTitle"
 			parent: notesInputContainer
 			setup: false
-			height: 30
-			width: notesView.width
+			height: notesInputSize.title.height
+			width: notesInputSize.title.width
 			padding: 0
 			fontSize: 30
 			text: "Hit and Run"
@@ -516,7 +520,7 @@ init = (device) ->
 		notesInputTime = new TextLayer
 			name: "notesInputTime"
 			parent: notesInputContainer
-			width: notesView.width
+			width: notesInputSize.time.width
 			y: notesInputTitle.y + notesInputTitle.height + 12
 			fontSize: fontSize
 			color: "#35343D"
@@ -526,8 +530,8 @@ init = (device) ->
 		notesInputText = new AutoGrowInput
 			name: "notesInput"
 			parent: notesInputContainer
-			height: notesView.height - notesInputTitle.height - notesInputTime.height - notesToolBtns.height - 40
-			width: notesView.width
+			height: notesInputSize.text.height
+			width: notesInputSize.text.width
 			x: 0
 			y: notesInputTime.y + notesInputTime.height + 10
 			borderColor: "#dedede"
@@ -566,10 +570,10 @@ init = (device) ->
 		notesInputContainer.placeBehind(notesToolBtns)
 		
 		notesInput =
-			notesInputContainer: notesInputContainer
-			notesInputTitle: notesInputTitle
-			notesInputTime: notesInputTime
-			notesInputText: notesInputText
+			container: notesInputContainer
+			title: notesInputTitle
+			time: notesInputTime
+			text: notesInputText
 		
 		return notesInput
 	
@@ -577,25 +581,39 @@ init = (device) ->
 	
 	# listen on title change
 	notesInputTitleText = "Hit and Run"
-	notesInput.notesInputTitle.on "keyup", ->
+	notesInput.title.on "keyup", ->
 		notesInputTitleText = @value
-
 	
-	# TODO notes annotation
+	# notes annotation
+	canvasNotes = null
+	notesShapeBtn.onTap -> 
+		if notesShapeBtn.opacity == 0.5
+			notesShapeBtn.animate("annotation")
+			# create canvas
+			canvasNotes = createCanvas("canvasNotes", notesView, notesView.size, notesToolBtns, 2)
+			startDrawing(canvasNotes)
+		if notesShapeBtn.opacity == 1
+			notesShapeBtn.animate("active")
+			canvasNotes.view.destroy()
 	
-	
-	# TODO notes save
+	# save notes
 	notesSaveBtn.onTap ->
 		notesText = document.querySelectorAll("textarea")[0].value
 		
-		sendNotesToDB = (title, text, img) ->
+		# get annotation from canvas
+		annoImg = null
+		if canvasNotes?
+			annoImg = canvasNotes.ele.toDataURL()
+		
+		sendNotesToDB = (title, text, img, annoImg) ->
 			firebase.post(
 					"/#{caseID}/captured",
 					{type: 'notes',
 					data: {
-						img: img,
 						title: notesInputTitleText
 						text: notesText,
+						img: img,
+						annoImg: annoImg,
 						time: "July 31, 2017 at 11:43am"
 						},
 					location: "300 S Craig St.",
@@ -610,10 +628,12 @@ init = (device) ->
 				# get screenshot
 				notesScreenshot = canvas.toDataURL()
 				# send to DB
-				sendNotesToDB(notesInputTitleText, notesText, notesScreenshot)
+				sendNotesToDB(notesInputTitleText, notesText, notesScreenshot, annoImg)
 				# clear the the title and textarea
 				document.querySelectorAll("textarea")[0].value = ""
-				document.querySelectorAll("input")[0].value = "New Title")
+				document.querySelectorAll("input")[0].value = "New Title"
+				# back to the original state
+				canvasNotes.view.destroy())
 		})
 
 
@@ -1022,7 +1042,6 @@ init = (device) ->
 													color: "#444444"
 										
 										when "notes"
-											# previewLayer.image = dataBox.image
 											title = new TextLayer
 												parent: previewLayer
 												height: 30
@@ -1057,6 +1076,20 @@ init = (device) ->
 												text: data.data.text
 											text.style =
 												padding: "16px"
+											
+											if data.data.annoImg?
+												posOffset = {x: 20, y: 90}
+												annoImg = new Layer
+													parent: previewLayer
+													x: title.x + posOffset.x
+													y: title.y + posOffset.y
+													height: notesInputSize.title.height + notesInputSize.time.height + notesInputSize.text.height
+													width: notesInputSize.text.width
+													image: data.data.annoImg
+													
+													
+													
+												
 												
 											
 									previewScroll.animate('active')
@@ -1107,7 +1140,7 @@ init = (device) ->
 	###
 	Tab Group
 	###
-	notes = [notesTab, notesTitle, notesView]
+	notes = [notesTab, notesTitle, notesShapeBtn, notesView]
 	voice = [voiceTab, voiceTitle, voiceView]
 	camera = [cameraTab, cameraTitle, cameraView, cameraBtn, cameraAnnoTool, cameraShapeBtn, cameraTextBtn]
 	people = [peopleTab, peopleTitle, peopleView, personDoneBtn, peopleScroll]
@@ -1155,6 +1188,7 @@ init = (device) ->
 	###
 	notesTab.onTap ->
 		tabConf("active", "default", "default", "default", "default", "default")
+		canvasNotes.view.destroy()
 	voiceTab.onTap ->
 		tabConf("default", "active", "default", "default", "default", "default")
 	cameraTab.onTap ->
@@ -1172,6 +1206,6 @@ init = (device) ->
 		# clear the summary page
 		summaryScroll.content.children.forEach((layer) -> layer.destroy())
 		
-	
+
 
 init("desktop")

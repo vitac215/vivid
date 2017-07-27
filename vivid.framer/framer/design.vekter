@@ -4432,7 +4432,7 @@
                     "widthFactor" : null,
                     "targetName" : null,
                     "heightFactor" : null,
-                    "fillColor" : "rgb(216, 216, 216)",
+                    "fillColor" : "rgb(50, 192, 206)",
                     "borderColor" : "#222",
                     "centerAnchorY" : 0.5,
                     "opacity" : 1,
