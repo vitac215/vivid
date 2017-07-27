@@ -613,7 +613,7 @@ init = (device) ->
 				sendNotesToDB(notesInputTitleText, notesText, notesScreenshot)
 				# clear the the title and textarea
 				document.querySelectorAll("textarea")[0].value = ""
-				document.querySelectorAll("input")[0].value = "")
+				document.querySelectorAll("input")[0].value = "New Title")
 		})
 
 
@@ -893,11 +893,6 @@ init = (device) ->
 
 
 	renderRes = (dataSet) ->
-		# clear the page
-		summaryScroll.content.children.forEach((layer) -> layer.destroy())
-		# remove all preview scroll
-		removePreviewScroll()
-		
 		if dataSet?
 			dataArray = _.toArray(dataSet).reverse()
 			# print "dataArray ", dataArray
@@ -1172,6 +1167,11 @@ init = (device) ->
 	summaryBtn.onTap ->
 		tabConf("default", "default", "default", "default", "default", "active")
 		retrieveDB()
+		# remove all preview scroll
+		removePreviewScroll()
+		# clear the summary page
+		summaryScroll.content.children.forEach((layer) -> layer.destroy())
+		
 	
 
 init("desktop")
