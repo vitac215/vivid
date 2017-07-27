@@ -32,7 +32,7 @@ init = (device) ->
 	UTL function
 	###
 	# create a canvas layer for drawing
-	createCanvas = (name, parent, size, placeAfter, lineWidth) -> 
+	createCanvas = (name, parent, size, placeAfter, lineWidth, strokeColor) -> 
 		canvasView = new Layer
 			name: name
 			parent: parent
@@ -61,7 +61,7 @@ init = (device) ->
 		
 		# get context
 		ctx = canvas.getContext("2d");
-		ctx.strokeStyle = "red";
+		ctx.strokeStyle = strokeColor;
 		ctx.lineWidth = lineWidth;
 		
 		canvasObj = 
@@ -413,11 +413,11 @@ init = (device) ->
 
 
 	# canvas = null
-	canvasCamera = createCanvas("canvasCamera", cameraAnnoTool, cameraBg.size, cameraTextBtn, 2)
+	canvasCamera = createCanvas("canvasCamera", cameraAnnoTool, cameraBg.size, cameraTextBtn, 2, "red")
 	# check preview
 	cameraPreview.on Events.Click, ->
 		# create a canvas layer for drawing
-		canvasCamera = createCanvas("canvasCamera", cameraAnnoTool, cameraBg.size, cameraTextBtn, 2)
+		canvasCamera = createCanvas("canvasCamera", cameraAnnoTool, cameraBg.size, cameraTextBtn, 2, "red")
 		img = cameraPreview.image
 		#cameraBg.image = img
 		if img != undefined
@@ -590,7 +590,7 @@ init = (device) ->
 		if notesShapeBtn.opacity == 0.5
 			notesShapeBtn.animate("annotation")
 			# create canvas
-			canvasNotes = createCanvas("canvasNotes", notesView, notesView.size, notesToolBtns, 2)
+			canvasNotes = createCanvas("canvasNotes", notesView, notesView.size, notesToolBtns, 2, "black")
 			startDrawing(canvasNotes)
 		if notesShapeBtn.opacity == 1
 			notesShapeBtn.animate("active")
@@ -633,7 +633,8 @@ init = (device) ->
 				document.querySelectorAll("textarea")[0].value = ""
 				document.querySelectorAll("input")[0].value = "New Title"
 				# back to the original state
-				canvasNotes.view.destroy())
+				if canvasNotes?
+					canvasNotes.view.destroy())
 		})
 
 
@@ -1188,7 +1189,8 @@ init = (device) ->
 	###
 	notesTab.onTap ->
 		tabConf("active", "default", "default", "default", "default", "default")
-		canvasNotes.view.destroy()
+		if canvasNotes?
+			canvasNotes.view.destroy()
 	voiceTab.onTap ->
 		tabConf("default", "active", "default", "default", "default", "default")
 	cameraTab.onTap ->
