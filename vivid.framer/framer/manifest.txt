@@ -1,25 +1,4 @@
 app.coffee
-framer/backups/backup-2017-07-27 14.04.01.coffee
-framer/backups/backup-2017-07-27 14.05.01.coffee
-framer/backups/backup-2017-07-27 14.06.01.coffee
-framer/backups/backup-2017-07-27 14.07.01.coffee
-framer/backups/backup-2017-07-27 14.08.01.coffee
-framer/backups/backup-2017-07-27 14.09.01.coffee
-framer/backups/backup-2017-07-27 14.10.01.coffee
-framer/backups/backup-2017-07-27 14.11.01.coffee
-framer/backups/backup-2017-07-27 14.12.01.coffee
-framer/backups/backup-2017-07-27 14.13.01.coffee
-framer/backups/backup-2017-07-27 14.14.01.coffee
-framer/backups/backup-2017-07-27 14.15.02.coffee
-framer/backups/backup-2017-07-27 14.16.01.coffee
-framer/backups/backup-2017-07-27 14.17.01.coffee
-framer/backups/backup-2017-07-27 14.19.01.coffee
-framer/backups/backup-2017-07-27 14.20.01.coffee
-framer/backups/backup-2017-07-27 14.21.01.coffee
-framer/backups/backup-2017-07-27 14.22.01.coffee
-framer/backups/backup-2017-07-27 14.24.01.coffee
-framer/backups/backup-2017-07-27 14.25.02.coffee
-framer/backups/backup-2017-07-27 14.26.01.coffee
 framer/backups/backup-2017-07-27 14.27.01.coffee
 framer/backups/backup-2017-07-27 14.28.01.coffee
 framer/backups/backup-2017-07-27 14.29.01.coffee
@@ -39,6 +18,28 @@ framer/backups/backup-2017-07-27 14.49.01.coffee
 framer/backups/backup-2017-07-27 14.50.01.coffee
 framer/backups/backup-2017-07-27 14.55.01.coffee
 framer/backups/backup-2017-07-27 14.59.03.coffee
+framer/backups/backup-2017-07-27 15.01.01.coffee
+framer/backups/backup-2017-07-27 15.12.01.vekter
+framer/backups/backup-2017-07-27 15.13.01.vekter
+framer/backups/backup-2017-07-27 15.14.01.vekter
+framer/backups/backup-2017-07-27 15.15.01.vekter
+framer/backups/backup-2017-07-27 15.16.01.vekter
+framer/backups/backup-2017-07-27 15.17.01.vekter
+framer/backups/backup-2017-07-27 15.18.01.vekter
+framer/backups/backup-2017-07-27 15.19.01.vekter
+framer/backups/backup-2017-07-27 15.20.01.vekter
+framer/backups/backup-2017-07-27 15.22.01.vekter
+framer/backups/backup-2017-07-27 15.23.01.vekter
+framer/backups/backup-2017-07-27 16.01.01.vekter
+framer/backups/backup-2017-07-27 16.02.01.vekter
+framer/backups/backup-2017-07-27 16.03.02.coffee
+framer/backups/backup-2017-07-27 16.03.03.vekter
+framer/backups/backup-2017-07-27 16.04.01.vekter
+framer/backups/backup-2017-07-27 16.05.01.vekter
+framer/backups/backup-2017-07-27 16.06.01.coffee
+framer/backups/backup-2017-07-27 16.07.01.vekter
+framer/backups/backup-2017-07-27 16.08.01.coffee
+framer/backups/backup-2017-07-27 16.09.01.vekter
 framer/coffee-script.js
 framer/config.json
 framer/design.vekter
@@ -65,6 +66,8 @@ framer/social-80x80.png
 framer/social-880x460.png
 framer/style.css
 framer/version
+images/arrow1.svg
+images/arrow2.svg
 images/design/08qHgT31dMt8aRXEoCzqkhxuq9yhnbXbmPQklizoxUuAKOfluiShMJkiKJpiQsPPdxDqQmFuAlcVyoVlg.png
 images/design/08qHgT31dMt8aRXEoCzqkhxuq9yhnbXbmPQklizoxUuAKOfluiShMJkiKJpiQsPPdxDqQmFuAlcVyoVlg.png-preview
 images/design/1FFYPCitl13txNp0r9y7O1CJBhlpPpgEk0Yne07fMKvFc28ldwnbo3dQcaVz2cmI31zt4HS8Quo8u52icew.png
@@ -82,16 +85,25 @@ images/design/g86rlzHIzpNiyb9oqJXThufhRUNGPrSPIeHAPXDEhnFw4wfA3LUoIrVid17sBWUwzB
 images/design/g86rlzHIzpNiyb9oqJXThufhRUNGPrSPIeHAPXDEhnFw4wfA3LUoIrVid17sBWUwzB534PZS1eqOSsdgCFqg.png-preview
 images/design/GMQJ0NkoK8yetHVXkKCzXyfEUSn47OPIl8HrtdKOgPYlOInfK7cHMWvnTKRO5VysOrgAytZnnSYHuf80cnw.png
 images/design/GMQJ0NkoK8yetHVXkKCzXyfEUSn47OPIl8HrtdKOgPYlOInfK7cHMWvnTKRO5VysOrgAytZnnSYHuf80cnw.png-preview
+images/design/k1VHwHvAqk7ED65B4QV1U8j4CY5qJ5MclbRDyWtoaCh750NGXhf5lQXUqbEUME7sRPwVTJZD5RxqC5sCTYw.png
+images/design/k1VHwHvAqk7ED65B4QV1U8j4CY5qJ5MclbRDyWtoaCh750NGXhf5lQXUqbEUME7sRPwVTJZD5RxqC5sCTYw.png-512
+images/design/k1VHwHvAqk7ED65B4QV1U8j4CY5qJ5MclbRDyWtoaCh750NGXhf5lQXUqbEUME7sRPwVTJZD5RxqC5sCTYw.png-preview
 images/design/meTwOibR2EhEX5ydPkSQPERKlJRspK4u2C9wX9ta1VuMDyTtQLQkbvhyOKB9yf5uIV9CUdIdRIU7WEZsAEjA.png
 images/design/meTwOibR2EhEX5ydPkSQPERKlJRspK4u2C9wX9ta1VuMDyTtQLQkbvhyOKB9yf5uIV9CUdIdRIU7WEZsAEjA.png-preview
 images/design/nUdDSh80XGgsdjAjtcPADpdb0rHjcZqzteXkIpTtkzojCqnYtW5Z1JcG5iDpo3iUHH6rcq1sCE9T77Nfemg.png
 images/design/nUdDSh80XGgsdjAjtcPADpdb0rHjcZqzteXkIpTtkzojCqnYtW5Z1JcG5iDpo3iUHH6rcq1sCE9T77Nfemg.png-preview
+images/design/PagELZ9mwWhnFNROoxUi4CvTFJ2evylPnVsqsCnTmffwvRmXumNfw1fExxhRXFzzat0AOI5RDiLL6mGqyyA.png
+images/design/PagELZ9mwWhnFNROoxUi4CvTFJ2evylPnVsqsCnTmffwvRmXumNfw1fExxhRXFzzat0AOI5RDiLL6mGqyyA.png-preview
+images/design/pnEO8aCuCFLkYA1fmLgp6xqCCVLAmSooylILFofXJFHSgKVN8iCw25fKbnYDvo4wTsV25F9ju4zcRD7djQ.png
+images/design/pnEO8aCuCFLkYA1fmLgp6xqCCVLAmSooylILFofXJFHSgKVN8iCw25fKbnYDvo4wTsV25F9ju4zcRD7djQ.png-512
+images/design/pnEO8aCuCFLkYA1fmLgp6xqCCVLAmSooylILFofXJFHSgKVN8iCw25fKbnYDvo4wTsV25F9ju4zcRD7djQ.png-preview
 images/design/rWnECchDFAO4S48MFExg98hWYBc8qj49wY2VOaHnLGPHGzqLHqFREZtscUumt7tDvtTxWT9lrHiYSygoujg.png
 images/design/rWnECchDFAO4S48MFExg98hWYBc8qj49wY2VOaHnLGPHGzqLHqFREZtscUumt7tDvtTxWT9lrHiYSygoujg.png-512
 images/design/rWnECchDFAO4S48MFExg98hWYBc8qj49wY2VOaHnLGPHGzqLHqFREZtscUumt7tDvtTxWT9lrHiYSygoujg.png-preview
 images/design/ugEbhpywjdJqOVc3pMl07BLUoFKx8unXwznR5ZXR50J9waKywHcpefavZOD2kyDC2GZISoydGwVpSWu8mw.svg
 images/design/X9rshQFiMQD6cKSSd2wKGDW5uCYJ3idMw9dFCOrttQeaOzqkuJe5RGH0E7tJKLkpmYXB57ST5B1bZcFOgg.svg
 images/id_sample.png
+images/map.png
 images/person_default.png
 imported/notes@1x/images/Layer-done-mdc0rjc2.png
 imported/notes@1x/images/Layer-menu_nav-odg1nkq2.png

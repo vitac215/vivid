@@ -872,6 +872,17 @@ init = (device) ->
 
 
 	###
+	Map view
+	###
+	
+
+
+
+
+
+
+
+	###
 	Summary view
 	###
 	summaryBtn = navbar.childrenWithName("summary_icon")[0]
