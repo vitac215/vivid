@@ -317,13 +317,14 @@ init = (device) ->
 				time: 0.2
 
 
-	# Views
+	# Views def
 	notesView = menu_nav.parent.childrenWithName("notes_view")[0]
 	voiceView = menu_nav.parent.childrenWithName("voice_view")[0]
 	cameraView = menu_nav.parent.childrenWithName("camera_view")[0]
 	peopleView = menu_nav.parent.childrenWithName("people_view")[0]
 	mapsView = menu_nav.parent.childrenWithName("maps_view")[0]
 	summaryView = menu_nav.parent.childrenWithName("summary_view")[0]
+
 
 
 	###
@@ -872,14 +873,85 @@ init = (device) ->
 
 
 	###
-	Map view
+	Maps view
 	###
+	mapsAnchor = mapsView.childrenWithName("anchor")[0]
+	mapsShapeBtn = mapsView.childrenWithName("map_annotation_tool")[0].childrenWithName("shape")[0]
+	mapsNextBtn = mapsView.childrenWithName("map_annotation_tool")[0].childrenWithName("next_btn")[0]
+	
+	mapsAnchor.opacity = 0
+	mapsShapeBtn.states = 
+		active:
+			opacity: 0.5
+		annotation:
+			opacity: 1
+
+	createPath = () ->
+		layerPath1 = new Layer
+			name: "layerpath1"
+			parent: mapsView
+			width: 55
+			height: 77
+			x: mapsAnchor.x
+			y: mapsAnchor.y - 73
+			backgroundColor: "rgba(0, 0, 0, 0, 0)"
+		layerPath1.placeBehind(mapsAnchor)
+		
+		layerPath1.html = '<svg width="55px" height="77px" viewBox="0 0 55 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<path fill="none" stroke="#EA6C63" stroke-width="3" d="M0,75 C49.9539034,75 52.743467,75.9092399 53,73 C53.2483913,70.1830922 51.7931202,64.1099079 48.15625,30.71875 C47.4292183,24.043662 47.6049996,13.9733495 48.6835937,0.5078125" id="mapsLayerPath1" stroke-dasharray="988.00 988.00" stroke-dashoffset="988.00"></path>
+	</svg>'
+	
+	
+		layerPath2 = new Layer
+			name: "layerpath2"
+			parent: mapsView
+			width: 32
+			height: 23
+			x: mapsAnchor.x + 30
+			y: layerPath1.y - 8
+			backgroundColor: "rgba(0, 0, 0, 0, 0)"
+		layerPath2.placeBehind(mapsAnchor)
+		
+		layerPath2.html = '<svg width="32px" height="17px" viewBox="0 0 32 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		<g id="Artboard" transform="translate(-259.000000, -308.000000)" stroke="#EA6C63" stroke-width="3">
+		<path fill="none" d="M261,324 C273.537752,305.271902 282.871086,304.938568 289,323" id="mapsLayerPath2" stroke-dasharray="988.00 988.00" stroke-dashoffset="988.00"></path></g>
+	</svg>'
+		
+		pathObj =
+			path1: layerPath1
+			path2: layerPath2
+		return pathObj
+		
+	
+	drawLayerPath = (svgPath, delayTime) ->
+		pathLength = 0
+		Utils.delay delayTime, ->
+			pathLength = svgPath.getTotalLength()
+			svgPath.style.strokeDasharray = pathLength + ' ' + pathLength;
+			svgPath.style.strokeDashoffset = pathLength
+			svgPath.getBoundingClientRect()
+			svgPath.style.transition = svgPath.style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out'
+			svgPath.style.strokeDashoffset = '0'
 	
 
-
-
-
-
+	
+	# annotate map
+	mapsShapeBtn.onTap -> 
+		if mapsShapeBtn.opacity == 0.5
+			mapsShapeBtn.animate("annotation")
+			paths = createPath()
+			svgPath1 = document.getElementById('mapsLayerPath1')
+			svgPath2 = document.getElementById('mapsLayerPath2')
+			drawLayerPath(svgPath1, 1)
+			drawLayerPath(svgPath2, 3)
+	
+	# destory paths
+	destroyPaths = () ->
+		layerPath1 = mapsView.childrenWithName("layerpath1")[0]
+		layerPath2 = mapsView.childrenWithName("layerpath2")[0]
+		if layerPath1 and layerPath2?
+			layerPath1.destroy()
+			layerPath2.destroy()
 
 
 	###
@@ -1140,13 +1212,14 @@ init = (device) ->
 	###
 	View group setup
 	###
-	# viewGroup = [notesView, voiceView, cameraView, peopleView, mapsView, summaryView]
-	viewGroup = [notesView, voiceView, cameraView, peopleView, summaryView]
+	viewGroup = [notesView, voiceView, cameraView, peopleView, mapsView, summaryView]
 
 	for view in viewGroup
 		view.states =
 			active:
 				visible: true
+			default:
+				visible: false
 
 
 	###
@@ -1156,7 +1229,7 @@ init = (device) ->
 	voice = [voiceTab, voiceTitle, voiceView]
 	camera = [cameraTab, cameraTitle, cameraView, cameraBtn, cameraAnnoTool, cameraShapeBtn, cameraTextBtn]
 	people = [peopleTab, peopleTitle, peopleView, personDoneBtn, peopleScroll]
-	maps = [mapsTab, mapsTitle]
+	maps = [mapsTab, mapsView, mapsTitle, mapsShapeBtn]
 	summary = [summaryView, summaryTitle, summaryScroll]
 
 
@@ -1177,8 +1250,9 @@ init = (device) ->
 	###
 	Defatult
 	###	
-	setStateTab(notes, "active")
-
+# 	setStateTab(notes, "active")
+	# testing
+	setStateTab(maps, "active")
 
 
 	###
@@ -1211,6 +1285,7 @@ init = (device) ->
 		tabConf("default", "default", "default", "active", "default", "default")
 	mapsTab.onTap ->
 		tabConf("default", "default", "default", "default", "active", "default")
+		destroyPaths()
 	summaryBtn.onTap ->
 		tabConf("default", "default", "default", "default", "default", "active")
 		retrieveDB()
