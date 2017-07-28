@@ -227,6 +227,7 @@ init = (device) ->
 	InputModule = require "input"
 	{AutoGrowInput} = require "AutoGrowInput"
 	html2canvas = require "html2canvas"
+	Android = require 'androidRipple'
 
 
 	###
@@ -348,6 +349,7 @@ init = (device) ->
 	cameraShapeBtn = cameraAnnoTool.childrenWithName("shape")[0]
 	cameraTextBtn = cameraAnnoTool.childrenWithName("text")[0]
 	cameraAnnotationSaveBtn = cameraAnnoTool.childrenWithName("save_btn")[0]
+	cameraAnnotationSaveBtn.clip = true
 
 	cameraBtn.states =
 		active:
@@ -448,8 +450,8 @@ init = (device) ->
 			cameraShapeBtn.animate("annotation")
 			startDrawing(canvasCamera)
 	
-	
 	# Save annotated image
+	cameraAnnotationSaveBtn.on(Events.Click, Android.Ripple)
 	cameraAnnotationSaveBtn.onTap ->
 		# transfer the annotated image to DB
 		img = canvasCamera.ele.toDataURL()
@@ -479,6 +481,7 @@ init = (device) ->
 	notesToolBtns = notesView.childrenWithName("tool_btns")[0]
 	notesShapeBtn = notesToolBtns.childrenWithName("shape")[0]
 	notesSaveBtn = notesToolBtns.childrenWithName("save_btn")[0]
+	notesSaveBtn.clip = true
 
 	notesShapeBtn.states = 
 		active:
@@ -597,6 +600,8 @@ init = (device) ->
 			canvasNotes.view.destroy()
 	
 	# save notes
+	notesSaveBtn.on(Events.Click, Android.Ripple)
+	
 	notesSaveBtn.onTap ->
 		notesText = document.querySelectorAll("textarea")[0].value
 		
@@ -645,6 +650,7 @@ init = (device) ->
 	personImg = peopleView.childrenWithName("person_img")[0]
 	personImgPlaceholder = personImg.children[0]
 	personSaveBtn = peopleView.childrenWithName("save_btn")[0]
+	personSaveBtn.clip = true
 
 	personDoneBtn = peopleView.childrenWithName("done")[0]
 	personDoneBtn.states =
@@ -830,6 +836,7 @@ init = (device) ->
 
 
 	# Save person info
+	personSaveBtn.on(Events.Click, Android.Ripple)
 	personSaveBtn.onTap ->
 		# print formData
 		# transfer to firebase
@@ -874,6 +881,7 @@ init = (device) ->
 	mapsSaveView = mapsView.childrenWithName("maps_save_view")[0]
 	mapsSaveImg = mapsSaveView.childrenWithName("maps_img")[0]
 	mapsSaveBtn = mapsSaveView.childrenWithName("save_btn")[0]
+	mapsSaveBtn.clip = true
 	mapsNotes = mapsSaveView.childrenWithName("maps_notes")[0]
 	mapsNotesTitle = mapsNotes.childrenWithName("title")[0]
 	
@@ -882,6 +890,7 @@ init = (device) ->
 	mapsShapeBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("shape")[0]
 	mapsTextBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("text")[0]
 	mapsNextBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("next_btn")[0]
+	mapsNextBtn.clip = true
 	
 	mapsContent = null
 	mapsInput = null
@@ -1019,6 +1028,7 @@ init = (device) ->
 		return layer
 	
 	# press next
+	mapsNextBtn.on(Events.Click, Android.Ripple)
 	mapsNextBtn.onTap ->
 		if mapsShapeBtn.states.current.name == "annotation"
 			text = mapsInputValue
@@ -1035,6 +1045,7 @@ init = (device) ->
 			shakeAnimate(mapsShapeBtn, 0.5)
 	
 	# press save
+	mapsSaveBtn.on(Events.Click, Android.Ripple)
 	mapsSaveBtn.onTap ->
 		# send to DB
 		img = mapImg

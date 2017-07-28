@@ -1,15 +1,4 @@
 app.coffee
-framer/backups/backup-2017-07-27 20.51.01.coffee
-framer/backups/backup-2017-07-27 20.54.01.coffee
-framer/backups/backup-2017-07-27 20.55.01.coffee
-framer/backups/backup-2017-07-27 20.56.01.coffee
-framer/backups/backup-2017-07-27 20.59.01.coffee
-framer/backups/backup-2017-07-27 21.02.01.coffee
-framer/backups/backup-2017-07-27 21.03.01.coffee
-framer/backups/backup-2017-07-27 21.04.01.coffee
-framer/backups/backup-2017-07-27 21.05.01.coffee
-framer/backups/backup-2017-07-27 21.09.01.coffee
-framer/backups/backup-2017-07-28 00.13.24.coffee
 framer/backups/backup-2017-07-28 00.14.25.coffee
 framer/backups/backup-2017-07-28 00.15.24.coffee
 framer/backups/backup-2017-07-28 00.16.24.coffee
@@ -39,6 +28,17 @@ framer/backups/backup-2017-07-28 00.41.24.coffee
 framer/backups/backup-2017-07-28 00.42.24.coffee
 framer/backups/backup-2017-07-28 00.43.24.coffee
 framer/backups/backup-2017-07-28 00.44.24.coffee
+framer/backups/backup-2017-07-28 00.45.24.coffee
+framer/backups/backup-2017-07-28 00.56.29.coffee
+framer/backups/backup-2017-07-28 01.00.27.coffee
+framer/backups/backup-2017-07-28 01.06.40.coffee
+framer/backups/backup-2017-07-28 01.07.24.coffee
+framer/backups/backup-2017-07-28 01.08.24.coffee
+framer/backups/backup-2017-07-28 01.09.24.coffee
+framer/backups/backup-2017-07-28 01.12.25.coffee
+framer/backups/backup-2017-07-28 01.15.25.coffee
+framer/backups/backup-2017-07-28 01.18.25.coffee
+framer/backups/backup-2017-07-28 01.19.25.coffee
 framer/coffee-script.js
 framer/config.json
 framer/design.vekter
@@ -117,6 +117,7 @@ imported/notes@1x/images/Layer-tabs-qte4nja5.png
 imported/notes@1x/layers.json
 imported/notes@1x/layers.json.js
 index.html
+modules/androidRipple.coffee
 modules/AutoGrowInput.coffee
 modules/CameraLayer.coffee
 modules/firebase.coffee
@@ -124,3 +125,4 @@ modules/html2canvas.js
 modules/input.coffee
 modules/keyboard.png
 modules/myModule.coffee
+modules/Pointer.coffee
