@@ -456,7 +456,7 @@
                 "width" : 110
               },
               {
-                "radiusBottomLeft" : 0,
+                "radiusBottomLeft" : 3,
                 "rotation" : 0,
                 "__class" : "RectangleNode",
                 "id" : ">(d8(PZk",
@@ -475,7 +475,7 @@
                   "__class" : "LinearGradient",
                   "start" : "black"
                 },
-                "radius" : 0,
+                "radius" : 3,
                 "boxShadows" : [
                   {
                     "x" : 0,
@@ -490,7 +490,7 @@
                 "centerAnchorX" : 0.5013333333333333,
                 "borderPerSide" : false,
                 "fillType" : "color",
-                "radiusBottomRight" : 0,
+                "radiusBottomRight" : 3,
                 "children" : [
                   {
                     "__class" : "TextNode",
@@ -679,7 +679,7 @@
                 "borderWidth" : 1,
                 "top" : null,
                 "borderTop" : 1,
-                "radiusTopRight" : 0,
+                "radiusTopRight" : 3,
                 "borderBottom" : 1,
                 "borderEnabled" : false,
                 "constraintsLocked" : false,
@@ -689,13 +689,13 @@
                 "visible" : true,
                 "borderLeft" : 1,
                 "heightFactor" : null,
-                "radiusTopLeft" : 0,
+                "radiusTopLeft" : 3,
                 "targetName" : null,
                 "bottom" : 118,
                 "width" : 324
               },
               {
-                "radiusBottomLeft" : 0,
+                "radiusBottomLeft" : 3,
                 "rotation" : 0,
                 "__class" : "ImageNode",
                 "id" : "~#!r)3Ck",
@@ -708,7 +708,7 @@
                 "borderColor" : "#222",
                 "left" : 26,
                 "locked" : false,
-                "radius" : 0,
+                "radius" : 3,
                 "boxShadows" : [
                   {
                     "x" : 0,
@@ -722,7 +722,7 @@
                 ],
                 "centerAnchorX" : 0.5013333333333333,
                 "borderPerSide" : false,
-                "radiusBottomRight" : 0,
+                "radiusBottomRight" : 3,
                 "children" : [
 
                 ],
@@ -735,7 +735,7 @@
                 "borderWidth" : 1,
                 "top" : 19,
                 "borderTop" : 1,
-                "radiusTopRight" : 0,
+                "radiusTopRight" : 3,
                 "intrinsicWidth" : 167.5,
                 "borderBottom" : 1,
                 "originalFilename" : "map_data.png",
@@ -748,7 +748,7 @@
                 "borderLeft" : 1,
                 "heightFactor" : null,
                 "intrinsicHeight" : 105.5,
-                "radiusTopLeft" : 0,
+                "radiusTopLeft" : 3,
                 "targetName" : null,
                 "bottom" : null,
                 "width" : 324
@@ -9311,7 +9311,7 @@
                     "width" : 110
                   },
                   {
-                    "radiusBottomLeft" : 0,
+                    "radiusBottomLeft" : 3,
                     "rotation" : 0,
                     "__class" : "RectangleNode",
                     "id" : "Q!)x$ka.",
@@ -9330,7 +9330,7 @@
                       "__class" : "LinearGradient",
                       "start" : "black"
                     },
-                    "radius" : 0,
+                    "radius" : 3,
                     "boxShadows" : [
                       {
                         "x" : 0,
@@ -9345,7 +9345,7 @@
                     "centerAnchorX" : 0.5013333333333333,
                     "borderPerSide" : false,
                     "fillType" : "color",
-                    "radiusBottomRight" : 0,
+                    "radiusBottomRight" : 3,
                     "children" : [
                       {
                         "__class" : "TextNode",
@@ -9445,7 +9445,7 @@
                     "borderWidth" : 1,
                     "top" : null,
                     "borderTop" : 1,
-                    "radiusTopRight" : 0,
+                    "radiusTopRight" : 3,
                     "borderBottom" : 1,
                     "borderEnabled" : false,
                     "constraintsLocked" : false,
@@ -9455,13 +9455,13 @@
                     "visible" : true,
                     "borderLeft" : 1,
                     "heightFactor" : null,
-                    "radiusTopLeft" : 0,
+                    "radiusTopLeft" : 3,
                     "targetName" : null,
                     "bottom" : 118,
                     "width" : 324
                   },
                   {
-                    "radiusBottomLeft" : 0,
+                    "radiusBottomLeft" : 3,
                     "rotation" : 0,
                     "__class" : "ImageNode",
                     "id" : "w~=!%x=l",
@@ -9474,7 +9474,7 @@
                     "borderColor" : "#222",
                     "left" : 26,
                     "locked" : false,
-                    "radius" : 0,
+                    "radius" : 3,
                     "boxShadows" : [
                       {
                         "x" : 0,
@@ -9488,7 +9488,7 @@
                     ],
                     "centerAnchorX" : 0.5013333333333333,
                     "borderPerSide" : false,
-                    "radiusBottomRight" : 0,
+                    "radiusBottomRight" : 3,
                     "children" : [
 
                     ],
@@ -9496,12 +9496,12 @@
                     "parentid" : ":}:D1`5#",
                     "borderRight" : 1,
                     "image" : "ldmL3sLc4U62CSTIMwkzfTJyuqhc8PXui6SxYUF9uTImYWWD7byMohumFsPz0oWa1Ew8RdYvhA1ipyMhy2RcA.png",
-                    "name" : null,
+                    "name" : "maps_img",
                     "height" : 205,
                     "borderWidth" : 1,
                     "top" : 19,
                     "borderTop" : 1,
-                    "radiusTopRight" : 0,
+                    "radiusTopRight" : 3,
                     "intrinsicWidth" : 167.5,
                     "borderBottom" : 1,
                     "originalFilename" : "map_data.png",
@@ -9514,7 +9514,7 @@
                     "borderLeft" : 1,
                     "heightFactor" : null,
                     "intrinsicHeight" : 105.5,
-                    "radiusTopLeft" : 0,
+                    "radiusTopLeft" : 3,
                     "targetName" : null,
                     "bottom" : null,
                     "width" : 324

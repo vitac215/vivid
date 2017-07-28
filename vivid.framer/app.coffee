@@ -753,12 +753,9 @@ init = (device) ->
 						width: row.width * (1-labelWidthRatio) * 0.9
 						x: row.width * 0.35
 						fontSize: fSize
-# 						borderColor: "#dedede"
-# 						borderRadius: 3
-# 						borderWidth: 1
 						resizeParent: false
 						lineHeight: fSize + 10
-						placeholder: ""
+						placeHolder: ""
 						padding: "5px 16px 16px 16px"
 					input.style =
 						"box-sizing" : "border-box"
@@ -875,9 +872,11 @@ init = (device) ->
 	Maps view
 	###
 	mapsSaveView = mapsView.childrenWithName("maps_save_view")[0]
+	mapsSaveImg = mapsSaveView.childrenWithName("maps_img")[0]
 	mapsSaveBtn = mapsSaveView.childrenWithName("save_btn")[0]
 	mapsNotes = mapsSaveView.childrenWithName("maps_notes")[0]
 	mapsNotesTitle = mapsNotes.childrenWithName("title")[0]
+	
 	mapsNextView = mapsView.childrenWithName("maps_next_view")[0]
 	mapsAnchor = mapsNextView.childrenWithName("anchor")[0]
 	mapsShapeBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("shape")[0]
@@ -1005,21 +1004,11 @@ init = (device) ->
 				mapsTextBtn.animate("ready")
 				mapsTextBtn.onTap ->
 					tabMapsTextBtn()
-		
-	# press next
-	mapsNextBtn.onTap ->
-		if mapsShapeBtn.states.current.name == "annotation"
-			text = mapsInputValue
-			# hide next screen
-			mapsNextView.animate("default")
-			# remove path
-			resetMapsView()
-			# show save screen
-			mapsSaveView.animate("save")
-			# clear text and add text to the notesbox
-			mapsContent = new TextLayer
-				name: "mapsContent"
-				parent: mapsNotes
+	
+	createMapsContent = (name, parent, text) ->
+		layer = new TextLayer
+				name: name
+				parent: parent
 				text: text
 				fontSize: fontSize
 				color: '#4A4A4A'
@@ -1027,6 +1016,20 @@ init = (device) ->
 				height: mapsNotes.height 
 				x: 20
 				y: mapsNotesTitle.y + mapsNotesTitle.height + 10
+		return layer
+	
+	# press next
+	mapsNextBtn.onTap ->
+		if mapsShapeBtn.states.current.name == "annotation"
+			text = mapsInputValue
+			# hide next screen
+			mapsNextView.animate("default")
+			# remove path and clear text
+			resetMapsView()
+			# show save screen
+			mapsSaveView.animate("save")
+			# add text to the notesbox
+			mapsContent = createMapsContent("mapsContent", mapsNotes, text)
 					
 		else 
 			shakeAnimate(mapsShapeBtn, 0.5)
@@ -1290,7 +1293,21 @@ init = (device) ->
 													height: notesInputSize.title.height + notesInputSize.time.height + notesInputSize.text.height
 													width: notesInputSize.text.width
 													image: data.data.annoImg
-													
+										when "maps"
+											xPos = mapsSaveImg.x
+											yPos = mapsSaveImg.y
+											# img
+											img = mapsSaveImg.copy()
+											img.parent = previewLayer
+											img.image = data.data.img
+											# notes
+											notes = mapsNotes.copy()
+											notes.parent = previewLayer
+											# notes conent
+											content = createMapsContent("", notes, data.data.notes)
+											
+											
+												
 													
 													
 												
