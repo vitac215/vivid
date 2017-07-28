@@ -197,11 +197,11 @@ init = (device) ->
 	###
 	shakeAnimate = (ele, duration) ->
 		animA = ele.animate
-			properties: {x: formEleArray[0].x + 4}
+			properties: {x: ele.x + 4}
 			time: 0.1
 			curve: "linear"
 		animB = ele.animate
-			properties: {x: formEleArray[0].x - 4}
+			properties: {x: ele.x - 4}
 			time: 0.1
 			curve: "linear"
 	
@@ -216,14 +216,13 @@ init = (device) ->
 
 
 	###
-	Module setting (firebase, input)
+	Module setting
 	###
 	# firebase
 	{Firebase} = require 'firebase'
 	firebase = new Firebase
 		projectID: "vivid-6124d"
 		secret: "gj2baisq18Z679XxNlxBosxtR4KBR5NLwwpQIVoA"
-
 
 	InputModule = require "input"
 	{AutoGrowInput} = require "AutoGrowInput"
@@ -875,17 +874,51 @@ init = (device) ->
 	###
 	Maps view
 	###
-	mapsAnchor = mapsView.childrenWithName("anchor")[0]
-	mapsShapeBtn = mapsView.childrenWithName("map_annotation_tool")[0].childrenWithName("shape")[0]
-	mapsNextBtn = mapsView.childrenWithName("map_annotation_tool")[0].childrenWithName("next_btn")[0]
+	mapsSaveView = mapsView.childrenWithName("maps_save_view")[0]
+	mapsSaveBtn = mapsSaveView.childrenWithName("save_btn")[0]
+	mapsNotes = mapsSaveView.childrenWithName("maps_notes")[0]
+	mapsNotesTitle = mapsNotes.childrenWithName("title")[0]
+	mapsNextView = mapsView.childrenWithName("maps_next_view")[0]
+	mapsAnchor = mapsNextView.childrenWithName("anchor")[0]
+	mapsShapeBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("shape")[0]
+	mapsTextBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("text")[0]
+	mapsNextBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("next_btn")[0]
+	
+	mapsContent = null
+	mapsInput = null
+	mapsInputValue = "Suspect ran this way"
+	mapsPaths = null
+	mapImg = "images/map_data.png"
 	
 	mapsAnchor.opacity = 0
+	mapsNextView.states =
+		active:
+			visible: true
+		default:
+			visible: false
+	mapsSaveView.states =
+		active:
+			visible: false
+		default:
+			visible: false
+		save:
+			visible: true
 	mapsShapeBtn.states = 
 		active:
 			opacity: 0.5
 		annotation:
 			opacity: 1
-
+	mapsTextBtn.states = 
+		active:
+			backgroundColor: "#D8D8D8"
+		ready:
+			backgroundColor: "#32C0CE"
+			opacity: 0.5
+		annotation:
+			backgroundColor: "#32C0CE"
+			opacity: 1
+	
+	
 	createPath = () ->
 		layerPath1 = new Layer
 			name: "layerpath1"
@@ -900,8 +933,8 @@ init = (device) ->
 		layerPath1.html = '<svg width="55px" height="77px" viewBox="0 0 55 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<path fill="none" stroke="#EA6C63" stroke-width="3" d="M0,75 C49.9539034,75 52.743467,75.9092399 53,73 C53.2483913,70.1830922 51.7931202,64.1099079 48.15625,30.71875 C47.4292183,24.043662 47.6049996,13.9733495 48.6835937,0.5078125" id="mapsLayerPath1" stroke-dasharray="988.00 988.00" stroke-dashoffset="988.00"></path>
 	</svg>'
-	
-	
+		
+		
 		layerPath2 = new Layer
 			name: "layerpath2"
 			parent: mapsView
@@ -922,7 +955,7 @@ init = (device) ->
 			path2: layerPath2
 		return pathObj
 		
-	
+	# draw path
 	drawLayerPath = (svgPath, delayTime) ->
 		pathLength = 0
 		Utils.delay delayTime, ->
@@ -933,25 +966,108 @@ init = (device) ->
 			svgPath.style.transition = svgPath.style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out'
 			svgPath.style.strokeDashoffset = '0'
 	
-
+	# annotate and text map
+	tabMapsTextBtn = () ->
+		#print "tab text"
+		# check if the button is ready to be clicked
+		if mapsTextBtn.states.current.name == "ready"
+			mapsTextBtn.animate("annotation")
+			# create text input box
+			mapsInput = new InputModule.Input
+				parent: mapsView
+				name: "mapsInput"
+				setup: false
+# 				height: fontSize + 10
+				width: 150
+				x: if mapsPaths then mapsPaths.path1.x - mapsPaths.path1.width
+				y: if mapsPaths then mapsPaths.path1.y - 50
+				fontSize: fontSize
+				text: "Suspect ran this way"
+				placeholder: "Enter your notes"
+				backgroundColor: "#fff"
+				autofocus: true
+			mapsInput.on "keyup", ->
+				mapsInputValue = @value
 	
-	# annotate map
+	
+	# annotate and shape map
 	mapsShapeBtn.onTap -> 
 		if mapsShapeBtn.opacity == 0.5
 			mapsShapeBtn.animate("annotation")
-			paths = createPath()
+			mapsPaths = createPath()
+			# draw path animation
 			svgPath1 = document.getElementById('mapsLayerPath1')
 			svgPath2 = document.getElementById('mapsLayerPath2')
 			drawLayerPath(svgPath1, 1)
 			drawLayerPath(svgPath2, 3)
+			# activate mapsTextBtn
+			Utils.delay 5, ->
+				mapsTextBtn.animate("ready")
+				mapsTextBtn.onTap ->
+					tabMapsTextBtn()
+		
+	# press next
+	mapsNextBtn.onTap ->
+		if mapsShapeBtn.states.current.name == "annotation"
+			text = mapsInputValue
+			# hide next screen
+			mapsNextView.animate("default")
+			# remove path
+			resetMapsView()
+			# show save screen
+			mapsSaveView.animate("save")
+			# clear text and add text to the notesbox
+			mapsContent = new TextLayer
+				name: "mapsContent"
+				parent: mapsNotes
+				text: text
+				fontSize: fontSize
+				color: '#4A4A4A'
+				width: mapsNotes.width - 40
+				height: mapsNotes.height 
+				x: 20
+				y: mapsNotesTitle.y + mapsNotesTitle.height + 10
+					
+		else 
+			shakeAnimate(mapsShapeBtn, 0.5)
 	
-	# destory paths
+	# press save
+	mapsSaveBtn.onTap ->
+		# send to DB
+		img = mapImg
+		firebase.post(
+			"/#{caseID}/captured",
+			{type: 'maps', 
+			data: {
+				img: img,
+				notes: mapsInputValue
+			} 
+			location: "300 S Craig St.",
+			created_at: new Date(),
+			author: UUID})
+		# back to original state
+		setStateTab(maps, "active")
+		resetMapsView()
+	
 	destroyPaths = () ->
-		layerPath1 = mapsView.childrenWithName("layerpath1")[0]
-		layerPath2 = mapsView.childrenWithName("layerpath2")[0]
-		if layerPath1 and layerPath2?
-			layerPath1.destroy()
-			layerPath2.destroy()
+			layerPath1 = mapsView.childrenWithName("layerpath1")[0]
+			layerPath2 = mapsView.childrenWithName("layerpath2")[0]
+			if layerPath1?
+				layerPath1.destroy()
+			if layerPath2?
+				layerPath2.destroy()
+	
+	# reset maps screen
+	resetMapsView = () ->
+		# destroy paths
+		destroyPaths()
+		# destroy inputbox
+		if mapsInput?
+			mapsInput.destroy()
+		if mapsContent?
+			mapsContent.destroy()
+	
+
 
 
 	###
@@ -1051,6 +1167,10 @@ init = (device) ->
 								y: size*j + yOffSet
 								backgroundColor: "#fff"
 								image: data.data.img
+								borderRadius: 3
+								shadowY: 1
+								shadowBlur: 3
+								shadowColor: "rgba(0,0,0,.15)"
 							
 							if type == 'img'
 								rotateFix(dataBox, 90)
@@ -1229,7 +1349,7 @@ init = (device) ->
 	voice = [voiceTab, voiceTitle, voiceView]
 	camera = [cameraTab, cameraTitle, cameraView, cameraBtn, cameraAnnoTool, cameraShapeBtn, cameraTextBtn]
 	people = [peopleTab, peopleTitle, peopleView, personDoneBtn, peopleScroll]
-	maps = [mapsTab, mapsView, mapsTitle, mapsShapeBtn]
+	maps = [mapsTab, mapsView, mapsTitle, mapsShapeBtn, mapsTextBtn, mapsNextView, mapsSaveView]
 	summary = [summaryView, summaryTitle, summaryScroll]
 
 
@@ -1285,7 +1405,7 @@ init = (device) ->
 		tabConf("default", "default", "default", "active", "default", "default")
 	mapsTab.onTap ->
 		tabConf("default", "default", "default", "default", "active", "default")
-		destroyPaths()
+		resetMapsView()
 	summaryBtn.onTap ->
 		tabConf("default", "default", "default", "default", "default", "active")
 		retrieveDB()
