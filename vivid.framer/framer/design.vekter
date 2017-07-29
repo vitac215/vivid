@@ -14342,6 +14342,52 @@
                     "clip" : false
                   },
                   {
+                    "__class" : "SVGNode",
+                    "fillType" : "color",
+                    "originalFilename" : "check_circle",
+                    "centerAnchorX" : 0.5,
+                    "parentid" : "FTGWHs?h",
+                    "rotation" : 0,
+                    "locked" : false,
+                    "intrinsicWidth" : 24,
+                    "top" : null,
+                    "right" : null,
+                    "intrinsicHeight" : 24,
+                    "name" : "done_mark",
+                    "shadows" : [
+                      {
+                        "y" : 2,
+                        "enabled" : false,
+                        "blur" : 5,
+                        "x" : 0,
+                        "__class" : "Shadow",
+                        "color" : "rgba(0,0,0,0.25)"
+                      }
+                    ],
+                    "aspectRatioLocked" : true,
+                    "id" : "}pZ3mlt4",
+                    "svg" : "<?xml version=\"1.0\"?><svg xmlns=\"http:\/\/www.w3.org\/2000\/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z\"><\/path><\/svg>",
+                    "constraintsLocked" : false,
+                    "left" : null,
+                    "bottom" : 16,
+                    "height" : 77,
+                    "fillGradient" : {
+                      "end" : "rgba(0,0,0,0)",
+                      "alpha" : 1,
+                      "angle" : 0,
+                      "__class" : "LinearGradient",
+                      "start" : "black"
+                    },
+                    "width" : 77,
+                    "widthFactor" : null,
+                    "targetName" : null,
+                    "heightFactor" : null,
+                    "fillColor" : "rgba(50, 192, 206, 1.00)",
+                    "opacity" : 1,
+                    "centerAnchorY" : 0.8996316758747698,
+                    "visible" : false
+                  },
+                  {
                     "radiusBottomLeft" : 0,
                     "rotation" : 0,
                     "__class" : "RectangleNode",

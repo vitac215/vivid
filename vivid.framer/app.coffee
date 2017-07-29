@@ -935,6 +935,7 @@ init = (device) ->
 	voicePauseBtn.clip = true
 	voiceSaveBtn = voiceTransView.childrenWithName("save_btn")[0]
 	voiceSaveBtn.clip = true
+	voiceDoneMark = voiceTransView.childrenWithName("done_mark")[0]
 	
 	# add real textlayers to trans view
 	setTextBox = (textBox, name, parent, opacity) ->
@@ -971,7 +972,7 @@ init = (device) ->
 
 
 	# add states to voice view
-	voiceVisibilityGroup = [voiceNextView, voiceConsentView, voiceSignView, voiceTransView, voiceSignTitle, voiceSignDes, voiceSignCheckBtn, voiceRecordBtn, voicePauseBtn]
+	voiceVisibilityGroup = [voiceNextView, voiceConsentView, voiceSignView, voiceTransView, voiceSignTitle, voiceSignDes, voiceSignCheckBtn, voiceRecordBtn, voicePauseBtn, voiceDoneMark]
 	for view in voiceVisibilityGroup
 		view.states =
 			active:
@@ -1044,6 +1045,8 @@ init = (device) ->
 		voiceRecordBtn.animate("active")
 		# hide pause btn
 		voicePauseBtn.animate("inactive")
+		# hide done mark
+		voiceDoneMark.animate("inactive")
 		# go to trans view
 		activateVoiceSubView(voiceTransView)
 	
@@ -1057,25 +1060,31 @@ init = (device) ->
 		# start typing animation
 		typingAnimate(voiceEnglishText, voiceEnglishTextContent)
 		typingAnimate(voiceSpanishText, voiceSpanishTextContent)
+		# hide pause btn and show done mark
+		Utils.delay 5.5, -> 
+			voicePauseBtn.animate("inactive")
+			voiceDoneMark.animate("active")
+	
 	
 	voiceSaveBtn.on(Events.Click, Android.Ripple)
 	voiceSaveBtn.onTap ->
-		# send to DB
-		img = "images/recording.jpg"
-		firebase.post(
-			"/#{caseID}/captured",
-			{type: 'recording',
-			data: {
-				img: img,
-				original: voiceEnglishTextRaw
-				trans: voiceSpanishTextRaw
-			}
-			location: "300 S Craig St.",
-			created_at: new Date(),
-			author: UUID})
-		# reset screen
-		setStateTab(voice, "active")
-		activateVoiceSubView(voiceNextView)
+		if voiceDoneMark.states.current.name == "active"
+			# send to DB
+			img = "images/recording.jpg"
+			firebase.post(
+				"/#{caseID}/captured",
+				{type: 'recording',
+				data: {
+					img: img,
+					original: voiceEnglishTextRaw
+					trans: voiceSpanishTextRaw
+				}
+				location: "300 S Craig St.",
+				created_at: new Date(),
+				author: UUID})
+			# reset screen
+			setStateTab(voice, "active")
+			activateVoiceSubView(voiceNextView)
 	
 
 
@@ -1516,10 +1525,14 @@ init = (device) ->
 											trans.parent = previewLayer
 											transText = trans.childrenWithName("text_sample")[0]
 											transText.opacity = 1
+											trans.childrenWithName("text")[0].destroy()
+											
 											original = voiceSpanish.copy()
 											original.parent = previewLayer
 											orgText = original.childrenWithName("text_sample")[0]
 											orgText.opacity = 1
+											original.childrenWithName("text")[0].destroy()
+
 										
 
 
