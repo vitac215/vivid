@@ -31,40 +31,51 @@ init = (device) ->
 	###
 	UTL function
 	###
+	# draw path
+	drawLayerPath = (svgPath, delayTime) ->
+		pathLength = 0
+		Utils.delay delayTime, ->
+			pathLength = svgPath.getTotalLength()
+			svgPath.style.strokeDasharray = pathLength + ' ' + pathLength;
+			svgPath.style.strokeDashoffset = pathLength
+			svgPath.getBoundingClientRect()
+			svgPath.style.transition = svgPath.style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out'
+			svgPath.style.strokeDashoffset = '0'
+	
 	# create a canvas layer for drawing
-	createCanvas = (name, parent, size, placeAfter, lineWidth, strokeColor) -> 
+	createCanvas = (name, parent, size, placeAfter, lineWidth, strokeColor) ->
 		canvasView = new Layer
 			name: name
 			parent: parent
 			size: size
 			# opacity: 1  # for debugging purpose
 			backgroundColor: "rgba(0, 0, 0, 0, 0)"
-		
-		canvasView.states = 
+
+		canvasView.states =
 			default:
 				visible: false
 			active:
 				visible: true
-		
+
 		canvasView.draggable.props =
 			vertical: false
 			horizontal: false
-			
+
 		# put canvas to the bottom of the main layer
 		canvasView.placeBehind(placeAfter)
-		
+
 		# insert actual canvas element
 		canvas = document.createElement("canvas");
 		canvas.width = size.width * canvasSizeOffset
 		canvas.height = size.height * canvasSizeOffset
 		canvasView._element.appendChild(canvas);
-		
+
 		# get context
 		ctx = canvas.getContext("2d");
 		ctx.strokeStyle = strokeColor;
 		ctx.lineWidth = lineWidth;
-		
-		canvasObj = 
+
+		canvasObj =
 			view: canvasView
 			ele: canvas
 			ctx: ctx
@@ -75,41 +86,41 @@ init = (device) ->
 		requestAnimFrame = ((cb) ->
 			return (cb) ->
 				window.setTimeout(cb, 1000/60))()
-		
+
 		view = canvas.view
 		ele = canvas.ele
 		ctx = canvas.ctx
 		rect = ele.getBoundingClientRect()
-		
+
 		drawing = false
-		mousePos = 
+		mousePos =
 			x: rect.left
 			y: rect.top
 		lastPos = mousePos
-		
+
 # 		getTouchPos = (e) ->
 # 			return posObj =
 # # 				x: (Events.touchEvent(e).clientX - rect.left)*drawingOffset
 # # 				y: (Events.touchEvent(e).clientY - rect.top)*drawingOffset
 # 				x: (Events.touchEvent(e).clientX - rect.left)*drawingOffset
 # 				y: (Events.touchEvent(e).clientY - rect.top)*drawingOffset
-		
+
 # 		# touch event listeners
-# 		view.onTouchStart (event) -> 
+# 		view.onTouchStart (event) ->
 # 			drawing = true
 # 			lastPos = getTouchPos(event)
 # 		view.onTouchEnd (event) ->
 # 			drawing = false
-# 		view.onTouchMove (event) -> 
+# 		view.onTouchMove (event) ->
 # 			mousePos = getTouchPos(event)
 
 		getMousePos = (e) ->
 			return posObj =
 				x: (e.clientX - rect.left)*drawingOffset
 				y: (e.clientY - rect.top)*drawingOffset
-				
+
 		# touch event listeners
-		view.onTouchStart (event) -> 
+		view.onTouchStart (event) ->
 			touch = Events.touchEvent(event)
 			mouseEvent = new MouseEvent("mousedown", {
 				clientX: touch.clientX,
@@ -123,50 +134,50 @@ init = (device) ->
 				clientY: touch.clientY
 			});
 			ele.dispatchEvent(mouseEvent);
-		view.onTouchMove (event) -> 
+		view.onTouchMove (event) ->
 			touch = Events.touchEvent(event)
 			mouseEvent = new MouseEvent("mousemove", {
 				clientX: touch.clientX,
 				clientY: touch.clientY
 			});
 			ele.dispatchEvent(mouseEvent);
-				
+
 		# mouse event listeners
-		view.onMouseDown (event) -> 
+		view.onMouseDown (event) ->
 			drawing = true
 			lastPos = getMousePos(event)
 		view.onMouseUp (event) ->
 			drawing = false
-		view.onMouseMove (event) -> 
+		view.onMouseMove (event) ->
 			mousePos = getMousePos(event)
-		
+
 		renderCanvas = () ->
 			if drawing
 				ctx.moveTo(lastPos.x, lastPos.y)
 				ctx.lineTo(mousePos.x, mousePos.y)
 				ctx.stroke()
 				lastPos = mousePos
-		
-		drawLoop = () -> 
+
+		drawLoop = () ->
 			requestAnimFrame(drawLoop)
 			renderCanvas()
 		drawLoop()
-		
-	
+
+
 # 	startDrawing = (canvas) ->
 # 		# Get the position of the canvas
 # 		ele = document.getElementsByName("camera_view")[1]
 # 		rect = ele.getBoundingClientRect()
 # 		canvasLeftOffset = rect.left
 # 		canvasTopOffset = rect.top
-# 		
+#
 # 		# drawing function
 # 		draw = (e) ->
 # 			drawS = 5
 # 			drawx = (Events.touchEvent(e).clientX - canvasLeftOffset)
 # 			drawy = (Events.touchEvent(e).clientY - canvasTopOffset)
-# 			
-# 			if drawing 
+#
+# 			if drawing
 # 				layer = new Layer
 # 					parent: canvas
 # 					name: "drawing"
@@ -177,19 +188,19 @@ init = (device) ->
 # 					scale: 1
 # 					borderRadius: "50%"
 # 					backgroundColor: "red"
-# 	
+#
 # 		drawing = false
-# 		
-# 		canvas.onTouchMove (event) -> 
+#
+# 		canvas.onTouchMove (event) ->
 # 			draw(event)
-# 		
+#
 # 		canvas.onTouchStart (event) ->
 # 			drawing = true
 # 			draw(event)
-# 	
-# 		canvas.onTouchEnd -> 
+#
+# 		canvas.onTouchEnd ->
 # 			drawing = false
-	
+
 
 
 	###
@@ -204,10 +215,10 @@ init = (device) ->
 			properties: {x: ele.x - 4}
 			time: 0.1
 			curve: "linear"
-	
+
 		animA.on Events.AnimationEnd, -> animB.start()
 		animB.on Events.AnimationEnd, -> animA.start()
-	
+
 		Utils.delay duration, ->
 			animA.stop()
 			animB.stop()
@@ -255,7 +266,7 @@ init = (device) ->
 		username: USERNAME})
 # 	firebase.post(
 # 		"/#{caseID}/meta",
-# 		{location: LOCATION, 
+# 		{location: LOCATION,
 # 		time: TIME})
 
 
@@ -297,7 +308,7 @@ init = (device) ->
 		# find the non-color layers
 		nonColor = tab.childrenWithName("inactive")
 		for layer in nonColor
-			layer.states = 
+			layer.states =
 				active:
 					opacity: 0
 				default:
@@ -307,7 +318,7 @@ init = (device) ->
 				time: 0.2
 		color = tab.childrenWithName("active")
 		for layer in color
-			layer.states = 
+			layer.states =
 				active:
 					opacity: 1
 				default:
@@ -330,7 +341,7 @@ init = (device) ->
 	###
 	Global variable
 	###
-	viewSize = 
+	viewSize =
 		width: Screen.width
 		height: Screen.height - navbar.height - menu_nav.height
 
@@ -340,7 +351,7 @@ init = (device) ->
 	###
 	Camera view
 	###
-	
+
 	# camera layers
 	cameraBtn = cameraView.childrenWithName("camera_btn")[0]
 	cameraPreview = cameraView.childrenWithName("camera_preview")[0]
@@ -366,12 +377,12 @@ init = (device) ->
 			visible: false
 		annotation:
 			visible: true
-	cameraShapeBtn.states = 
+	cameraShapeBtn.states =
 		active:
 			opacity: 0.5
 		annotation:
 			opacity: 1
-	cameraTextBtn.states = 
+	cameraTextBtn.states =
 		active:
 			opacity: 0.5
 		annotation:
@@ -398,14 +409,14 @@ init = (device) ->
 			# when image is ready
 			reader.onload = ->
 				img = reader.result
-				
+
 				# transfer to firebase
 				firebase.post(
 					"/#{caseID}/captured",
-					{type: 'img', 
+					{type: 'img',
 					data: {
 						img: img,
-					} 
+					}
 					location: "300 S Craig St.",
 					created_at: new Date(),
 					author: UUID})
@@ -442,14 +453,14 @@ init = (device) ->
 		canvasCamera.view.image = null
 		rotateFix(cameraPreview, 0)
 		rotateFix(canvasCamera.view, 0)
-	
-	
+
+
 	# Annotate an image (shape button)
-	cameraShapeBtn.onTap -> 
+	cameraShapeBtn.onTap ->
 		if cameraShapeBtn.opacity == 0.5
 			cameraShapeBtn.animate("annotation")
 			startDrawing(canvasCamera)
-	
+
 	# Save annotated image
 	cameraAnnotationSaveBtn.on(Events.Click, Android.Ripple)
 	cameraAnnotationSaveBtn.onTap ->
@@ -457,14 +468,14 @@ init = (device) ->
 		img = canvasCamera.ele.toDataURL()
 		firebase.post(
 					"/#{caseID}/captured",
-					{type: 'img', 
+					{type: 'img',
 					data: {
 						img: img,
 						},
 					location: "300 S Craig St.",
 					created_at: new Date(),
 					author: UUID})
-		
+
 		# back to the original state
 		canvasCamera.view.destroy()
 		tabConf("default", "default", "active", "default", "default", "default")
@@ -483,18 +494,18 @@ init = (device) ->
 	notesSaveBtn = notesToolBtns.childrenWithName("save_btn")[0]
 	notesSaveBtn.clip = true
 
-	notesShapeBtn.states = 
+	notesShapeBtn.states =
 		active:
 			opacity: 0.5
 		annotation:
 			opacity: 1
-	
+
 	# create notes
 	notesInputSize =
 		title: {height: 30, width: notesView.width}
 		time: {height: 20, width: notesView.width}
 		text: {width: notesView.width, height: notesView.height - 30 - 20 - notesToolBtns.height - 40}
-	
+
 	createNotesLayer = () ->
 		notesInputContainer = new Layer
 			name: "notesInputContainer"
@@ -504,7 +515,7 @@ init = (device) ->
 			#height: 430  200
 			width: 200
 			height: 200
-		
+
 		notesInputTitle = new InputModule.Input
 			name: "notesInputTitle"
 			parent: notesInputContainer
@@ -516,10 +527,10 @@ init = (device) ->
 			text: "Hit and Run"
 			placeholder: "New Title"
 			#autofocus: true
-		notesInputTitle.style = 
+		notesInputTitle.style =
 			fontWeight: "600"
 			color: "#32C0CE"
-		
+
 		notesInputTime = new TextLayer
 			name: "notesInputTime"
 			parent: notesInputContainer
@@ -528,8 +539,8 @@ init = (device) ->
 			fontSize: fontSize
 			color: "#35343D"
 			text: "July 31, 2017 at 11:43am"
-			
-			
+
+
 		notesInputText = new AutoGrowInput
 			name: "notesInput"
 			parent: notesInputContainer
@@ -548,7 +559,7 @@ init = (device) ->
 			value: "I was dispatched to the corner of Murray Av. and Darlington to investigate a hit and run. Victim says he was about to turn the light and was hit by a red car. The man inside veered towards Forbes and took off. Victim possibly recognized the perpetrators license plate. By memory he thought it to be:"
 		notesInputText.style =
 			"box-sizing" : "border-box"
-				
+
 		# notes scroll layer
 		notesScroll = new ScrollComponent
 		notesScroll.props =
@@ -566,30 +577,30 @@ init = (device) ->
 				visible: true
 			inactive:
 				visible: false
-		
+
 		notesInputText.parent = notesScroll.content
 		notesScroll.placeBehind(notesInputTitle)
-		
+
 		notesInputContainer.placeBehind(notesToolBtns)
-		
+
 		notesInput =
 			container: notesInputContainer
 			title: notesInputTitle
 			time: notesInputTime
 			text: notesInputText
-		
+
 		return notesInput
-	
+
 	notesInput = createNotesLayer()
-	
+
 	# listen on title change
 	notesInputTitleText = "Hit and Run"
 	notesInput.title.on "keyup", ->
 		notesInputTitleText = @value
-	
+
 	# notes annotation
 	canvasNotes = null
-	notesShapeBtn.onTap -> 
+	notesShapeBtn.onTap ->
 		if notesShapeBtn.opacity == 0.5
 			notesShapeBtn.animate("annotation")
 			# create canvas
@@ -598,18 +609,18 @@ init = (device) ->
 		if notesShapeBtn.opacity == 1
 			notesShapeBtn.animate("active")
 			canvasNotes.view.destroy()
-	
+
 	# save notes
 	notesSaveBtn.on(Events.Click, Android.Ripple)
-	
+
 	notesSaveBtn.onTap ->
 		notesText = document.querySelectorAll("textarea")[0].value
-		
+
 		# get annotation from canvas
 		annoImg = null
 		if canvasNotes?
 			annoImg = canvasNotes.ele.toDataURL()
-		
+
 		sendNotesToDB = (title, text, img, annoImg) ->
 			firebase.post(
 					"/#{caseID}/captured",
@@ -624,10 +635,10 @@ init = (device) ->
 					location: "300 S Craig St.",
 					created_at: new Date(),
 					author: UUID})
-		
+
 		# convert html to image
 		notesDOM = document.getElementsByName("notesInputContainer")[0]
-		
+
 		html2canvas(notesDOM, {
 			onrendered: ((canvas) ->
 				# get screenshot
@@ -699,8 +710,8 @@ init = (device) ->
 
 	# append form to the scroll content
 	appendForm = (popData) ->
-		
-		
+
+
 		createFormLayers = (scroll) ->
 			h = 40
 			w = 335
@@ -709,14 +720,14 @@ init = (device) ->
 			rowMargin = 5
 			labelWidthRatio = 0.35
 			fSize = fontSize
-			
+
 			arrayLen = inputform.label.length
 			for i in [0...arrayLen]
 				itemLabel = inputform.label[i]
 				itemName = inputform.name[i]
 				itemText = inputform.content[i]
 				yOffSet = (if i == 0 then yPos else yPos + rowMargin*i)
-	
+
 				row = new Layer
 					parent: scroll.content
 					name: itemName
@@ -729,7 +740,7 @@ init = (device) ->
 					shadowY: 1
 					shadowBlur: 3
 					shadowColor: "rgba(0,0,0,.15)"
-	
+
 				label = new TextLayer
 					parent: row
 					padding: 10
@@ -738,9 +749,9 @@ init = (device) ->
 					text: itemLabel
 					fontSize: fSize
 					color: "#4A4A4A"
-				label.style = 
+				label.style =
 					fontWeight: "600"
-				
+
 				if itemName != 'notes'
 					input = new InputModule.Input
 						parent: row
@@ -752,7 +763,7 @@ init = (device) ->
 						fontSize: fSize
 						placeholder: if itemName == 'name' then 'Required' else ''
 						text: if popData then itemText else ''
-				else 				
+				else
 					input = new AutoGrowInput
 						parent: row
 						height: row.height * 0.8
@@ -765,12 +776,12 @@ init = (device) ->
 						padding: "5px 16px 16px 16px"
 					input.style =
 						"box-sizing" : "border-box"
-		
+
 				formEleArray.push(row)
 				inputsArray.push(input)
-	
+
 		createFormLayers(peopleScroll)
-		
+
 		# add states for the required field
 		requiredRow = formEleArray[0]
 		requiredRow.scale = 1
@@ -874,6 +885,193 @@ init = (device) ->
 
 
 
+	###
+	Voice view
+	###
+	# next view
+	voiceNextView = voiceView.childrenWithName("voice_next_view")[0]
+	voiceChooseNextBtn = voiceNextView.childrenWithName("next_btn")[0]
+	voiceChooseNextBtn.clip = true
+
+	# consent view
+	voiceConsentView = voiceView.childrenWithName("voice_consent_view")[0]
+	voiceConsentNextBtn = voiceConsentView.childrenWithName("next_btn")[0]
+	voiceConsentNextBtn.clip = true
+
+	# sign view
+	voiceSignView = voiceView.childrenWithName("voice_sign_view")[0]
+	voiceSignTitle = voiceSignView.childrenWithName("title")[0]
+	voiceSignDes = voiceSignView.childrenWithName("description")[0]
+	voiceSignContainer = voiceSignView.childrenWithName("sign_container")[0]
+	voiceSignContainer.states = 
+		active:
+			rotation: 90
+			scale: 1.5
+		inactive:
+			rotation: 0
+			scale: 1
+	voiceSignCheckBtn = voiceSignView.childrenWithName("check_btn")[0]
+	voiceSignCheckBtn.clip = true
+	voiceSignCheckBtn.states.animationOptions =
+			curve: "linear"
+			time: 3
+	
+	# trans view
+	voiceTransView = voiceView.childrenWithName("voice_translation_view")[0]
+	voiceEnglish = voiceTransView.childrenWithName("english_container")[0]
+	voiceSpanish = voiceTransView.childrenWithName("spanish_container")[0]
+	voiceEnglishTextSample = voiceEnglish.childrenWithName("text_sample")[0]
+	voiceSpanishTextSample = voiceSpanish.childrenWithName("text_sample")[0]
+	voiceRecordBtn = voiceTransView.childrenWithName("record_btn")[0]
+	voiceRecordBtn.clip = true
+	voicePauseBtn = voiceTransView.childrenWithName("pause_btn")[0]
+	voicePauseBtn.clip = true
+	voiceSaveBtn = voiceTransView.childrenWithName("save_btn")[0]
+	voiceSaveBtn.clip = true
+	
+	# add real textlayers to trans view
+	setTextBox = (textBox, name, parent, opacity) ->
+		textBox.name = name
+		textBox.parent = parent
+		textBox.opacity = opacity
+		textBox.style =
+			color: "#4A4A4A"
+			fontFamily: "Avenir"
+			fontSize: "18px"
+		textBox.html = ""
+	
+	voiceEnglishText = voiceEnglishTextSample.copy()
+	voiceSpanishText = voiceSpanishTextSample.copy()
+	setTextBox(voiceEnglishText, "text", voiceEnglishTextSample.parent, 1)
+	setTextBox(voiceSpanishText, "text", voiceSpanishTextSample.parent, 1)
+
+	
+	voiceEnglishTextRaw = "I saw a tall man take off in a gray battered car as soon as he hit the other driver. He was wearing..."
+	voiceEnglishTextContent = voiceEnglishTextRaw.split("")
+	
+	voiceSpanishTextRaw = "Vi un hombre alto que se escapó en un carro chocado después de pegarle al otro conductor. Tenía puesto..."
+	voiceSpanishTextContent = voiceSpanishTextRaw.split("")
+	
+	typingAnimate = (textBox, text) ->
+		# print "called"
+		totalDelay = 0
+		typeLetter = (letter, delay, textBox) ->
+			totalDelay += 0.05
+			Utils.delay totalDelay, -> textBox.html += letter
+		for letter, i in text
+			typeLetter(letter, i, textBox)
+
+
+
+	# add states to voice view
+	voiceVisibilityGroup = [voiceNextView, voiceConsentView, voiceSignView, voiceTransView, voiceSignTitle, voiceSignDes, voiceSignCheckBtn, voiceRecordBtn, voicePauseBtn]
+	for view in voiceVisibilityGroup
+		view.states =
+			active:
+				visible: true
+			inactive:
+				visible: false
+	
+	# when active a sub view, deactive the rest
+	voiceLayerGroup = [voiceNextView, voiceConsentView, voiceSignView, voiceTransView, voiceSignContainer]
+	activateVoiceSubView = (viewToActivate, state="active") ->
+		viewToActivate.animate(state)
+		for view in voiceLayerGroup
+			if view != viewToActivate
+				view.animate("inactive")
+
+	voiceChooseNextBtn.on(Events.Click, Android.Ripple)
+	voiceChooseNextBtn.onTap ->
+		activateVoiceSubView(voiceConsentView)
+
+	voiceConsentNextBtn.on(Events.Click, Android.Ripple)
+	voiceConsentNextBtn.onTap ->
+		# show title
+		voiceSignTitle.animate("active")
+		voiceSignDes.animate("active")
+		# hide checkmark
+		voiceSignCheckBtn.animate("inactive")
+		# remove signature path
+		for layer in voiceSignContainer.childrenWithName("signaturePath")
+			layer.destroy()
+		activateVoiceSubView(voiceSignView)
+	
+	
+	voiceSignContainer.onTap ->
+		if this.states.current.name == "active"
+			return
+		# hide title and description
+		voiceSignTitle.animate("inactive")
+		voiceSignDes.animate("inactive")
+		# rotate and enlarge the sign container 
+		this.animate("active")
+		Utils.delay 0.5, ->
+			# draw signature
+			signaturePath = new Layer
+				name: "signaturePath"
+				parent: voiceSignContainer
+				width: 150
+				height: 150
+				backgroundColor: "rgba(0, 0, 0, 0, 0)"
+			signaturePath.placeBehind(voiceSignCheckBtn)
+			signaturePath.center()
+			signaturePath.y = 60
+			signaturePath.html = '<svg width="165px" height="74px" viewBox="0 0 165 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+		 <path fill="none" stroke="#5F5D70" stroke-width="3" transform="translate(-48.000000, -32.000000)" d="M54.8911085,95.6406784 C71.0502223,78.9202288 86.4326088,23.409011 66.1821271,35.7823985 C36.4035659,53.9776041 51.2059056,96.9402874 82.396423,103.573886 C104.339783,108.240799 103.869123,89.3570554 118.53827,74.1476612 C123.326953,69.1826172 125.738717,103.831063 141.142995,97.3725225 C149.065966,94.0506643 142.334288,69.7160262 150.172785,73.232582 L157.122849,70.0108982 C162.584412,72.4610989 165.366269,78.8095447 170.266714,82.2472465 C172.620759,83.8986277 174.542991,60.0892012 164.761114,75.3198701 C163.609935,77.1122885 160.679101,96.9114167 166.054325,101.652976 C168.153989,103.505118 171.823101,104.72916 174.274912,103.377257 C187.840695,95.8972258 199.453455,85.3227193 212.042727,76.2954504" stroke-dasharray="988.00 988.00" stroke-dashoffset="988.00" id="voiceSignaturePath"></path>
+		</svg>'
+		
+			# draw path
+			signaturePath = document.getElementById('voiceSignaturePath')
+			drawLayerPath(signaturePath, 1)
+			
+			# show checkmark
+			voiceSignCheckBtn.animate("active")
+		
+	# press checkmark
+	voiceSignCheckBtn.on(Events.Click, Android.Ripple)
+	voiceSignCheckBtn.onTap ->
+		# clear textbox
+		voiceEnglishText.html = ""
+		voiceSpanishText.html = ""
+		# show record btn
+		voiceRecordBtn.animate("active")
+		# hide pause btn
+		voicePauseBtn.animate("inactive")
+		# go to trans view
+		activateVoiceSubView(voiceTransView)
+	
+	# press record button
+	voiceRecordBtn.on(Events.Click, Android.Ripple)
+	voiceRecordBtn.onTap ->
+		# hide record btn
+		voiceRecordBtn.animate("inactive")
+		# show pause btn
+		voicePauseBtn.animate("active")
+		# start typing animation
+		typingAnimate(voiceEnglishText, voiceEnglishTextContent)
+		typingAnimate(voiceSpanishText, voiceSpanishTextContent)
+	
+	voiceSaveBtn.on(Events.Click, Android.Ripple)
+	voiceSaveBtn.onTap ->
+		# send to DB
+		img = "images/recording.jpg"
+		firebase.post(
+			"/#{caseID}/captured",
+			{type: 'recording',
+			data: {
+				img: img,
+				original: voiceEnglishTextRaw
+				trans: voiceSpanishTextRaw
+			}
+			location: "300 S Craig St.",
+			created_at: new Date(),
+			author: UUID})
+		# reset screen
+		setStateTab(voice, "active")
+		activateVoiceSubView(voiceNextView)
+	
+
+
 
 	###
 	Maps view
@@ -884,20 +1082,20 @@ init = (device) ->
 	mapsSaveBtn.clip = true
 	mapsNotes = mapsSaveView.childrenWithName("maps_notes")[0]
 	mapsNotesTitle = mapsNotes.childrenWithName("title")[0]
-	
+
 	mapsNextView = mapsView.childrenWithName("maps_next_view")[0]
 	mapsAnchor = mapsNextView.childrenWithName("anchor")[0]
 	mapsShapeBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("shape")[0]
 	mapsTextBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("text")[0]
 	mapsNextBtn = mapsNextView.childrenWithName("map_annotation_tool")[0].childrenWithName("next_btn")[0]
 	mapsNextBtn.clip = true
-	
+
 	mapsContent = null
 	mapsInput = null
 	mapsInputValue = "Suspect ran this way"
 	mapsPaths = null
 	mapImg = "images/map_data.png"
-	
+
 	mapsAnchor.opacity = 0
 	mapsNextView.states =
 		active:
@@ -911,12 +1109,12 @@ init = (device) ->
 			visible: false
 		save:
 			visible: true
-	mapsShapeBtn.states = 
+	mapsShapeBtn.states =
 		active:
 			opacity: 0.5
 		annotation:
 			opacity: 1
-	mapsTextBtn.states = 
+	mapsTextBtn.states =
 		active:
 			backgroundColor: "#D8D8D8"
 		ready:
@@ -925,8 +1123,8 @@ init = (device) ->
 		annotation:
 			backgroundColor: "#32C0CE"
 			opacity: 1
-	
-	
+
+
 	createPath = () ->
 		layerPath1 = new Layer
 			name: "layerpath1"
@@ -937,12 +1135,12 @@ init = (device) ->
 			y: mapsAnchor.y - 73
 			backgroundColor: "rgba(0, 0, 0, 0, 0)"
 		layerPath1.placeBehind(mapsAnchor)
-		
+
 		layerPath1.html = '<svg width="55px" height="77px" viewBox="0 0 55 77" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<path fill="none" stroke="#EA6C63" stroke-width="3" d="M0,75 C49.9539034,75 52.743467,75.9092399 53,73 C53.2483913,70.1830922 51.7931202,64.1099079 48.15625,30.71875 C47.4292183,24.043662 47.6049996,13.9733495 48.6835937,0.5078125" id="mapsLayerPath1" stroke-dasharray="988.00 988.00" stroke-dashoffset="988.00"></path>
 	</svg>'
-		
-		
+
+
 		layerPath2 = new Layer
 			name: "layerpath2"
 			parent: mapsView
@@ -952,28 +1150,17 @@ init = (device) ->
 			y: layerPath1.y - 8
 			backgroundColor: "rgba(0, 0, 0, 0, 0)"
 		layerPath2.placeBehind(mapsAnchor)
-		
+
 		layerPath2.html = '<svg width="32px" height="17px" viewBox="0 0 32 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 		<g id="Artboard" transform="translate(-259.000000, -308.000000)" stroke="#EA6C63" stroke-width="3">
 		<path fill="none" d="M261,324 C273.537752,305.271902 282.871086,304.938568 289,323" id="mapsLayerPath2" stroke-dasharray="988.00 988.00" stroke-dashoffset="988.00"></path></g>
 	</svg>'
-		
+
 		pathObj =
 			path1: layerPath1
 			path2: layerPath2
 		return pathObj
-		
-	# draw path
-	drawLayerPath = (svgPath, delayTime) ->
-		pathLength = 0
-		Utils.delay delayTime, ->
-			pathLength = svgPath.getTotalLength()
-			svgPath.style.strokeDasharray = pathLength + ' ' + pathLength;
-			svgPath.style.strokeDashoffset = pathLength
-			svgPath.getBoundingClientRect()
-			svgPath.style.transition = svgPath.style.WebkitTransition = 'stroke-dashoffset 2s ease-in-out'
-			svgPath.style.strokeDashoffset = '0'
-	
+
 	# annotate and text map
 	tabMapsTextBtn = () ->
 		#print "tab text"
@@ -996,10 +1183,10 @@ init = (device) ->
 				autofocus: true
 			mapsInput.on "keyup", ->
 				mapsInputValue = @value
-	
-	
+
+
 	# annotate and shape map
-	mapsShapeBtn.onTap -> 
+	mapsShapeBtn.onTap ->
 		if mapsShapeBtn.opacity == 0.5
 			mapsShapeBtn.animate("annotation")
 			mapsPaths = createPath()
@@ -1013,7 +1200,7 @@ init = (device) ->
 				mapsTextBtn.animate("ready")
 				mapsTextBtn.onTap ->
 					tabMapsTextBtn()
-	
+
 	createMapsContent = (name, parent, text) ->
 		layer = new TextLayer
 				name: name
@@ -1022,11 +1209,11 @@ init = (device) ->
 				fontSize: fontSize
 				color: '#4A4A4A'
 				width: mapsNotes.width - 40
-				height: mapsNotes.height 
+				height: mapsNotes.height
 				x: 20
 				y: mapsNotesTitle.y + mapsNotesTitle.height + 10
 		return layer
-	
+
 	# press next
 	mapsNextBtn.on(Events.Click, Android.Ripple)
 	mapsNextBtn.onTap ->
@@ -1040,10 +1227,10 @@ init = (device) ->
 			mapsSaveView.animate("save")
 			# add text to the notesbox
 			mapsContent = createMapsContent("mapsContent", mapsNotes, text)
-					
-		else 
+
+		else
 			shakeAnimate(mapsShapeBtn, 0.5)
-	
+
 	# press save
 	mapsSaveBtn.on(Events.Click, Android.Ripple)
 	mapsSaveBtn.onTap ->
@@ -1051,18 +1238,18 @@ init = (device) ->
 		img = mapImg
 		firebase.post(
 			"/#{caseID}/captured",
-			{type: 'maps', 
+			{type: 'maps',
 			data: {
 				img: img,
 				notes: mapsInputValue
-			} 
+			}
 			location: "300 S Craig St.",
 			created_at: new Date(),
 			author: UUID})
 		# back to original state
 		setStateTab(maps, "active")
 		resetMapsView()
-	
+
 	destroyPaths = () ->
 			layerPath1 = mapsView.childrenWithName("layerpath1")[0]
 			layerPath2 = mapsView.childrenWithName("layerpath2")[0]
@@ -1070,7 +1257,7 @@ init = (device) ->
 				layerPath1.destroy()
 			if layerPath2?
 				layerPath2.destroy()
-	
+
 	# reset maps screen
 	resetMapsView = () ->
 		# destroy paths
@@ -1080,7 +1267,7 @@ init = (device) ->
 			mapsInput.destroy()
 		if mapsContent?
 			mapsContent.destroy()
-	
+
 
 
 
@@ -1099,7 +1286,7 @@ init = (device) ->
 	summaryScroll.states =
 		active:
 			visible: true
-	
+
 	createPreviewScroll = () ->
 		previewScroll = new ScrollComponent
 		previewScroll.props =
@@ -1119,7 +1306,7 @@ init = (device) ->
 				visible: false
 		previewScroll.animate('inactive')
 		return previewScroll
-	
+
 	removePreviewScroll = () ->
 		previewScrolls = summaryView.childrenWithName("previewScroll")
 		for layer in previewScrolls
@@ -1130,7 +1317,7 @@ init = (device) ->
 		if dataSet?
 			dataArray = _.toArray(dataSet).reverse()
 			# print "dataArray ", dataArray
-			
+
 			# create the preview scroll
 			previewScroll = createPreviewScroll()
 
@@ -1185,10 +1372,10 @@ init = (device) ->
 								shadowY: 1
 								shadowBlur: 3
 								shadowColor: "rgba(0,0,0,.15)"
-							
+
 							if type == 'img'
 								rotateFix(dataBox, 90)
-							
+
 							dataBoxListenPreview = (dataBox, data) ->
 								# create the preview layer
 								createPreviewLayer = (dataBox, type, previewScroll) ->
@@ -1196,11 +1383,11 @@ init = (device) ->
 										parent: previewScroll.content
 										size: Screen.size
 										backgroundColor: "#F8F8F9"
-										
+
 									switch type
 										when 'img'
 											previewLayer.image = dataBox.image
-										
+
 										when 'people'
 											img = new Layer
 												parent: previewLayer
@@ -1208,7 +1395,7 @@ init = (device) ->
 												size: 110
 											img.center()
 											img.y = 10
-											
+
 											h = 40
 											w = 335
 											xPos = 20
@@ -1216,14 +1403,14 @@ init = (device) ->
 											rowMargin = 5
 											labelWidthRatio = 0.35
 											fSize = fontSize
-											
+
 											# print data.data
 											arrayLen = inputform.label.length
 											for i in [0...arrayLen]
 												itemLabel = inputform.label[i]
 												itemName = inputform.name[i]
 												yOffSet = (if i == 0 then yPos else yPos + rowMargin*i)
-												
+
 												row = new Layer
 													parent: previewScroll.content
 													name: itemName
@@ -1236,7 +1423,7 @@ init = (device) ->
 													shadowY: 1
 													shadowBlur: 3
 													shadowColor: "rgba(0,0,0,.15)"
-											
+
 												label = new TextLayer
 													parent: row
 													padding: 10
@@ -1245,9 +1432,9 @@ init = (device) ->
 													text: itemLabel
 													fontSize: fSize
 													color: "#4A4A4A"
-												label.style = 
+												label.style =
 													fontWeight: "600"
-												
+
 												info = new TextLayer
 													parent: row
 													padding: 10
@@ -1258,7 +1445,7 @@ init = (device) ->
 													fontSize: fSize
 													fontWeight: 500
 													color: "#444444"
-										
+
 										when "notes"
 											title = new TextLayer
 												parent: previewLayer
@@ -1272,7 +1459,7 @@ init = (device) ->
 											title.style =
 												fontWeight: "600"
 												color: "#32C0CE"
-											
+
 											time = new TextLayer
 												parent: previewLayer
 												width: notesView.width
@@ -1281,7 +1468,7 @@ init = (device) ->
 												fontSize: fontSize
 												color: "#35343D"
 												text: data.data.time
-											
+
 											text = new TextLayer
 												parent: previewLayer
 												fontSize: fontSize
@@ -1294,7 +1481,7 @@ init = (device) ->
 												text: data.data.text
 											text.style =
 												padding: "16px"
-											
+
 											if data.data.annoImg?
 												posOffset = {x: 20, y: 90}
 												annoImg = new Layer
@@ -1316,29 +1503,29 @@ init = (device) ->
 											notes.parent = previewLayer
 											# notes conent
 											content = createMapsContent("", notes, data.data.notes)
-											
-											
-												
-													
-													
-												
-												
-											
+
+
+
+
+
+
+
+
 									previewScroll.animate('active')
-												
-								
+
+
 								# click on a data box to preview
-								dataBox.onTap -> 
+								dataBox.onTap ->
 									createPreviewLayer(this, data.type, previewScroll)
-							
+
 							dataBoxListenPreview(dataBox, data)
-							
-										
-							
-								
-							
+
+
+
+
+
 		# if no data, reload
-		else 
+		else
 			nodata = new TextLayer
 				parent: summaryScroll.content
 				text: "No Data"
@@ -1397,10 +1584,11 @@ init = (device) ->
 
 	###
 	Defatult
-	###	
-# 	setStateTab(notes, "active")
+	###
+	# setStateTab(notes, "active")
+
 	# testing
-	setStateTab(maps, "active")
+	setStateTab(voice, "active")
 
 
 	###
@@ -1426,6 +1614,7 @@ init = (device) ->
 			canvasNotes.view.destroy()
 	voiceTab.onTap ->
 		tabConf("default", "active", "default", "default", "default", "default")
+		activateVoiceSubView(voiceNextView)
 	cameraTab.onTap ->
 		tabConf("default", "default", "active", "default", "default", "default")
 		resetCamera()
@@ -1441,7 +1630,7 @@ init = (device) ->
 		removePreviewScroll()
 		# clear the summary page
 		summaryScroll.content.children.forEach((layer) -> layer.destroy())
-		
+
 
 
 init("desktop")
