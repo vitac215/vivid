@@ -1595,10 +1595,7 @@ init = (device) ->
 	###
 	Defatult
 	###
-	# setStateTab(notes, "active")
-
-	# testing
-	setStateTab(voice, "active")
+	setStateTab(notes, "active")
 
 
 	###
