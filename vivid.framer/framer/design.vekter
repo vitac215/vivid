@@ -14995,7 +14995,7 @@
             "right" : 0,
             "radiusPerCorner" : false,
             "centerAnchorY" : 0.5029985007496252,
-            "visible" : true,
+            "visible" : false,
             "borderLeft" : 1,
             "heightFactor" : null,
             "radiusTopLeft" : 0,
