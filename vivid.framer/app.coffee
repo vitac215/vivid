@@ -1503,7 +1503,17 @@ init = (device) ->
 											notes.parent = previewLayer
 											# notes conent
 											content = createMapsContent("", notes, data.data.notes)
-
+										
+										when "recording"
+											trans = voiceEnglish.copy()
+											trans.parent = previewLayer
+											transText = trans.childrenWithName("text_sample")[0]
+											transText.opacity = 1
+											original = voiceSpanish.copy()
+											original.parent = previewLayer
+											orgText = original.childrenWithName("text_sample")[0]
+											orgText.opacity = 1
+										
 
 
 

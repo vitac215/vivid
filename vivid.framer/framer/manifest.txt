@@ -1,15 +1,4 @@
 app.coffee
-framer/backups/backup-2017-07-28 21.20.50.coffee
-framer/backups/backup-2017-07-28 21.21.50.coffee
-framer/backups/backup-2017-07-28 21.23.50.coffee
-framer/backups/backup-2017-07-28 21.25.50.coffee
-framer/backups/backup-2017-07-28 21.26.50.coffee
-framer/backups/backup-2017-07-28 21.27.52.coffee
-framer/backups/backup-2017-07-28 21.29.50.coffee
-framer/backups/backup-2017-07-28 21.30.50.coffee
-framer/backups/backup-2017-07-28 21.31.53.coffee
-framer/backups/backup-2017-07-28 21.33.50.coffee
-framer/backups/backup-2017-07-28 21.35.50.coffee
 framer/backups/backup-2017-07-28 21.36.50.coffee
 framer/backups/backup-2017-07-28 21.37.50.coffee
 framer/backups/backup-2017-07-28 21.38.50.coffee
@@ -39,6 +28,17 @@ framer/backups/backup-2017-07-28 22.38.38.coffee
 framer/backups/backup-2017-07-28 22.38.38.vekter
 framer/backups/backup-2017-07-28 22.40.42.coffee
 framer/backups/backup-2017-07-28 22.44.41.coffee
+framer/backups/backup-2017-07-28 22.49.38.coffee
+framer/backups/backup-2017-07-28 22.52.48.coffee
+framer/backups/backup-2017-07-28 22.54.19.coffee
+framer/backups/backup-2017-07-28 22.55.38.coffee
+framer/backups/backup-2017-07-28 22.56.38.coffee
+framer/backups/backup-2017-07-28 22.57.38.coffee
+framer/backups/backup-2017-07-28 22.58.38.coffee
+framer/backups/backup-2017-07-28 22.59.39.coffee
+framer/backups/backup-2017-07-28 23.00.38.coffee
+framer/backups/backup-2017-07-28 23.01.38.coffee
+framer/backups/backup-2017-07-28 23.02.38.coffee
 framer/coffee-script.js
 framer/config.json
 framer/design.vekter
