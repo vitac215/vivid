@@ -395,7 +395,6 @@ init = (device) ->
 	cameraBtn.on Events.Click, ->
 		cameraInput.click()
 
-
 	# take photos
 	cameraInput.onchange = ->
 		imageReader()
@@ -403,6 +402,9 @@ init = (device) ->
 
 	imageReader = ->
 		file = cameraInput.files[0]
+		# reset input
+		cameraInput.value = ''
+		# process input
 		if file?
 			reader = new FileReader()
 			reader.readAsDataURL file
@@ -700,7 +702,7 @@ init = (device) ->
 	inputform = {
 		label: ["Name", "DOB", "Address", "Height", "Notes"],
 		name: ["name", "dob", "address", "height", "notes"],
-		content: ["Michael M", "04/13/1976", "2345 Park Street, PA", "5'03''", "Mentally disabled"]}
+		content: ["Michael M", "04/13/1976", "2345 Park Street, PA", "5'03''", ""]}
 	sampleIDImg = "images/id_sample.png"
 	defaultIDImg = "images/person_default.png"
 
@@ -710,8 +712,6 @@ init = (device) ->
 
 	# append form to the scroll content
 	appendForm = (popData) ->
-
-
 		createFormLayers = (scroll) ->
 			h = 40
 			w = 335
@@ -770,6 +770,7 @@ init = (device) ->
 						width: row.width * (1-labelWidthRatio) * 0.9
 						x: row.width * 0.35
 						fontSize: fSize
+						color: "#1F1F1F"
 						resizeParent: false
 						lineHeight: fSize + 10
 						placeHolder: ""
@@ -796,6 +797,15 @@ init = (device) ->
 				formData["#{input.name}"] = @value)
 
 	appendForm(false)
+	
+	
+	# reset form
+	clearForm = () ->
+		# clear form data map
+		for key of formData
+			formData["#{key}"] = ""
+		# clear input fields
+		formEleArray.forEach((row) -> row.destroy())
 
 
 	# ID scan
@@ -805,13 +815,20 @@ init = (device) ->
 	scanInput = document.getElementById("scanBtn")
 	personImg.on Events.Click, ->
 		scanInput.click()
-
-	# scan/take photo of ID
-	scanInput.onchange = ->
-		idReader()
-
-	idReader = ->
+		
+	addPersonImg = () ->
+		personImgPlaceholder.visible = false
+		personImg.image = sampleIDImg
+	removePersonImg = ->
+		personImgPlaceholder.visible = true
+		personImg.image = null
+	
+	
+	idReader = () ->
 		file = scanInput.files[0]
+		# reset input
+		scanInput.value = ''
+		# process input
 		if file?
 			reader = new FileReader()
 			reader.readAsDataURL file
@@ -829,28 +846,18 @@ init = (device) ->
 			for i in [0...arrayLen]
 				formData["#{inputform.name[i]}"] = "#{inputform.content[i]}"
 
-
-	addPersonImg = ->
-		personImgPlaceholder.visible = false
-		personImg.image = sampleIDImg
-	removePersonImg = ->
-		personImgPlaceholder.visible = true
-		personImg.image = null
-
-	# reset form
-	clearForm = ->
-		# clear form data map
-		for key of formData
-			formData["#{key}"] = ""
-		# clear input fields
-		formEleArray.forEach((row) -> row.destroy())
+	# scan/take photo of ID
+	scanInput.onchange = ->
+		idReader()
 
 
 	# Save person info
 	personSaveBtn.on(Events.Click, Android.Ripple)
 	personSaveBtn.onTap ->
 		# print formData
-		# transfer to firebase
+		# get notes 
+		notesText = document.querySelectorAll("textarea")[1].value
+		# send to DB
 		if formData.name != ""
 			firebase.post(
 				"/#{caseID}/captured",
@@ -861,7 +868,7 @@ init = (device) ->
 					dob: formData.dob,
 					address: formData.address,
 					height: formData.height,
-					notes: formData.notes,
+					notes: notesText,
 					},
 				location: "300 S Craig St.",
 				created_at: new Date(),
