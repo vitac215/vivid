@@ -1660,4 +1660,8 @@ init = (device) ->
 
 
 
-init("desktop")
+userAgent = window.navigator.platform
+if userAgent == "MacIntel"
+	init("desktop")
+else 
+	print "The prototype is best viewed with a Mac computer"
